@@ -1,7 +1,7 @@
-require 'rubygems'
-gem 'soap4r'
-require 'oauth'
-require 'soap/rpc/driver' 
+#require 'rubygems'
+#gem 'soap4r'
+#require 'oauth'
+#require 'soap/rpc/driver' 
 
 #RAILS_GEM_VERSION = '2.3.4' unless defined? RAILS_GEM_VERSION
 
@@ -52,5 +52,6 @@ Rails::Initializer.run do |config|
   config.gem 'RedCloth'
   config.gem 'jnunemaker-twitter', :lib => 'twitter'
   config.gem 'hoptoad_notifier'
+  config.gem 'soap4r'
 end
 
