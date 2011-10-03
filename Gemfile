@@ -7,14 +7,14 @@ gem "mysql"
 # gem "geokit"
 
 gem 'bullet'
-gem 'collectiveidea-money'
+gem 'money'
 gem 'json'
 gem 'rflickr'
 # gem 'colored'
 gem 'uuidtools'
 gem 'mocha'
 gem 'redgreen'
-gem "thoughtbot-factory_girl"
+gem "factory_girl"
 gem 'aasm'
 gem 'chronic'
 gem 'avatar'
@@ -32,6 +32,6 @@ gem 'geokit'
 gem 'hpricot'
 gem 'static-gmaps'
 gem 'redcloth'
-gem 'jnunemaker-twitter'
+gem 'twitter'
 gem 'hoptoad_notifier'
 gem 'soap4r'
