@@ -1,0 +1,21 @@
+<%
+feed_item ||= @feed_item
+f = Friendship.find(
+  feed_item.item_id,
+  :include => [:friender, :friendee]
+)
+%>
+
+<% if f.pending? %>
+	<% content_for_feed_item(feed_item, f.friender) do %>
+		<%= name_link(f.friender, true, true) -%> <%= has_have(f.friender) %> sent <%= name_link(f.friendee, true, false) -%> a friend request.
+    <% if f.friendee == @p -%>
+      <p><%= link_to 'Accept', friend_path(f.friendee, f.friender) %>
+      or <%= link_to 'Ignore', friend_path(f.friendee, f.friender, :ignore => 'yes') %></p>
+    <% end -%>
+	<% end %>
+<% else %>
+	<% content_for_feed_item(feed_item, f.friender) do  %>
+	  <%= name_link(f.friender, true, true) -%> <%= is_are(f.friender) %> now friends with <%= name_link(f.friendee, true, false) -%>
+	<% end %>
+<% end %>

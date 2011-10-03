@@ -1,0 +1,26 @@
+<%= add_body_css('normal') %>
+
+<% update_element :header do %>
+	<h1>Contacts</h1>
+		<%= link_to_remote "Back",
+		    :url => welcome_url, :html => {:class => "nav", :id => "backButton"}
+		%>
+		<%= link_to_remote "New", 
+			:url => new_profile_kontact_url(@p), :html => {:class => "nav Action"}
+		%>
+<% end %>
+
+<% update_element :message_holder do %>
+	<%= render :partial => 'shared/flashes' %>
+<% end %>
+
+<% update_element :content do %>
+	<h3><%= "#{@kontacts.count} entries"%></h3>
+	<% groups = @kontacts.group_by{ |kontact| kontact.display_name[0..0] } %>
+		<% groups.keys.sort.each do |key| %>
+			<h4><%= key %></h4>
+			<ul>
+				<%= render :partial => 'kontact', :collection => groups[key] %>
+			</ul>
+		<% end %>
+<% end %>

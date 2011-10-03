@@ -1,0 +1,14 @@
+<% build_menu_items %>
+
+<table>
+  <tbody>
+    <tr>
+    <% items = @menu_items.length-1
+    for i in 0..items 
+      right = i.modulo(2) == 1 %>
+      <td class="<%= (right) ? "menu-right" : "menu-left" %>"><%= link_to @menu_items[i][0], @menu_items[i][1] %></td>
+      <%= "</tr>" if right || i == items %>
+      <%= "<tr>" if right unless i == items %>
+    <% end %>
+  </tbody>
+</table>

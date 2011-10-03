@@ -1,0 +1,28 @@
+<% content_for :stories do %>
+  <ul id='activity-stream'>
+    <%= render :partial => 'profiles/stream_form' %>
+	  <li class="heading">Public Stream</li>
+		<% unless @active == :public_stream %>
+		<li>
+			<a href="http://smartcall.7.am/welcome/twitter">
+				<%= image_tag "twitter.png", :class => caption_class(@active, :twitter) %>
+			</a>
+			&nbsp;
+			<a href="http://smartcall.7.am/welcome/facebook">
+				<%= image_tag "facebook.png", :class => caption_class(@active, :facebook) %>
+			</a>
+			&nbsp;
+			<a href="http://smartcall.7.am/welcome/public">
+				<%= image_tag "chat.png", :class => caption_class(@active, :public_stream)%>
+			</a>
+      </li>
+	  <% end %>
+          <% unless @feed_items.empty? %>
+	  <% @feed_items.each do |feed_item| %> <!-- debug feed_item -->
+	    <% next unless feed_item.item rescue false %>
+	    <% "#{feed_item.partial}" %>
+			<%= render :partial => "feed_items/#{feed_item.partial}", :locals => {:feed_item => feed_item} %>
+	  <% end %>
+          <% end %>
+	</ul>
+<% end %>

@@ -1,0 +1,28 @@
+<% 
+ki = kontact.kontact_information 
+@kontact_information = ki
+return if ki.nil?
+%>
+<% content_tag_for(:li, kontact, :class => "vcard clearfix") do %>
+	<div class="vcardavatar">
+	  <%= avatar(ki , 'small') %>
+	</div>
+    <div class="maininfo">
+	  	<div class="primaryinfo">
+	    <div class="fn">
+	      <%= "#{ki.given_name} #{ki.family_name}" %>
+	    </div>
+	    <div class="tel">
+	      <%= ki.primary_phone_number.value unless ki.primary_phone_number.nil? %>
+	    </div>
+		</div>
+		<div class="secondaryinfo">
+	    <%= mail_to ki.primary_email.value, ki.primary_email.value, :class => :email unless ki.primary_email.blank? %>
+	    <%= "<div class=\"email\">#{ki.location}</div>" unless ki.location.blank? %>
+		</div>
+		<div class="vcardchoices">
+	      <%= link_to 'Edit', edit_profile_kontact_path(@parent, kontact) , :method => :get if @kontact_information.owner == @parent %> | 
+	      <%= link_to 'Delete', owner_kontact_path(@parent, kontact), :prompt => 'Are you sure?', :method => :delete if @kontact_information.owner == @parent %>
+	    </div>
+  </div>
+<% end -%>

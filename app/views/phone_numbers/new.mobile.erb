@@ -1,0 +1,13 @@
+<% @page_title = @kontact_information.f %>
+
+<% draw_crumbs Crumb.new("Contacts", profile_kontacts_path(@profile)), 
+  Crumb.new(@kontact_information.f, [@profile, @kontact]) %>
+
+<% content_for :topbox do %>
+  <h3>New number for <%= @kontact_information.display_name %></h3>
+<% end %>
+
+<% form_for @phone_number, :url => profile_kontact_kontact_information_phone_numbers_path(@profile, @kontact) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+  <%= submit_tag 'Save', :disable_with => 'Saving..' %>
+<% end %>

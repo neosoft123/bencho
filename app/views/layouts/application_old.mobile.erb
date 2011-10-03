@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="Pragma" content="no-cache">
+	<!-- Pragma content set to no-cache tells the browser not to cache the page
+	This may or may not work in IE -->
+
+	<meta http-equiv="expires" content="0">
+    <title></title>
+    <meta name = "viewport" content = "width = device-width, user-scalable=no
+          minimum-scale=1.0 maximum-scale=1.0">
+		<%= javascript_include_merged :mobile %>
+		<%= stylesheet_link_merged :mobile %>
+
+	    <%= yield :jquery %>
+		<%= yield :head %>
+
+    <script type="text/javascript">
+      function clickclear(thisfield, defaulttext) {
+        if (thisfield.value == defaulttext) {
+          thisfield.value = "";
+        }
+      }
+      function clickrecall(thisfield, defaulttext) {
+        if (thisfield.value == "") {
+          thisfield.value = defaulttext;
+        }
+      }
+    </script>
+
+  </head>
+  <body>
+    <div id="non_footer">
+    		<div id="header">
+				<div id="headerinner">
+				<%= yield :toolbar %>
+				</div>
+
+			</div>
+			
+		<div id="messenger">
+		</div>
+      <ul id="message_holder" class="data" <% unless flash[:notice] || flash[:error] %>style="display:none;"<% end %>>
+        <%= render :partial => 'shared/flashes' %>
+      </ul>
+      <!-- Floating Content -->
+
+      <div id="content">
+
+        <ul id="spinner" class="data" style="display:none;">
+          <p>Loading...</p>
+        </ul>
+
+				<div class="mobile-title">
+        	<%= yield :title %>
+				</div>
+
+        <!-- Body up to view to decide whether its data or a form -->
+				<div class="mobile-body">
+        	<%= yield %>
+				</div>
+				
+				<br />
+
+				<div class="mobile-footer">
+        	<%= yield :footer %>
+				</div>
+
+      </div>
+    </div>
+    <!-- Footer -->
+    <div id="footer">
+    </div>
+
+		<%#= wait_for_messages(:url => check_for_messages_profile_chat_url(@p, @chat), :polling => true, :frequency => 5) if @p && @chat %>
+		<%#= call_for_presence_updates "presenceChange" if @p %>
+		
+  </body>
+</html>

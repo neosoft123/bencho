@@ -1,0 +1,6 @@
+<ol id="crumbs">
+  <li><%= link_to "Home", welcome_url %></li>
+  <% crumbs.each do |crumb| %>
+    <li> » <%= crumb %></li>
+  <% end -%>
+</ol>

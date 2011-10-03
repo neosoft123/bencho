@@ -1,0 +1,18 @@
+<div class="statuswrapper" id="profile-status-<%= profile_status.id %>">
+  <div class="statusmessage">
+    <div class="statusbody">
+      <%= profile_status.text %>
+    </div>
+    <div class="statusmetadata">
+      <%= link_to_function 'Add Comment', "$('#new-comment-#{profile_status.id}').toggle()", :class=>'statusmetacomments' -%>
+      <%= time_ago_in_words(profile_status.created_at) %> ago -
+      <%= link_to 'Delete', profile_profile_status_path(my_profile, profile_status), :method => :delete if is_my_profile?(profile_status.profile) %>
+    </div>
+  </div>
+  <%= render :partial => 'comments/remote_form', :locals => { :resource => profile_status } %>
+
+  <div id="comment-list-<%= profile_status.id %>">
+    <%= render :partial => 'comments/status_comment', :collection => profile_status.comments.find(:all, :limit => 3, :order => 'created_at asc') %>
+  </div>
+  <%= render :partial => 'status_comments', :locals => { :status => profile_status } %>
+</div>

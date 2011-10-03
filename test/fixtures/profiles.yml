@@ -1,0 +1,55 @@
+# == Schema Information
+# Schema version: 20081206110601
+#
+# Table name: profiles
+#
+#  id               :integer(4)    not null, primary key
+#  user_id          :integer(4)    
+#  location         :string(255)   
+#  created_at       :datetime      
+#  updated_at       :datetime      
+#  email            :string(255)   
+#  is_active        :boolean(1)    
+#  last_activity_at :datetime      
+#  lat              :decimal(15, 1 
+#  lng              :decimal(15, 1 
+#  last_checkin     :datetime      
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+user:
+    user: user
+    email: user@example.com
+    is_active: true
+    #icon: user.png
+
+user2:
+    user: user2
+    email: user2@example.com
+    is_active: true
+
+user3:
+    user: user3
+    email: user3@example.com
+    is_active: true
+
+inactive:
+    user: inactive
+    email: inactive@example.com
+    is_active: false
+
+cant_message:
+    user: cant_message
+    email: cant_message@example.com
+    is_active: true
+
+admin:
+    user: admin
+    email: admin@example.com
+    is_active:
+
+deleted:
+  user:
+  email: deleted@ldjf.com
+  is_active: false

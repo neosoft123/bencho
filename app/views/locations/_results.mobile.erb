@@ -1,0 +1,17 @@
+<% if @locations.length > 0 %>
+	<li class="heading">Where you've been.. click a location to check in there again</li>
+	<div><%= static_map_with_markers_tag(@locations) %></div>
+	<% @locations.each_index do |i| 
+		loc = @locations[i]
+		alpha = StaticGmaps::Marker::VALID_ALPHA_CHARACTERS[i].to_s.upcase
+	%>
+		
+		<li>
+			<%= link_to image_tag('delete.png'), profile_location_path(@p, loc), :method => :delete, :confirm => 'Are you sure?', :class=>'delete' if me? %>
+			<strong><%= alpha -%></strong>&nbsp;You checked in at <%= link_to loc.title, profile_location_path(@profile, loc) %> <%= time_ago_in_words(loc.created_at) %> ago
+			<div class="feed-item-detail" style="padding-left:0px"><%= pluralize(loc.comments_count, "Comment") %> - <%= link_to('Comment', new_profile_location_comment_path(loc.profile, loc)) %></div>
+		</li>
+	<% end %>
+<% else %>
+	<li>You have not checked in anywhere yet...</li>
+<% end %>

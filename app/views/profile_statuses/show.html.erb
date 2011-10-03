@@ -1,0 +1,29 @@
+<%= setup_map %>
+
+<div class="left clearfix" id="column_l">
+  <h2 class="contenttitle">Status Detail</h2>
+  
+  <div class="statuswrapper" id="profile-status-<%= @status.id %>">
+    <div class="statusmessage">
+      <dl class="statusbody">
+        <dt><%= @status.text %></dt>
+        <dd>-<%= time_ago_in_words(@status.created_at) %> ago</dd>
+      </dl>
+    </div>
+    <%= render :partial => 'comments/remote_form', :locals => { :resource => @status } %>
+    
+    <div id="comment-list-<%= @status.id %>">
+      <%= render :partial => 'comments/status_comment', :collection => @status.comments.find(:all, :limit => 3, :order => 'created_at asc') %>
+    </div>
+    <%= render :partial => 'status_comments', :locals => { :status => @status } %>
+  </div>
+  
+  <div class="statusmetadata">
+    <%= link_to_function 'Add Comment', "$('#new-comment-#{@status.id}').toggle()", :class=>'statusmetacomments' -%>
+    <%= link_to 'Delete', profile_profile_status_path(my_profile, @status), :method => :delete if is_my_profile?(@status.profile)  %>
+  </div>
+  
+  <%= link_to('Return to main profile', @p, :class=>'profilelink') %>
+</div>
+
+<%= render :partial => 'profiles/profile_info' %>

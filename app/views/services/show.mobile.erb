@@ -1,0 +1,35 @@
+<p>
+  <b>Title:</b>
+  <%=h @service.title %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%=h @service.description %>
+</p>
+
+<p>
+  <b>Price :</b>
+  <%=h @service.price.format %>
+</p>
+
+<p>
+  <b>Credit:</b>
+  <%=h @service.credit.format %>
+</p>
+<p>
+  <b>Debit:</b>
+  <%=h @service.debit.format %>
+</p>
+<p>
+  <b>Active:</b>
+  <%=h @service.active %>
+</p>
+
+<p>
+  <b>STS Service ID:</b>
+  <%=h @service.sts_service_id %>
+</p>
+
+<%= link_to 'Edit', edit_service_path(@service) %> |
+<%= link_to 'Back', services_path %>

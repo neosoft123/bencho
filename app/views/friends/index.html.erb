@@ -1,0 +1,25 @@
+<div class="left" id="column_l">	
+  <div class="dashboard clearfix">
+    <div id="sub_nav">
+      <%= link_to("&larr; Back to #{h @profile.f}'s Profile", @profile) unless me? %>
+      <%= link_to('&larr; Back to Dashboard', @p) if me? %>
+    </div>
+	</div>
+  <%= render :partial => 'getting_started' %>
+  <h2 class="contenttitle">Your Network</h2>
+  <%= render :partial => 'friends/list', :locals => {:type => 'friends', :with_friending => true, :size => nil} %>
+  <%= render :partial => 'friends/list', :locals => {:type => 'followers', :with_friending => true, :size => nil} %>
+  <%= render :partial => 'friends/list', :locals => {:type => 'followed', :with_friending => true, :size => nil} %>
+</div>
+<div class="right" id="column_r">
+	  <div class="newprofilewrapper">
+  	<div class="newprofile">
+	<h3 class="friendsearchtitle">Find new friends</h3>
+	<p class="friendblurb">Find new and interesting people to follow and friend. Enter a search term here to match all publically available profiles</p>
+	     <% form_tag url_for(:controller => :profiles, :action => :search), :method => :get do %>
+        <%= text_field_tag 'search[q]', (params[:search] && params[:search][:q] ? params[:search][:q] : 'Search for Friends'), :id => 'search_q', :class=>'friendsearch' %>
+         <button type="submit" class="submitBtn"><span>Search</span></button>
+	  <% end %>
+	</div>
+	</div>
+</div>

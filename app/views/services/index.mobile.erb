@@ -1,0 +1,33 @@
+<h1>Listing services</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Price in cents</th>
+    <th>Credit</th>
+	<th>Debit</th>
+	<th>Service Id</th>
+	<th>Active</th>
+	<th colspan="3">Actions</th>
+  </tr>
+
+<% for service in @services %>
+  <tr>
+    <td><%=h service.title %></td>
+    <td><%=h service.description %></td>
+    <td><%=h service.price.format %></td>
+    <td><%=h service.credit.format %></td>
+    <td><%=h service.debit.format %></td>
+	<td><%=h service.sts_service_id %></td>
+	<td><%=h service.active %></td>
+    <td><%= link_to 'Show', service %></td>
+    <td><%= link_to 'Edit', edit_service_path(service) %></td>
+    <td><%= link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New service', new_service_path %>

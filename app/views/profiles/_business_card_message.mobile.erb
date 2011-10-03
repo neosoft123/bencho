@@ -1,0 +1,4 @@
+<%= @p.f %> has requested your business card. You can either
+<%= link_to('accept', accept_share_business_card_path(@p)) %> or 
+<%= link_to('decline', decline_share_business_card_path(@p)) %>
+this request. For your privacy <%= @p.f %> will not be notified if you decline the request.

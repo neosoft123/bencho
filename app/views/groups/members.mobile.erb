@@ -1,0 +1,27 @@
+<% @page_title = "#{@group.name} Members" %>
+<%= draw_crumbs Crumb.new(@group.name, group_path(@group)) %>
+
+<% content_for :topbox do %>
+	<div class="bio-info"><strong>Owner:</strong> <%= link_to @group.owner.f, @group.owner %></div>
+	<div class="bio-info"><strong>Description:</strong> <%= @group.description %></div>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<li class="heading">Group Members</li>
+		<% if @members.length > 0 %>
+			<% @members.each do |member| %>
+			  <% content_tag_for :li, member do %>
+			    <%= link_to member.f, member %> (<%= online_status(member) %>)
+  			<% end %>
+			<% end %>
+		<% else %>
+			<li>This group has no members</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<% content_for :footer do %>
+	<%= will_paginate @members %>
+<% end %>
+

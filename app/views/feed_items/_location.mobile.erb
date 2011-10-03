@@ -1,0 +1,38 @@
+<%-
+feed_item ||= @feed_item
+l = feed_item.item
+var  ||= "#{l.profile.icon}"
+ab ||= var.split("/")
+k ||= ab.count-1
+cd ||= Array.new
+for i in 8..k do
+cd[i] = ab[i]
+end
+f ||= cd.delete_if {|x| x == nil}
+url ||= f.join("/")
+
+%>
+
+<% if @p %>
+<% content_for_feed_item feed_item, l.profile do %>
+  <%= link_to static_map_tag(l, {:height => 75, :marker => :tiny, :zoom => 5}), profile_location_path(l.profile, l) %>
+  <div class="feed-item-detail">Checked in to <%= link_to l.title, profile_location_path(l.profile, l) %></div>
+  <%= feed_comments l %>
+  <%= feed_location feed_item %>
+<% end %>
+
+<%  else %>
+     
+<li class="public_feed_item" id="public_feed_item_260395"><div class="posted-by"><% if l.profile.icon != nil %> <a href="session/new"><img style="margin:10px;width:32px;height:32px" src="<%= url %>" /> </a>
+<% else %>
+<%= link_to image_tag("avatar_default_thumb.png", :style => 'margin:10px;width:32px;height:32px;' ), new_session_path%> <% end %>
+                   <a href="/session/new"><% if l.profile.display_name == nil%>
+                   <%= l.profile.user.login%> <% else %>
+                   <%= l.profile.display_name %><% end %></a> <%= distance_of_time_in_words(Time.now, feed_item.item.created_at)%> ago</div>
+  <%= link_to static_map_tag(l, {:height => 75, :marker => :tiny, :zoom => 5}), new_session_path %>
+  <div class="feed-item-detail">Checked in to <%= link_to l.title, new_session_path %></div>
+  <div class="feed-item-detail"><a href="/session/new"><%= feed_item.item.comments_count %> Comment</a> - <a href="/session/new">Add comment</a></div>
+
+  
+</li>
+<% end %>

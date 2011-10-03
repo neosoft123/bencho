@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title><%= @page_title %> | Admin</title>
+    <meta http-equiv="Content-Type" content="text/html; utf-8" />
+    <%= stylesheet_link_tag 'admin' %>
+    <%= javascript_include_tag 'jquery-1.2.6' %>
+    <%= javascript_include_tag 'textile-editor' %>
+  </head>
+  <body>
+    <div id="page_container">
+      <h1>Admin</h1>
+      
+      <% if flash[:notice] or flash[:error] -%>
+        <h2 class="<%= notice_or_error %>"><%= flash[:notice] or flash[:error] %></h2>
+      <% end -%>
+      
+      <h2><%= @page_title %></h2>
+      <%= yield %>
+    </div>
+  </body>
+</html>

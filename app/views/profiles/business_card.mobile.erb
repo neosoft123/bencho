@@ -1,0 +1,48 @@
+<% @page_title = 'Business Card' -%>
+<%= draw_crumbs Crumb.new('Business Cards', business_cards_profile_path(@p)) %>
+
+<% content_for :topbox do %>
+	<div>
+		<ul class="profile">
+		  <li class="picture" style="background: #fff url(<%= avatar_path(@card.owner, :small) %>) no-repeat !important;">
+			<a href="#"></a></li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+  	<li class="heading">
+  		<%= @card.formatted_name %>
+  	</li>
+	
+  	  <% @card.emails.each do |e| %>
+  	    <% content_tag_for(:li, e) do %>
+  	      Email (<%= e.field_type %>):
+  	      <big><%= mail_to e.value, :html_options => {:class => "email"} %></big>
+  	    <% end %>
+  	  <% end %>
+	
+  	  <% @card.phone_numbers.each do |pn| %>
+  	    <% content_tag_for(:li, pn) do %>
+  			<%= pn.field_type %>:
+  		    <big><a href="tel:<%= pn.value %>"><%= pn.value %></a></big>
+  	    <% end %>
+	  
+  	  <% content_tag_for(:li, pn) do %>
+  	      <%= pn.field_type %>[sms]:
+  	      <big><a href="smsto:<%= pn.value %>"><%= pn.value %></a></big>
+  	    <% end %>
+  	  <% end %>
+	
+  	  <% content_tag_for(:li, ki) do %>
+  	    Location:
+  	    <big><%= @card.location%>&nbsp;</big>
+  	  <% end unless @card.location.blank? %>
+	
+  	  <% content_tag_for(:li, ki) do %>
+  	    Note:
+  	    <div><big><%= @card.note %>&nbsp;</big></div>
+  	  <% end unless @card.note.blank? %>
+  </ul>
+<% end %>

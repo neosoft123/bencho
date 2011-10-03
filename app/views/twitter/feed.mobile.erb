@@ -1,0 +1,17 @@
+<% draw_crumbs %>
+
+<%= render :partial => 'twitter_bio' %>
+
+<% content_for :stories do %>
+  <ul>
+    <% @tweets.each do |tweet| %>
+      <% content_for_tweet(tweet) do %>
+        <%= tweetify(linkify(shortlinkify(tweet["text"]))) %>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :footer do %>
+	<%= will_paginate @tweets %>
+<% end %>

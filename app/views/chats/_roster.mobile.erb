@@ -1,0 +1,14 @@
+<h2>Friends Roster</h2>
+<p id="roster_loading">Please wait while your friends load...</p>
+<form id="chat" name="chat" 
+	onsubmit="new Ajax.Request('<%= converse_profile_chat_url(@profile, @chat) %>', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;" method="post" action="<%= converse_profile_chat_url(@profile, @chat) %>">
+	<%= hidden_field_tag("to", nil) %>
+	<%= hidden_field_tag("transport", nil) %>
+	<ul id="roster">
+	 <% for_roster do |msg| %>
+		<% return if msg.message == @u.login %>
+		<li id="roster_<%= msg.message %>" class="arrow friend">
+			<a href="#" onClick="sendTo('<%= msg.message %>', '<%= msg.network %>')"><%= msg.message %></a></li>
+	 <% end %>
+	</ul>
+</form>

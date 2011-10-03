@@ -1,0 +1,16 @@
+<%
+profile ||= (@profile ? @profile : @p) %>
+<div class="subcontentboxwrapper">
+    <div class="subcontentboxouter">
+        <div class="subcontentbox clearfix">
+    <div class="biosecondary">
+        <div class="bioavatar">
+            <%= avatar_icon_tag profile, :big %>
+        </div>
+    </div>
+    <div class="bioprimary">
+        <%= render_all_information(profile) %>
+    </div>
+</div>
+</div>
+</div>

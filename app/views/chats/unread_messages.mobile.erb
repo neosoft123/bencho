@@ -1,0 +1,14 @@
+<% content_for :toolbar do %>
+  <h1><%= Unread Messages %></h1>
+	<%= link_to "Back", welcome_path, :class => "nav", :id => "backButton" %>
+<% end %>
+
+<% content_for :head do %>
+	<%= stylesheet_link_tag 'chat' %>
+<% end %>
+
+<% @messages.each do |msg| %>
+	<% content_tag_for(:li, msg) do %>
+		<strong><%= msg.message %></string> <em>from <%= link_to(msg.from.f, msg.from.profile, :style=>'display:inline') %> at <%= msg.created_at %></em>
+	<% end %>
+<% end %>

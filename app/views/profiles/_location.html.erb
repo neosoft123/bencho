@@ -1,0 +1,24 @@
+<div class="clearfix">
+<%= link_to "Skip these steps. I will fill in my profile later" , profile_kontacts_path(@profile) , :class=>"skipsteps" %>
+<h2 class="wizardtitle">Getting Started</h2>
+</div>
+
+<%= render :partial => "wizard_options" , :locals => { :details => "" , :mobile => "" , :location => "_active"}  %>
+
+<h3 class="subtitle">Where do you live?</h3>
+<p class="clear">Enter your home town in the field below eg: Cape Town, South Africa</p>
+ <% remote_form_for :profile, @profile, :url => set_location_profile_path(:id => @profile) do |f| %>
+    <div class="profilefields clearfix">
+  	<%= label_tag :location, 'Where do you live?' %>
+	<%= f.text_field :location, :class=>"textfield" %>
+	</div>
+<p class="clear">You can drag and drop the marker so that it matches your actual position</p>
+<div class="profilemap">
+<%= @map.div(:width => 653, :height => 300, :id => "select_location_map", :class => "select_location_map") %>
+</div>
+<%= @map.to_html %>
+<div class="rightbuttons">	
+<%= submit_tag "Next" , :onclick => "displaySpinner();"%>
+<%= link_to_function "Skip this step" , "toggleProfile();" %>
+</div>	
+  <% end %>

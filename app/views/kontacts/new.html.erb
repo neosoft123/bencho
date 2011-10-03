@@ -1,0 +1,13 @@
+<% form_for([@parent, @kontact]) do |f| %>
+	
+	<%= f.label :status %>
+	<%= f.text_field :status %>
+	<%= render :partial => 'kontact_information_form' %>
+
+	<div id="submit">
+		<%= f.submit "Create" %>
+	</div>
+
+<% end %>
+
+<%= link_to 'Back', profile_kontacts_path(@p) %>

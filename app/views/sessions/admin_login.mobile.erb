@@ -1,0 +1,25 @@
+<% content_for :stories do %>
+        <ul>
+                
+
+    @user = User.new
+
+        <% form_for @user, :url => register_path, :method => :post do |f| %>
+        <%= f.label 'Username' -%><%= f.text_field :login, :value => @user.login %>
+        <%= f.label 'Password' -%><span style="font-size:9px">Be tricky! Your password should be at least 4 character and not a dictionary word or common name
+<%= f.password_field :password, :value => @user.password %>
+        <%= f.label 'Mobile Number' -%><small>eg. +27821234567</small>
+><%= text_field_tag :phone_number,'', :value => @user.mobile_number || params[:phone_number] %>
+
+        <%= f.hidden 'is_admin' 'yes' %>       
+  <%= check_box_tag :user_terms_of_service, 1, params[:terms_of_service, 1, params[:terms_of_service], :checked => 'checked', :class => 'checkbox', :name => 'user[terms_of_service]' %><span style="font-size:9px">By submitting this information, I acknowledge that I have read and agree to the <%= link_to 'Terms &amp; Conditions.', terms_path, :style=>"font-size:9px" %></span>
+          <br/><%= f.submit 'Sign up', :disable_with => "Signing up.." %>
+        <% end %>
+    </li>
+
+
+
+
+  </ul>
+<% end %>
+

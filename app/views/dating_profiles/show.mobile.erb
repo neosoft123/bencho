@@ -1,0 +1,47 @@
+<% @page_title = "Dating Profile" %>
+
+<% draw_crumbs %>
+
+<% content_for :topbox do %>
+	<%= render :partial => 'profiles/bio_full' %>
+<% end %>
+
+<% content_for :actions do %>
+  <ul>
+    <li class="arrow">
+      <%= link_to 'Edit Dating Profile', edit_profile_dating_profile_url(@p) %>
+    </li>
+    <li class="arrow">
+      <%= link_to 'Find Matches', matches_profile_dating_profile_url(@p) %>
+    </li>
+    <li class="arrow">
+      <%= link_to 'Unsubscribe', profile_dating_profile_url(@p), :method => :delete, :confirm => "Are you sure?" %>
+    </li>
+    <li class="arrow">
+      <%= link_to 'Transaction History', transaction_history_profile_dating_profile_url(@p) %>
+    </li>
+  </ul>
+<% end %>
+
+<%content_for :stories do %>
+  <ul>
+    <li class="heading">You're looking for..</li>
+    <li>..<strong><%= @dating_profile.seeking.downcase.pluralize %></strong></li>
+    <li>..between the ages of <strong><%= @dating_profile.age_lowest %></strong> and 
+      <strong><%= @dating_profile.age_highest %></strong></li>
+    <li>..for <strong><%= @dating_profile.for.downcase %></strong></li>
+    <li>..who are from <strong><%= @dating_profile.from_international_dialing_code.country %></strong></li>
+    <% unless @dating_profile.interests.blank? %>
+      <li class="heading">You're interested in..</li>
+      <li><%= @dating_profile.interests.split(/,/).to_sentence %></li>
+    <% end %>
+    <% unless @dating_profile.likes.blank? %>
+      <li class="heading">You like..</li>
+      <li><%= @dating_profile.likes.split(/,/).to_sentence %></li>
+    <% end %>
+    <% unless @dating_profile.dislikes.blank? %>
+      <li class="heading">You dislike..</li>
+      <li><%= @dating_profile.dislikes.split(/,/).to_sentence %></li>
+    <% end %>
+  </ul>
+<% end %>

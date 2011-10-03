@@ -1,0 +1,13 @@
+<% @page_title = 'Text Messages' %>
+<% content_for :crumbs, render(:partial => 'shared/crumbs', :locals => {:crumbs => [Crumb.new(@page_title)]}) -%>
+
+<% content_for :stories do %>
+	<ul id="recent_message">
+		<li class="heading">Recent Messages [Followers]</li>
+		<%= render :partial => 'text_message', :collection => @text_messages %>
+	</ul>
+<% end %>
+
+<% content_for :footer do %>
+	<%= will_paginate @text_messages, :page_links => false, :prev_label => 'Prev', :next_label => 'Next' %>
+<% end %>

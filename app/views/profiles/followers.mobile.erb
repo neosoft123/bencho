@@ -1,0 +1,41 @@
+<% @page_title = "Followers" %>
+
+<% draw_crumbs Crumb.new(@p.f, profile_path(@profile))%>
+
+<% content_for :topbox do %>
+  <%= render :partial => 'profiles/bio' %>
+<% end %>
+
+<% if @results %>
+       
+	<% content_for :stories do %>
+	  <% content_tag :ul do %>
+	    <li class="heading"><%= @profile.f %> is followed by <%= pluralize(@profile.followers_count, 'person') %></li>
+	    <% @results.each do |p| %>
+	      <%= render :partial => 'profile_list_item', :locals => { :p => p } %>
+	    <% end %>
+	  <% end %>
+        <li>
+	<%= will_paginate @results %>
+     </li>
+	<% end %>
+	<% end %>
+    <% begin %>
+       <% content_for :stories do %>
+	<% content_tag :ul do %>
+	    <li class="heading"><%= @profile.f %> is followed by <%= pluralize(@twitter_followers.count, 'person') %> on twitter </li>
+	     <% @twitter_followers.each do |tf|%>
+	     	<li class="arrow">
+		<div style="float:left;margin-right:5px;">
+		<%= image_tag(tf.profile_image_url) %>
+		 </div>						 
+		 <div><%= link_to tf.name, twitter_feed_path(tf.screen_name) %></div>	      		
+		<div style="font-size:10px;color:#ccc;"><%= tf.location if tf.location %></div>
+	    <% end %>
+	  <% end %>
+	<% end %>
+<li>
+	<%= will_paginate @twitter_followers %>
+     </li> 
+<% rescue %>
+ <% end %>

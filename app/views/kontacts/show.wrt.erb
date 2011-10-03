@@ -1,0 +1,49 @@
+<% ki = @kontact.kontact_information 
+	return if ki.nil?
+%>
+
+
+<%= remove_body_css('normal') %>
+
+<% update_element :header do %>
+	<h1>Kontacts</h1>
+		<%= link_to_remote "Back",
+		    :url => profile_kontacts_url(@p), :html => {:class => "nav", :id => "backButton"}
+		%>	
+<% end %>
+
+<% update_element :message_holder do %>
+	<%= render :partial => 'shared/flashes' %>
+<% end %>
+
+<% update_element :content do %>
+	
+	<ul class="profile">
+		<li class="picture" style="background: #fff url(<%= kontact_icon_url(ki, :size => '62x62', :crop => "1:1", :name => "thumb")%>) no-repeat !important;"><a href="#"><!--use this space to define tooltip title when user taps--><%= ki.display_name %></a></li>
+		<li class="clearfix"><h2><%= ki.display_name %></h2></li>
+	</ul>
+
+	<ul class="field">
+			<% ki.emails.each do |e| %>
+				<li class="arrow">
+					<h3><%= e.field_type %></h3>
+					<%=mail_to e.value %>&nbsp;
+				</li>
+			<% end %>
+			<% ki.phone_numbers.each do |pn| %>
+				<li class="arrow">
+					<h3><%= pn.field_type %></h3>
+					<a href="<%= pn.value %>"><%= pn.value %></a>&nbsp;
+				</li>
+			<% end %>
+			<li>
+				<h3>Location</h3>
+				<big><%= ki.location%>&nbsp;</big>
+			</li>
+			<li>
+				<h3>Notes</h3>
+				<big><%= ki.about_me %>&nbsp;</big>
+			</li>
+			</ul>
+		</ul>
+<% end %>

@@ -1,0 +1,36 @@
+<li style="border:none">
+  <div style="float:right;margin-right:2px">
+    <%= link_to(avatar_icon_tag(match.profile, :small, :class => 'profile-pic'),match.profile) %>
+  </div>
+  <div>
+    <%= link_to(match.profile.f, match.profile, :style => "font-size:14px") %><br />
+    <%= age_and_sex(match.profile) %>
+  </div>
+  <div class="feed-item-detail" style="padding-left:0px">
+    <%= link_to 'Send Friend Request', friend_path(@p, match.profile) %><br/><%= link_to 'Follow', follow_path(@p, match.profile) %>
+  </div>
+</li>
+<li style="border:none">
+    Looking for
+    <strong><%= match.seeking.downcase.pluralize %></strong>
+    between the ages of <strong><%= match.age_lowest %></strong> and 
+      <strong><%= match.age_highest %></strong>
+    for <strong><%= match.for.downcase %></strong>
+    who are from <strong><%= match.from_international_dialing_code.country %></strong>
+</li>
+<% unless match.interests.blank? %>
+  <li style="border:none">
+    Interested in <%= match.interests.split(/,/).to_sentence %>
+  </li>
+<% end %>
+<% unless match.likes.blank? %>
+  <li style="border:none">
+    Likes <%= match.likes.split(/,/).to_sentence %>
+  </li>
+<% end %>
+<% unless match.dislikes.blank? %>
+  <li style="border:none">
+    Dislikes <%= match.dislikes.split(/,/).to_sentence %>
+  </li>
+<% end %>
+<li/>

@@ -1,0 +1,23 @@
+<p>
+  <b>To:</b>
+  <%=h @text_message.to %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @text_message.message %>
+</p>
+
+<p>
+  <b>Sent:</b>
+  <%=h @text_message.sent %>
+</p>
+
+<p>
+  <b>Profile:</b>
+  <%=h @text_message.profile_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_text_message_path(@text_message) %> |
+<%= link_to 'Back', text_messages_path %>

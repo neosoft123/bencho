@@ -1,0 +1,87 @@
+h2. Ride The FireEagle
+
+This is a Rails plugin that easily integrates your app with "Fire Eagle":http://fireeagle.com/
+
+For now, it only covers the ActiveRecord side of things. Full support for handling the entire authentication flow coming soon.
+
+h3. Install
+
+# @gem install fireeagle@
+# @./script/generate ride_the_fireeagle User@
+# @rake db:migrate@
+# @mate config/fireeagle.yml@, add your FireEagle application info
+# Add @ride_the_fireeagle@ to @/app/models/user.rb@
+
+h3. Usage
+
+Once that's all done, your instances of @User@ have some fun new methods:
+
+<pre>
+>> @user = User.create(:login => 'alice')
+>> @user.authorized_with_fireeagle?
+=> false
+</pre>
+
+So, this user hasn't linked their account to Fire Eagle yet. Send them to an action that does the following:
+
+<pre>
+  def activate_fireeagle
+    @user = User.find(params[:id])
+    @user.get_fireeagle_request_token
+    redirect_to @user.fireeagle_authorization_url
+  end
+</pre>
+
+Now you wait for the user to authorize. When they authorize, Fire Eagle will invoke your application callback URL with the request token appended as parameters.
+
+<pre>
+  def fireeagle_callback
+    @user = User.find_by_fireeagle_request_token(params[:oauth_token])
+    @user.authorize_with_fireeagle
+  end
+</pre>
+
+Now that user is authorized with Fire Eagle!
+
+<pre>
+>> @user = User.find_by_login('alice')
+>> @user.authorized_with_fireeagle?
+=> true
+</pre>
+
+You can now update and query that user's location, assuming the User gave you those permissions when authorizing.
+
+<pre>
+>> @user = User.find_by_login('alice')
+>> @user.update_location(:q => "Atlanta, GA")
+>> @user.location.name
+=> "Atlanta, GA"
+</pre>
+
+More information about the acceptable parameters for updating a User's location is available in the RDoc for "FireEagle::Client#update":http://fireeagle.rubyforge.org/classes/FireEagle/Client.html
+
+More information about 'location' response is available in the RDoc for "FireEagle::Location":http://fireeagle.rubyforge.org/classes/FireEagle/Location.html. The 'best guess' location is currently automatically selected and returned. We'd really appreciate it if you didn't call FireEagle to get a user's location on every page load - please cache locations for an appropriate length of time
+
+Oh, and you get some pretty rad class-level finders too:
+
+<pre>
+>> User.find_fireeagle_recent(:conditions => { :time => 'now' }, :limit => 10, :offset => 0)
+</pre>
+
+The call above returns a list of users of the application who have updated their location within the given amount of time. The @time@ condition is flexible, supported forms are 'now', 'yesterday', '12:00', '13:00', '1:00pm' and '2008-03-12 12:34:56'. (default: 'now')
+
+<pre>
+>> User.find_fireeagle_within(:conditions => { :woe => "12796255" }, :limit => 10, :offset => 0)
+</pre>
+
+The call above takes a Place ID or a WoE ID and returns a list of users using your application who are within the bounding box of that location. Not for the faint of heart, this method is experimental and may not be stable.
+
+The arrays of Users returned by both of the class level finders have their most recent location information cached fresh from Fire Eagle.
+
+h3. Author
+
+"Jesse Newland":http://jnewland.com/
+
+h3. License
+
+"WTFPL":http://sam.zoy.org/wtfpl/

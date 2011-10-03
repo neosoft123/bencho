@@ -1,0 +1,15 @@
+<% if flash[:notice] %>
+	<li class="notice">
+		<%= flash[:notice] %>
+	</li>
+<% end %>
+<% if flash[:error] %>
+  <li class="error">
+    <%= flash[:error] %>
+  </li>
+<% end %>
+<% if flash[:invite] && @chat_inviters %>
+  <li class="invite">
+    <%= flash[:invite] + @chat_inviters.map{|p|link_to(p.f,profile_chatter_path(p))}.to_sentence %>
+  </li>
+<% end %>

@@ -1,0 +1,27 @@
+<% @page_title = 'Welcome to 7AM' %>
+<% draw_crumbs %>
+
+<% content_for :topbox do %>
+  <p>Please wait a moment...</p>
+  <p>You should receive a text message.</p>
+  
+  <h2>Sync Instructions</h2>
+  <p>The message contains settings that allow your phone to
+  be automatically set up for sync. The password for this message is:</p>
+  <p style="font-size:36px;text-align:center;font-weight:bold">1234</p>
+  <p>If you do not receive this message or sync is not working please follow
+  the <%= link_to 'manual sync setup', sync_help_profile_mobile_path(@p) %>.</p>
+  
+  <h2>Sync Settings</h2>
+  <p>Please check your sync settings - some mobiles have incomplete support for
+    receiving and saving the settings correctly. The username should be <strong>"<%= @u.login %>@7.am"</strong> and
+    the password will be the password you selected to access 7.am</p>
+<% end %>
+  
+<% content_for :stories do %>
+  <ul>
+      <li class="arrow">
+          <%= link_to 'Continue to 7.am', welcome_path %>
+      </li>
+  </ul>
+<% end %>

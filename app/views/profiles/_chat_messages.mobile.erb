@@ -1,0 +1,5 @@
+<% @messages.each do |msg| %>
+	<% content_for_chat_message(msg, msg.from.profile) do %>
+		<%= msg.message %>
+	<% end %>
+<% end %>

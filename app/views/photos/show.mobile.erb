@@ -1,0 +1,26 @@
+<% if @photo.caption.include?("ruby/object:Tempfile")%>
+<% else %>
+<% @page_title = sanitize(@photo.caption) %>
+<% end %>
+
+<%= draw_crumbs Crumb.new('Photos', profile_photos_url(@profile)) %>
+
+<% content_for :topbox do %>
+  <a href="<%= image_path(@photo, nil) %>"><%= image(@photo, :small) %></a>
+<% end %>
+
+<% content_for :actions do %>
+	<ul>
+    <% if me? %>
+  		<li class="arrow"><%= link_to 'Send to Facebook', facebook_photo_upload_path(@p, @photo) %></li>
+  		<li class="arrow"><%= link_to 'Delete', profile_photo_path(@p, @photo), :method => :delete %></li>
+  	<% end %>
+  	<li class="arrow"><%= link_to "Download", download_profile_photo_path(@profile, @photo) %></li>
+    <li><%= link_to "#{get_name(@profile, true, true, true)} Profile", @profile %></li>
+    <li><%= link_to 'Add Comment', new_profile_photo_comment_path(@photo.profile, @photo) %></li>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<%= render :partial => 'comments/comment_list', :locals => { :parent => @photo } %>
+<% end if @photo.comments_count && @photo.comments_count > 0 %>

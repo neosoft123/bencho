@@ -1,0 +1,28 @@
+<% @page_title = "Friends?" %>
+<% draw_crumbs %>
+
+<% content_for :topbox do %>
+  These are people that are members of 7.am that we think you might know
+<% end %>
+
+<% content_for :stories do %>
+  <% content_tag :ul do %>
+    <% if @profiles.length > 0 %>
+      <% @profiles.each do |p| %>
+        <%= content_tag :li, name_link(p, false), :class => "arrow" %>
+      <% end %>
+    <% else %>
+      <li>Sorry, we couldn't find any people that we thought you might know</li>
+      <li>
+        Try searching for people that you know.
+        <% form_tag basic_search_do_profile_path(@p) do %>
+      		<%= text_field_tag 'q', nil, :class=>"search-box" -%><%= submit_tag 'Search', :disable_with => 'Searching..' %>
+      	<% end %>
+      </li>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :footer do %>
+  <%= will_paginate @profiles %>
+<% end %>

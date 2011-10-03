@@ -1,0 +1,9 @@
+<li>
+	<% form_for @account_entry, :url => profile_wallet_account_entries_path(@profile) do |f| %>
+		<div class="posted-by"><%= "#{buy_service.title}"  %></div>
+		<div><%= buy_service.description %></div>
+		<%= "#{buy_service.price.format}"  %>
+		<%= f.hidden_field :service_id, :value => buy_service.id %>
+		<%= f.submit 'Buy' %>
+	<% end %>
+</li>

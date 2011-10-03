@@ -1,0 +1,8 @@
+page.replace_html "comment-list-#{@status.id}", :partial => 'comments/status_comment', :collection => @comments
+page.visual_effect :highlight, "comment-list-#{@status.id}", :duration => 10
+page['more-button'].toggle()
+
+#@comments.each do |comment|
+#  page.insert_html :bottom, 'comment-list', :partial => 'comments/status_comment', :object => comment
+#  page.visual_effect :highlight, "comment-#{comment.id}", :duration => 10
+#end

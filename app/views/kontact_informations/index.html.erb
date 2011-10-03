@@ -1,0 +1,18 @@
+<h1>Listing kontact_informations</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for kontact_information in @kontact_informations %>
+  <tr>
+    <td><%= link_to 'Show', kontact_information %></td>
+    <td><%= link_to 'Edit', edit_kontact_information_path(kontact_information) %></td>
+    <td><%= link_to 'Destroy', kontact_information, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New kontact_information', new_kontact_information_path %>

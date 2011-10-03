@@ -1,0 +1,10 @@
+<%-
+feed_item ||= @feed_item
+f = Friend.find(
+  feed_item.item_id,
+  :include => [:inviter, :invited]
+)
+-%>
+
+<% content_for_feed_item feed_item, f.inviter, "Now a #{f.description(f.inviter)} of #{name_link(f.invited)}" %>
+

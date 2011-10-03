@@ -1,0 +1,20 @@
+<%= setup_map %>
+
+<div class="left clearfix" id="column_l">
+<%= link_to('Return to main profile', @p, :class=>'profilelink') %>
+<h2 class="contenttitle">Status Updates</h2>
+<div id="status-list">
+	
+	<% form_tag profile_profile_statuses_twitter_proc_path(@p) do %>
+	
+	<%= label_tag 'Login' %><%= text_field_tag 'login' %>
+	<%= label_tag 'Password' %><%= password_field_tag 'password' %>
+	
+	<%= submit_tag 'Activate', :disable_with => 'Checking..' %>
+	
+	<% end %>
+	
+</div>
+</div>
+
+<%= render :partial => 'profiles/profile_info' %>

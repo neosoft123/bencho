@@ -1,0 +1,11 @@
+<div class="left" id="column_l">
+  <div class="dashboard">
+  <div id="sub_nav">
+    	<%= link_to('&larr; Back to Dashboard', @p) if @p %>  
+      <%= link_to '&larr; Back to Blogs', profile_blogs_path(@p) unless @p.blogs.empty? %>
+  </div>
+  </div>
+  <h2 class="contenttitle">New Post</h2>
+<%= render :partial => 'form' %>
+</div>
+

@@ -1,0 +1,11 @@
+<%
+feed_item ||= @feed_item
+blog = feed_item.item
+%>
+
+<% content_for_feed_item feed_item, blog.profile do %>
+  Diary: <%= link_to linkify(shortlinkify(h(blog.title))), [blog.profile, blog] %>
+  <%= feed_comments blog %>
+<% end %>
+
+

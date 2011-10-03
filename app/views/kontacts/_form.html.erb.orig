@@ -1,0 +1,107 @@
+<%
+	kontact ||= @kontact
+	kontact_information = kontact.kontact_information
+%>
+
+	<div id="editor">
+
+	<!-- Setup jQuery UI/DatePicker -->
+	<script type="text/javascript" charset="utf-8">
+		$("#kontact_kontact_information_birthday").datepicker();
+		$("#kontact_kontact_information_anniversary").datepicker();
+	</script>
+
+	<% form_for([@parent, kontact], :html => {:class => 'actionform clearfix'}) do |f| %>
+	
+		<!-- Kontact Selection Here. e.g. Radio buttons to select relationship. -->
+		<!-- Can set as own? -->
+		<!-- The f Formbuilder can build Kontact Fields -->
+	
+			<% fields_for "kontact[kontact_information]", kontact_information,
+					:builder => ApplicationHelper::DefinitionListFormBuilder do |ki| %>
+		
+					<!-- Fields for Kontact Information Here -->
+					<div class="avatarfield">
+					<div class="noavatar">
+						You do not have an image set yet
+					</div>
+					<div class="avatarlink">
+					<a href="#">Upload a Picture</a>
+					</div></div>
+					<div class="editorform clearfix">
+					<% field_set_tag 'Basic Information' do %>
+						<div class="clearfix">
+						<dl class="mini">
+						 	<%= ki.text_field :honorific_prefix, :title => 'Title' %>
+						</dl>
+						<dl class="normal">
+						 	<%= ki.text_field :given_name %>
+							</dl>
+						<dl class="normal">
+							<%= ki.text_field :middle_name %>
+							</dl>
+						<dl class="normal">
+							<%= ki.text_field :family_name %>
+							</dl>
+						<dl class="mini">
+							<%= ki.text_field :honorific_suffix, :title => 'Suffix' %>
+						</dl>
+						</div>
+						<div class="seperator clearfix">
+						<dl class="largefield">
+							<%= ki.text_field :display_name %>
+						</dl>
+						<dl class="largefield">
+							<%= ki.text_field :nickname %>	
+						</dl>
+						</div>
+						<% end %>
+						<% field_set_tag 'Contact Information' do %>
+						<h4 class="fakelabel">Phone Number</h4>
+						<dl id="phone_numbers">
+							<%= render :partial => 'phone_number', :collection => kontact_information.phone_numbers %>
+						</dl>
+						<h4 class="fakelabel">Phone Number</h4>
+						<dl id="emails">
+								<%= render :partial => 'email', :collection => kontact_information.emails %>
+						</dl>
+						<% end %>
+						<% field_set_tag 'Additional Information' do %>
+						<dl>
+							<%= ki.text_field :birthday %>	
+							<%= ki.text_field :anniversary %>	
+<<<<<<< HEAD:app/views/kontacts/_form.html.erb
+							<%= ki.text_field :gender %>	
+=======
+							<%= ki.select :gender, KontactInformation::GENDER %>
+							<%= ki.text_field :nickname %>	
+>>>>>>> 0dea94e1412ff71b4bca61e9f6199c8b2c958342:app/views/kontacts/_form.html.erb
+							<%= ki.text_area :note %>	
+		                </dl>
+<<<<<<< HEAD:app/views/kontacts/_form.html.erb
+=======
+		
+						<% field_set_tag 'Phone Numbers' do %>
+							<dl id="phone_numbers" class="actionfields clearfix">
+								<%= render :partial => 'phone_number', :collection => kontact_information.phone_numbers %>
+							</dl>
+						<% end %>
+						<% field_set_tag 'Email Addresses' do %>
+							<dl id="emails" class="actionfields clearfix">
+								<%= render :partial => 'email', :collection => kontact_information.emails %>
+							</dl>
+>>>>>>> 0dea94e1412ff71b4bca61e9f6199c8b2c958342:app/views/kontacts/_form.html.erb
+						<% end %>
+		                <div class="actionsubmit">
+							<%= button_to_remote 'new_kontact_submit', 'Save', :loading => toggle_element(:working), 
+										:complete => toggle_element(:working), :url => eval("#{@parent.class_name}_kontact_path(@parent, kontact)")
+							%>
+							<%= button_to_remote 'cancel_kontact', 'Cancel', :loading => toggle_element(:working), 
+										:complete => toggle_element(:working), :url => hide_element(:editor)
+							%>
+		                </div>
+		            </div>
+					</div>
+			<% end %>
+	<% end %>
+</div>

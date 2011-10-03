@@ -1,0 +1,24 @@
+
+<%= error_messages_for :help %>
+
+<% form_for [:admin, @help], :url => {:action => create_or_update} do |f| %>
+  <fieldset>
+    <legend><%= create_new_or_update %> help content</legend>
+    <dl>
+      <dt><%= f.label :controller %></dt>
+      <dd><%= f.text_field :controller %></dd>
+      
+      <dt><%= f.label :action %></dt>
+      <dd><%= f.text_field :action %></dd>
+      
+      <dt><%= f.label :content %></dt>
+      <dd><%= f.textile_editor :content, :rows => 10, :cols => 100 %></dd>
+      
+      <dt><%= f.submit create_or_update %></dt>
+    </dl>
+  </fieldset>
+<% end -%>
+
+<script type="text/javascript">
+  TextileEditor.initialize('help_content', 'extended');
+</script>

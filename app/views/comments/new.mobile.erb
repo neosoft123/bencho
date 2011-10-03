@@ -1,0 +1,12 @@
+<% @page_title = "Add comment" %>
+<%= draw_crumbs %>
+
+<% content_for :formholder do %>
+	<%= error_messages_for :comment %>
+	<% form_for [@profile, @parent, @comment], :html => { :id => 'remote-status-form' } do |f| %>
+		<ul>
+			<li><%= f.label :comment %><%= f.text_area :comment, :rows => 5 %></li>
+	  	<li><%= f.submit 'Save', :disable_with => 'Saving..' %> or <%= link_to 'Cancel', [@profile, @parent] %></li></li>
+		</ul>
+	<% end %>
+<% end %>

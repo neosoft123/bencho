@@ -1,0 +1,5 @@
+<li>
+	  <%= link_to image_tag('delete.png'), profile_photo_path(@p, photo), :method => :delete, :confirm => 'Are you sure?', :class=>'delete' if me? %>
+    <%= link_to image(photo, :square, :style=>'margin:10px'), profile_photo_path(photo.profile, photo) %>
+		<%= photo.caption %>
+</li>

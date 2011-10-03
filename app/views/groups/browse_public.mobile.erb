@@ -1,0 +1,13 @@
+<% @page_title = 'Public Groups' %>
+<%= draw_crumbs Crumb.new("Groups", groups_path) %>
+
+<% content_for :stories do %>
+	<ul>
+		<% if @groups.length > 0 %>
+			<%= render :partial => 'group', :collection => @groups %>
+		<% else %>
+			<li>You do not belong to any groups. Use the link above to create a group
+				of your own and invite your friends to it!</li>
+		<% end %>
+	</ul>
+<% end %>

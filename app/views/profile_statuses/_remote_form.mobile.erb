@@ -1,0 +1,10 @@
+<% profile_page = false unless defined?(profile_page) %>
+	<%= render :partial => 'current_location' %>
+	<%= error_messages_for :profile_status %>
+	<% form_for [my_profile, status], :html => { :id => 'remote-status-form' } do |f| %>
+		<input type="hidden" name="format" value="mobile" />
+		<input type="hidden" name="profile_page" value="<%= profile_page %>"/>
+		<label>What are you doing right now?</label>
+   	<%= f.text_field :text %></li>
+    <%= f.submit 'Save', :disable_with => 'Saving..' %>
+ <% end %>

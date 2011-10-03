@@ -1,0 +1,34 @@
+<div id="subcontent">
+  <%= render :partial => 'profiles/bio' %>
+  <div class="clearfix buttonbar">
+		<% content_tag_for(:div, @profile) do %>
+			<% unless @p.friend_of?(@profile) %>
+	      <% if @p.following?(@profile) %>
+					<%= link_to 'Stop Following', stop_following_path(@p, @profile), :class => :barbutton %>
+				<% else %>
+					<%= link_to 'Follow', follow_path(@p, @profile), :class => :barbutton %>
+				<% end %>
+				<% unless @p.friend_of?(@profile) or @p.want_to_be_friend_of?(@profile) or @p.wants_to_be_my_friend?(@profile) %>
+					<%= link_to 'Send Friend Request', friend_path(@p, @profile), :class => :barbutton %>
+				<% end %>
+				<% if @p.wants_to_be_my_friend?(@profile) %>
+					<%= link_to 'Accept Friend Request', friend_path(@p, @profile), :class => :barbutton %>
+				<% end %>
+			<% end %>
+		<% end unless me? %>
+    
+		<%= render :partial => 'profiles/controls' if me? %>
+    
+  </div>
+  <% if @map# && @profile.show_location_map? -%>
+	  	<div class="profilemapholder">
+	    <%= @map.div(:width => 265, :height => 200, :id => "friends_map", :class => "profile_friends_map")  %>
+	  </div>
+  <% end -%>
+  <%= @map.to_html if @map %>
+  <div class="profilekontacts">
+    <%= render :partial => 'friends/list_profile', :locals => {:type => 'friends'} %>
+    <%= render :partial => 'friends/list_profile', :locals => {:type => 'followers'} %>
+    <%= render :partial => 'friends/list_profile', :locals => {:type => 'followed'} %>
+  </div>
+</div>

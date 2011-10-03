@@ -1,0 +1,69 @@
+var BOSH_SERVICE = '<%= "http://#{XMPP_CONFIG['xmpp_server']}/http-bind/" %>';
+var connection = null;
+var jid = '<%= "#{@u.login}@#{XMPP_CONFIG['xmpp_server']}" %>';
+var password = 'password';
+
+function log(msg) 
+{
+    $('#footer').html(document.createTextNode(msg));
+}
+
+function rawInput(data)
+{
+    log('RECV: ' + data);
+}
+
+function rawOutput(data)
+{
+    log('SENT: ' + data);
+}
+
+function onMessage(msg) {
+	
+	log('INCOMING ' + message);
+	
+    var to = msg.getAttribute('to');
+    var from = msg.getAttribute('from');
+    var type = msg.getAttribute('type');
+    var elems = msg.getElementsByTagName('body');
+
+    
+	var body = elems[0];
+
+	log(from + ': ' + 
+	    Strophe.getText(body));
+    
+    // we must return true to keep the handler alive.  
+    // returning false would remove it after it finishes.
+    return true;
+}
+
+function onConnect(status, condition)
+{
+    if (status == Strophe.Status.CONNECTING) {
+	log('Strophe is connecting.');
+    } else if (status == Strophe.Status.CONNFAIL) {
+		log('Strophe failed to connect.');
+		log(condition);
+    } else if (status == Strophe.Status.DISCONNECTING) {
+	log('Strophe is disconnecting.');
+    } else if (status == Strophe.Status.DISCONNECTED) {
+		log('Strophe is disconnected.');
+    } else if (status == Strophe.Status.CONNECTED) {
+		log('Strophe is connected.');
+		var status = $pres({type: 'available'});
+		connection.send(status.tree());
+		connection.addHandler(onMessage, null, 'message', null, null,  null); 
+    }
+}
+
+function connect() 
+{
+	connection = new Strophe.Connection(BOSH_SERVICE);
+	connection.rawInput = rawInput;
+	connection.rawOutput = rawOutput;
+
+	connection.connect(jid,
+			       password,
+			       onConnect);
+}

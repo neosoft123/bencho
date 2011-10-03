@@ -1,0 +1,18 @@
+<% content_for :topbox do %>
+  <div style="float:right"><%= image_tag(@user[0]["pic_square"]) %></div>
+  <h3><%= @user[0]["first_name"] %></h3>
+  <div>
+    Name:-  <%= @user[0]["first_name"]%> <%= @user[0]["last_name"]%> <br /> <br />
+
+    Sex:-  <%= @user[0]["sex"]%><br />	<br />
+
+    Birthday:- <%= @user[0]["birthday"]%><br />	<br />
+
+    Current location :-  <%= @user[0]["current_location"]%><br /><br />
+
+    Profile_url :-  <%= @user[0]["profile_url"]%><br />
+    </div>
+   <% end%>
+
+
+  

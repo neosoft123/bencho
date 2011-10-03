@@ -1,0 +1,7 @@
+<div id="content">
+  <h2 class="recentactivity">Recent Activity</h2>
+  <%= render :partial => 'profile_statuses/remote_form_new', :locals => { :profile => @profile, :status => my_profile.profile_statuses.new, :profile_page => true } %>
+  <%= render :partial => 'profiles/recent_activity' %>
+</div>
+
+<%= render :partial => 'profiles/profile_info' %>

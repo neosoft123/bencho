@@ -1,0 +1,9 @@
+<% @page_title = "Edit Advert" %>
+<% draw_crumbs Crumb.new("Adverts", adverts_path) %>
+
+<% content_for :topbox do %>
+  <%= error_messages_for :advert %>
+<% end %>
+
+<%= render :partial => 'form' %>
+

@@ -1,0 +1,9 @@
+<% profile ||= (@profile ? @profile : @p) %>
+
+<div class="avatar">
+  <%= avatar_icon_tag profile %>
+</div>
+<h3><%= link_to profile.f, profile %></h3>
+
+<%= tweetify(linkify(shortlinkify(sanitize(profile.profile_statuses.current.text)))) rescue nil %>
+

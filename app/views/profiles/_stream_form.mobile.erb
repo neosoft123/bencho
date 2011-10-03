@@ -1,0 +1,14 @@
+<% if me? %>
+  <li>
+    <% form_for [@p, @p.profile_statuses.new] do |f| %>
+    	<input type="hidden" name="format" value="mobile" />
+    	<div>What's on your mind?</div>
+     	<%= f.text_field :text, :style => "width:90%;" %> <br />
+	Facebook <%= check_box_tag 'facebook_flag' %>         
+	Twitter <%= check_box_tag 'twitter_flag' %>
+        
+     <%= f.submit 'Save', :disable_with => 'Saving..' %>
+     
+    <% end %>
+  </li>
+<% end %>

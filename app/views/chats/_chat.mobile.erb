@@ -1,0 +1,4 @@
+<li>
+  <%= link_to chat.topic, profile_chat_url(@profile, chat) %>
+  <span style="font-size:10px;color:#c0c0c0;font-style:italic"><%= time_ago_in_words(chat.created_at) %> ago</span>
+</li>

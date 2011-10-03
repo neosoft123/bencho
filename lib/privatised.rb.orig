@@ -1,0 +1,145 @@
+<<<<<<< HEAD:lib/privatised.rb
+module Privatised  
+  # Friend Methods
+  def friend_of? user
+    user.in? friends
+  end
+  
+  def friend_or_follower? user
+    self.friend_of(user) ? true : ( self.followed_by(user) ? true : false )
+  end
+  
+  def followed_by? user
+    user.in? followers
+  end
+  
+  def following? user
+    user.in? followings
+  end
+  
+  def privacy_setting=(hash)
+    
+    raise OptionParser::InvalidOption unless PrivacySetting::TYPES.include?(hash[:type])
+    
+    ps = self.privacy_selector(hash[:type])
+    unless ps.blank?
+      ps.update_attribute(:value , hash[:value]) 
+    else 
+      self.privacy_settings.create( { :field_type => hash[:type].to_s.downcase ,
+                                      :value => hash[:value] } ) 
+    end 
+  end
+  
+  # return the privacy setting value or object
+  def privacy_setting(type , object = false)
+    ps = self.privacy_selector(type)
+    ps.blank? ? nil : ( object ? ps : ps.value )
+  end
+  
+  def privacy_setting?(type , setting)
+    ps = privacy_setting(type)
+    return false if ps.blank?
+    setting == ps
+  end
+  
+  def privacy_selector(type)
+    case type
+    when "basic"
+      return self.privacy_settings.basic.first
+    when "contact"
+      return self.privacy_settings.contact.first
+    when "additional"
+      return self.privacy_settings.additional.first
+    end
+  end
+  
+  def basic_privacy_filter(peeping_tom)
+    basic_information_columns = [ :given_name , :family_name ]
+    basic_information_columns.each do |m|
+      self.create_method(m) do
+        case self.privacy_setting('basic')
+        when "everyone"
+          return super
+        when "followers"
+          self.friend_or_follower?(peeping_tom) ? ( return super ) : ( return "Private" ) 
+        when "friends"
+          self.friend_of?(peeping_tom) ? ( return super ) : ( return "Private" ) 
+        end
+      end
+    end
+  end
+ 
+  protected
+ 
+  def create_method(name, &block)
+    self.class.send(:define_method, name, &block)
+  end
+=======
+module Privatised  
+  def privacy_setting=(hash)
+    
+    raise OptionParser::InvalidOption unless PrivacySetting::TYPES.include?(hash[:type])
+    
+    ps = self.privacy_selector(hash[:type])
+    unless ps.blank?
+      ps.update_attribute(:value , hash[:value]) 
+    else 
+      self.privacy_settings.create( { :field_type => hash[:type].to_s.downcase ,
+                                      :value => hash[:value] } ) 
+    end 
+  end
+  
+  # return the privacy setting value or object
+  def privacy_setting(type , object = false)
+    ps = self.privacy_selector(type)
+    ps.blank? ? nil : ( object ? ps : ps.value )
+  end
+  
+  def privacy_setting?(type , setting)
+    ps = privacy_setting(type)
+    return false if ps.blank?
+    setting == ps
+  end
+  
+  def privacy_selector(type)
+    case type
+    when "basic"
+      return self.privacy_settings.basic.first
+    when "contact"
+      return self.privacy_settings.contact.first
+    when "additional"
+      return self.privacy_settings.additional.first
+    end
+  end
+  
+  def basic_privacy_filter(peeping_tom)
+    basic_information_columns = [ :given_name , :family_name ]
+    basic_information_columns.each do |m|
+      self.create_method(m) do
+        case self.privacy_setting('basic')
+        when "everyone"
+          return super
+        when "followers"
+          self.owner.friend_or_follower?(peeping_tom) ? ( return super ) : ( return "Private" ) 
+        when "friends"
+          self.owner.friend_of?(peeping_tom) ? ( return super ) : ( return "Private" ) 
+        end
+      end
+    end
+  end
+ 
+  def apply_filters
+  end
+ 
+  def after_find
+    
+  end
+  
+  protected
+ 
+  def create_method(name, &block)
+    self.class.send(:define_method, name, &block)
+  end
+>>>>>>> 76aedec2861e05b81df4609f46137f01e55ce826:lib/privatised.rb
+
+end

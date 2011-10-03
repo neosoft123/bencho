@@ -1,0 +1,70 @@
+--- !ruby/object:Gem::Specification 
+name: collectiveidea-money
+version: !ruby/object:Gem::Version 
+  prerelease: false
+  segments: 
+  - 1
+  - 7
+  - 4
+  version: 1.7.4
+platform: ruby
+authors: 
+- Brandon Keepers
+- Tobias Luetke
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-01-11 00:00:00 +02:00
+default_executable: 
+dependencies: []
+
+description: Class aiding in the handling of Money and Currencies. It supports easy pluggable bank objects for customized exchange strategies. Can be used as composite in ActiveRecord tables.
+email: brandon@opensoul.org
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- README
+- MIT-LICENSE
+- lib/money.rb
+- lib/money/core_extensions.rb
+- lib/money/bank/no_exchange_bank.rb
+- lib/money/bank/variable_exchange_bank.rb
+- lib/money/rails.rb
+- lib/support/cattr_accessor.rb
+has_rdoc: true
+homepage: http://github.com/collectiveidea/money
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.6
+signing_key: 
+specification_version: 2
+summary: Class aiding in the handling of Money.
+test_files: []
+

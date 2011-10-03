@@ -1,0 +1,19 @@
+<% @page_title = "Invite a friend" %>
+
+<%= draw_crumbs %>
+
+<% content_for :topbox do %>
+  <p>Enter a friend's name and mobile number to invite them to join you on 7.am.
+  Invitations require <%= Service.FriendInviteService.debit.format %></p>
+<% end %>
+
+<% content_for :searchbar do %>
+  <% form_tag adhoc_invitation_path(@p) do %>
+    <%= label_tag "Name" %>
+    <%= text_field_tag :name %>
+    <%= label_tag "Mobile Number" %>
+    <%= text_field_tag :mobile %>
+    <%= submit_tag "Send", :disable_with => "Sending.." %>
+  <% end %>
+<% end %>
+

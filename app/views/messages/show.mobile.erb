@@ -1,0 +1,35 @@
+<% @page_title = sanitize(@message.subject) %>
+<%= draw_crumbs Crumb.new("Mailbox", profile_messages_path(@p)) %>
+
+<% content_for :actions do %>
+	<ul>
+		<% if (@parent.is_a?(Profile) && @p == @parent) || (@parent.is_a?(Group) && @parent.owner == @p) %>
+		  <li>
+		    <%= link_to "Delete", profile_message_path(@p, @message), :method => :delete, :confirm => 'Are you sure?' %>
+		  </li>
+		<% end %>
+	  <li>
+	    <%= link_to "Reply", message_profile_reply_path(@parent, @message) if @parent.is_a?(Profile) %>
+	    <%= link_to "Reply to Group", message_group_reply_path(@parent, @message) if @parent.is_a?(Group) && @parent.is_member?(@p) %>
+	  </li>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<li><strong>From:</strong> <%= link_to @message.sender.f, @message.sender, :style => 'display:inline' %></li>
+		<li><strong>To:</strong> <%= link_to @message.receiver.f, @message.receiver, :style => 'display:inline' %></li>
+		<li><strong>Sent:</strong> <%= @message.created_at.to_s(:long) %></li>	
+	</ul>
+<% end %>
+
+<% if @message.is_a?(ChatReminderMessage) %>
+  You received chat messages from <%= link_to @message.sender.f, @message.sender %> while you were offline.
+  Please <%= link_to "click here", profile_chatter_path(@message.sender) %> to view them.
+<% else %>
+  <%= linkify(shortlinkify(@message.body)) %>
+  
+  <% if(@message.icon)%>
+  <p><%= image_tag url_for_file_column(@message, 'icon')%></p>
+  <% end %>
+<% end %>

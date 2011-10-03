@@ -1,0 +1,55 @@
+<% @page_title = "SmartBucks" %>
+
+<%= draw_crumbs  %>
+
+<% content_for :topbox do %>
+	<div>
+		<ul>
+		  <li>
+			<strong>Account Balances</strong>
+		  </li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :actions do %>
+  <ul>
+    <li>
+		<%= link_to 'Buy SmartBucks', new_profile_wallet_account_entry_path(@profile)%>
+    </li>
+	<!--li>
+		<%#= link_to 'Refresh Wallet', profile_wallet_path(@profile)%>
+	</li-->
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+<ul>
+	<li class="heading">
+		Balance
+	</li>
+  <li>
+    Credit
+    <big><%= @wallet.balance.format %></big>
+  </li>
+  <li>
+    Reserved
+    <big><%= @wallet.reserve.format %></big>
+  </li>
+  <li>
+    Available
+    <big><strong><%= @wallet.available.format %></strong></big>
+  </li>
+</ul>
+<ul>
+	<li class="heading">
+		Recent Activity
+	</li>
+	<% unless @recent_activity.empty? %>
+	  <%= render :partial => 'recent_activity', :collection => @recent_activity %>
+	<% else %>
+	  <li>No recent account activity</li>
+	<% end %>
+</ul>
+	<%= will_paginate @recent_activity %>
+<% end %>

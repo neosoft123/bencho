@@ -1,0 +1,12 @@
+<%
+feed_item ||= @feed_item
+f ||= GlobalFeedItem.find(feed_item.item_id)
+%>
+
+<% content_for_feed_item(feed_item, nil) do %>
+  <i><%= linkify(shortlinkify(h(f.message))) %><i>
+  <%#= feed_comments f %>
+  <%= feed_location feed_item %>
+<% end %>
+
+

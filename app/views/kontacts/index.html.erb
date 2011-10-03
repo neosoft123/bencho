@@ -1,0 +1,23 @@
+<% content_for :head do -%>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        $('#contactlist').listnav({showCounts:false});
+		$('.photo').addClass('corners iradius5');
+    });
+</script>
+<% end -%>
+<% working_indicator do %>
+<h3>Working</h3>
+<% end %>
+<div id="content">
+    <h2 class="phonebook">Phone Book</h2>
+    <div id="kontact_more_detail">
+    </div>
+    <div id="filteredkontacts">
+        <%= render :partial => 'kontacts' %>
+    </div>
+</div>
+<div id="subcontent">
+    <%= render :partial => 'new_kontact', :locals => {:kontact => @kontact} %>
+	<%= render :partial => 'sync_information', :locals => {:kontact => @kontact} %>
+</div>

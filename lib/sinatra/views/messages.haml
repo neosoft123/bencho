@@ -1,0 +1,8 @@
+!!! XML
+%messages
+  - @messages.each do |msg|
+    %message
+      %id= msg.id.to_s
+      %message= msg.message
+      %created= msg.created_at.to_s
+      %read= msg.read

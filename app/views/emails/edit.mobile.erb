@@ -1,0 +1,9 @@
+<% @page_title = @kontact_information.f %>
+
+<% draw_crumbs Crumb.new("Contacts", profile_kontacts_path(@profile)), 
+  Crumb.new(@kontact_information.f, [@profile, @kontact]) %>
+
+<% form_for @email, :url => profile_kontact_kontact_information_email_path(@profile, @kontact, @email) do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+	<%= submit_tag 'Save', :disable_with => 'Saving..' %>
+<% end %>

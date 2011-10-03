@@ -1,0 +1,10 @@
+<%
+feed_item ||= @feed_item
+bc = feed_item.item
+%>
+
+<% content_for_feed_item feed_item, bc.business_card.owner do %>
+	<%= name_link(bc.business_card.owner, true, true) -%> <%= has_have(bc.business_card.owner) %> shared his 
+	<%= link_to 'contact details', business_card_profile_path(bc.business_card.owner) %> with <%= name_link(@profile, true, false) -%>
+<% end %>
+

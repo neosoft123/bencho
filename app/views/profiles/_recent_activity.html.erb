@@ -1,0 +1,14 @@
+<%-
+#locals
+feed_items ||= @feed_items -%>
+ 
+<div id="lifestream" class="tileview">
+    <ul class="dayview">
+        <li class="daylist clearfix">
+            <ul class="lifelist" id="lifelist">
+                <%= render :partial => feed_items %>
+            </ul>
+			<p id="loading">Loading more page results...</p>
+        </li>
+    </ul>
+</div>

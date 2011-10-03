@@ -1,0 +1,47 @@
+<% content_for :head do  -%>
+<%= auto_discovery_link_tag :rss, formatted_profile_url(@profile, :rss), :title=>"#{@profile.f}'s recent activity" %>
+<%= auto_discovery_link_tag :rss, formatted_profile_blogs_url(@profile, :rss), :title=>"#{@profile.f}'s Blogs" %>
+<%= auto_discovery_link_tag :rss, formatted_profile_photos_url(@profile, :rss), :title=>"#{@profile.f}'s Photos" %>
+<%= GMap.header %>
+<% end -%>
+<% content_for :head do -%>
+	<script type="text/javascript" charset="utf-8">
+	    $(document).ready(function(){
+	            $('.big').addClass('corners iradius8');
+				$('.small').addClass('corners iradius5');
+				$('.barbutton').corners();
+	    });
+	
+		// endless_page.js
+		var currentPage = 1;
+
+		function checkScroll() {
+		  if (nearBottomOfPage()) {
+		    currentPage++;
+			$.getScript('<%= profile_url(@profile) %>?' + 'page=' + currentPage);
+		
+		  } else {
+		    setTimeout("checkScroll()", 250);
+		  }
+		}
+
+		function nearBottomOfPage() {
+		  return scrollDistanceFromBottom() < 150;
+		}
+
+		function scrollDistanceFromBottom(argument) {
+		  return pageHeight() - (window.pageYOffset + self.innerHeight);
+		}
+
+		function pageHeight() {
+		  return Math.max(document.body.scrollHeight, document.body.offsetHeight);
+		}
+
+		$(document).ready(function() {
+			checkScroll();
+		});
+		
+	</script>
+	<%= javascript_include_tag 'endless_page' %>
+<% end -%>
+<%= render :partial => 'profiles/profile_choice' %>

@@ -1,0 +1,9 @@
+<% @page_title = "Change Profile Picture" %>
+<%= draw_crumbs Crumb.new('Profile', profile_path(@profile)) %>
+
+<h2>Current Avatar</h2>
+<%= profile_icon(@p, "medium") %>
+<% form_tag(upload_icon_profile_path(:id => @p) , :multipart => true) do -%>
+  <%= file_column_field 'profile', 'icon' , :size => "10" %>
+  <%= submit_tag 'Upload', :disable_with => 'Uploading..' %>
+<% end -%>

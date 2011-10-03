@@ -1,0 +1,43 @@
+<% @page_title = "Edit Profile" %>
+
+<%=draw_crumbs Crumb.new('Profile', profile_path(@profile)) %>
+
+The more you fill in the more your friends are able to contact you
+
+<% form_for @profile do |f| %>
+  <ul id="credentials" class="form">
+    <li>
+      <%= f.label :display_name -%><%= f.text_field :display_name %>*
+    </li>
+    <li>
+      <%= f.label :given_name -%><%= f.text_field :given_name %>
+    </li>
+    <li>
+      <%= f.label :family_name -%><%= f.text_field :family_name %>
+    </li>
+    <li>
+      <%= f.label :email -%><%= f.text_field :email %> *
+    </li>
+    
+    <li>
+      <%= f.label :mobile -%><small>eg. +27821234567</small><%= f.text_field :mobile %>
+    </li>
+    <li>
+      <%= f.label :gender -%><%= f.select :gender, [['Male', 'Male'], ['Female', 'Female']], {:include_blank => true} %>*
+    </li>
+    <li>
+      <%= f.label :birthday -%><%= f.date_select :birthday, :start_year => 1920, :include_blank => true %>
+    </li>
+     <li>
+      <%= f.label :description -%><%= f.text_area :description %>
+    </li>
+     <li>
+      <%= f.label :interest -%><%= f.select :interest, [['Male', 'Male'], ['Female', 'Female']], {:include_blank => true } %> *
+    </li>
+    <li>
+      <%= f.label :relation_status-%><%= f.select :relation_status, [['Single looking', 'Single  looking'], ['Single not looking', 'Single not looking'] , ['Enganged', 'Enganged' ], ['Married', 'Married' ]], {:include_blank => true } %>*
+    </li>
+   
+  </ul>
+  <%= submit_tag 'Save', :disable_with => 'Saving..' %>
+<% end %>

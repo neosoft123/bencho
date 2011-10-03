@@ -1,0 +1,25 @@
+<%-
+#locals
+feed_item ||= @feed_item
+#f = feed_item.item
+f = Friend.find(
+	feed_item.item_id, 
+	:include => [:inviter, :invited]
+)
+-%>
+
+<li class="feed_item status_feed" id="<%= feed_item.dom_id rescue rand(1000) %>">
+  <div class ="lifecontent">
+  <div class="lifeheader">
+    <%= time_ago_in_words(feed_item.created_at) %> ago
+  </div>
+  <div class="lifebody">
+      <p><%= link_to(h(f.inviter.f), f.inviter, :style=>'display:inline') -%> is now a 
+	  <%= f.description f.inviter -%> of <%= link_to(h(f.invited.f), f.invited, :style=>'display:inline') -%></p>
+  </div>
+  <div class="lifefooter clearfix">
+	<div class="friendfeeditem"></div>
+	<%#= link_to h(status.profile.formatted_name), status.profile %>
+  </div>
+  </div>
+</li>

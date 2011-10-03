@@ -1,0 +1,19 @@
+<div id="loc-results">
+	<!-- location search results go here -->
+</div>
+
+<div class="main clearfix">
+    <h2 class="contenttitle smallwidth">Where you've been..</h2>
+</div>
+
+<div id="loc-history">
+	<% if my_profile.locations.count > 0 %>
+		<ul>
+			<% my_profile.locations.last_5.each do |loc| %>
+				<li>You checked in at <%= loc.title %> <%= time_ago_in_words(loc.created_at) %> ago</li>
+			<% end %>
+		</ul>
+	<% else %>
+		You have not checked in anywhere yet...
+	<% end %>
+</div>

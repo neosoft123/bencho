@@ -1,0 +1,4 @@
+<li>
+  <%= "[#{text_message.recipient.f}]" if text_message.recipient %> <%= link_to truncate(text_message.message, 40), profile_text_message_url(@profile, text_message) %>
+  <span style="font-size:10px;color:#c0c0c0;font-style:italic"><%= time_ago_in_words(text_message.created_at) %> ago</span>
+</li>

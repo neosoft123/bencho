@@ -1,0 +1,31 @@
+<% @page_title ='Business Cards' %>
+<%= draw_crumbs %>
+
+<% content_for :topbox do %>
+  Only checked business cards will be synced to your mobile device
+<% end %>
+
+<% content_for :stories do %>
+  <% form_tag business_card_sync_settings_path(@p) do %>
+    <ul>
+      <% if @cards.length > 0 %>
+        <% @cards.each do |bcp|
+          card = bcp.business_card %>
+          <% unless card.owner.nil?  %>
+            <% content_tag_for(:li, card, :profile, :class => "arrow") do  %>
+              <%= check_box_tag 'sync[]', bcp.id, bcp.sync_to_phone %>
+              <%= link_to "#{card.f}", business_card_profile_path(card.owner) %>
+            <% end %>
+          <%end %>
+        <% end %>
+        <li><%= submit_tag "Save sync settings", :disable_with => 'Saving..' %>
+      <% else %>
+        <li>You currently have no business cards.</li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>
+
+<% content_for :footer do %>
+  <%= will_paginate @cards %>
+<% end %>

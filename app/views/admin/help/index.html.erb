@@ -1,0 +1,25 @@
+<% @page_title = 'Help content' -%>
+
+<ul>
+  <li><%= link_to 'Create new help content', new_admin_help_path %></li>
+</ul>
+
+<% if @help.any? -%>
+  <table>
+    <thead>
+      <tr>
+        <td>Controller</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    
+    <% @help.each do |help| -%>
+      <tbody>
+        <tr>
+          <td><%= link_to help.controller, edit_admin_help_path(help) %></td>
+          <td><%= link_to help.action, edit_admin_help_path(help) %></td>
+        </tr>
+      </tbody>
+    <% end -%>
+  </table>
+<% end -%>

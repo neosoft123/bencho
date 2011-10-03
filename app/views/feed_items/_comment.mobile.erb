@@ -1,0 +1,41 @@
+<%-
+feed_item ||= @feed_item
+comment = feed_item.item
+var  ||= "#{comment.profile.icon}"
+ab ||= var.split("/")
+k ||= ab.count-1
+cd ||= Array.new
+for i in 8..k do
+cd[i] = ab[i]
+end
+f ||= cd.delete_if {|x| x == nil}
+url ||= f.join("/")
+
+-%>
+
+<% if @p %>
+<% begin %>
+<% content_for_feed_item feed_item, comment.profile do %>
+  <%= linkify(shortlinkify(truncate(comment.comment, 100))) %>
+  <div class="feed-item-detail">Comment on <%= name_link(comment.commentable.profile, true, false, true) %> <%= link_to comment.commentable_name.downcase, [comment.commentable.profile, comment.commentable] %></div>
+<% end %>
+<% rescue %>
+<% end %>
+
+<% else %>
+
+<li class="public_feed_item" id="public_feed_item_260396"><div class="posted-by">
+                   <% if comment.profile.icon != nil %> <a href="session/new"><img style="margin:10px;width:32px;height:32px" src="<%= url %>" /> </a>
+<% else %>
+<%= link_to image_tag("avatar_default_thumb.png", :style => 'margin:10px;width:32px;height:32px;' ), new_session_path%> <% end %>
+              <a href="/session/new"><% if comment.profile.display_name == nil%> <%= comment.profile.user.login %>
+                   <% else %> <%= comment.profile.display_name%> <% end %>
+          </a> <%= distance_of_time_in_words(Time.now, feed_item.item.created_at)%> ago</div>
+         <%= feed_item.item.comment %>
+  <div class="feed-item-detail">Comment on <a href="/session/new"><% if comment.profile.display_name == nil%> <%= comment.profile.user.login %>
+                   <% else %> <%= comment.profile.display_name%> <% end %>
+                   's</a>
+                   <a href="/session/new">location</a></div>
+</li>
+
+<% end %>

@@ -1,0 +1,5 @@
+<li>
+	<div class="posted-by"><%= recent_activity.service.title.titleize -%> <%= time_ago_in_words(recent_activity.created_at) %> ago</div>
+	<%= link_to recent_activity.aasm_state.capitalize, profile_wallet_account_entry_path(@profile, recent_activity) %>
+	<big><%= recent_activity.formatted_amount %></big>
+</li>

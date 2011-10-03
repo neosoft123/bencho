@@ -1,0 +1,26 @@
+<%#= setup_map %>
+
+<% content_for :head do -%>
+	<script type="text/javascript" charset="utf-8">
+	    $(document).ready(function(){
+	            $('.big').addClass('corners iradius8');
+				$('.small').addClass('corners iradius5');
+				$('.barbutton').corners();
+				$('.statusmessage').corners();
+				$('.statuscomments').corners();
+	    });
+			
+	</script>
+<% end -%>
+
+<div id="content">
+<%= link_to('Return to main profile', @p, :class=>'profilelink') %>
+<%= render :partial => 'remote_form_new', :locals => {:profile => @profile, :status => my_profile.profile_statuses.new} if is_my_profile?(@profile) %>
+<%= link_to 'RSS Feed', profile_profile_statuses_path(@profile) + '.atom', :class=>'icon_rss' %>
+<h2 class="contenttitle">Status Updates</h2>
+<div id="status-list">
+  <%= render :partial => @statuses %>
+</div>
+</div>
+
+<%= render :partial => 'profiles/profile_info' %>

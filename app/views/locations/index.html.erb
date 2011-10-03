@@ -1,0 +1,39 @@
+<% content_for :head do  -%>
+<%= auto_discovery_link_tag :rss, formatted_profile_url(@profile, :rss), :title=>"#{@profile.f}'s recent activity" %>
+<%= auto_discovery_link_tag :rss, formatted_profile_blogs_url(@profile, :rss), :title=>"#{@profile.f}'s Blogs" %>
+<%= auto_discovery_link_tag :rss, formatted_profile_photos_url(@profile, :rss), :title=>"#{@profile.f}'s Photos" %>
+<%= GMap.header %>
+<% end -%>
+
+<% content_for :head do -%>
+	<script type="text/javascript" charset="utf-8">
+	    $(document).ready(function(){
+	            $('.big').addClass('corners iradius8');
+				$('.small').addClass('corners iradius5');
+				$('.barbutton').corners();
+	    });
+			
+	</script>
+<% end -%>
+
+
+<div id="content">
+  <%= render :partial => 'locations/remote_form', :locals => { :profile => @profile } %>
+  <%= render :partial => 'locations/results' %>
+
+	<!--div id='fireeagle'>
+		<%= image_tag 'fe_logo_final3.png' %>
+		<% if my_profile.user.settings.authorized_with_fireeagle? %>
+			<p>You have already activated your <%= link_to 'Fire Eagle', 'http://fireeagle.yahoo.net' %> account. Checking in on 7.am will also update your Fire Eagle location.</p>
+		<% else %>
+			<p><%= link_to 'Fire Eagle', 'http://fireeagle.yahoo.net' %> is a site that stores information about your location. With your permission, other services and devices can either update that information or access it. By helping applications respond to your location, Fire Eagle is designed to make the world around you more interesting! Use your location to power friend-finders, games, local information services, blog badges and stuff like that...</p>
+			<p><%= link_to 'Authorise', fireeagle_activate_settings_path %> 7.am to use your Fire Eagle account.</p>
+		<% end %>
+	</div-->
+
+</div>
+
+<%= render :partial => 'profiles/profile_info' %>
+
+<div id='loc-results' />
+

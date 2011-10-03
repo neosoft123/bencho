@@ -1,0 +1,16 @@
+<% p = feed_item.item %>
+<li class="feed_item status_feed" id="<%= feed_item.dom_id rescue rand(1000) %>">
+    <div class="lifecontent">
+		<div class="lifeheader">
+	        <%= time_ago_in_words(feed_item.created_at) %> ago
+	    </div>
+		<div class="lifebody">
+			<div class="photo_feed_photo">
+		            <a href="<%= image_path p, nil %>" title="<%= p.caption %>" class="thickbox"><img width="120" src="<%= photo_path p, :square %>" class="corners iradius10 iborder1 icolorffffff" /></a> 
+		    </div>
+		</div>
+		<div class="lifefooter clearfix">
+			<%= truncate(p.caption, 20) %>
+		</div>
+	</div>
+</li>

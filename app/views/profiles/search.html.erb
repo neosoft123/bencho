@@ -1,0 +1,41 @@
+<div class="left" id="column_l">	
+<h2 class="contenttitle">Search Results</h2>
+<div id="contactlist-nav" class="listNav"></div>
+ <ul id="contactlist" class="clearfix">
+		<% @results.each do |r| %>
+    <li class="vcard">
+	<div class="maininfo">
+    <div class="fn">
+      <%= link_to h(r.f), r %>
+    </div>
+    <div class="tel">
+     &nbsp;
+    </div>
+    &nbsp;
+  </div>
+  <div class="secondaryinfo friendcard">
+    <%= icon(r , :small) %>
+    <div class="vcardchoices">
+      &nbsp;
+    </div>
+  </div>
+  </li>
+	<% end %>
+ </ul>
+   	<% if @results.blank? %>
+	<p>There were no results for this search. Please try again</p>
+	<% end %>
+<%= will_paginate @results %>
+</div>
+<div class="right" id="column_r">
+	  <div class="newprofilewrapper">
+  	<div class="newprofile">
+	<h3 class="friendsearchtitle">Search Again</h3>
+	<p class="friendblurb">Find new and interesting people to follow and friend. Enter a search term here to match all publically available profiles</p>
+	     <% form_tag url_for(:controller => :profiles, :action => :search), :method => :get do %>
+        <%= text_field_tag 'search[q]', (params[:search] && params[:search][:q] ? params[:search][:q] : 'Search for Friends'), :id => 'search_q', :class=>'friendsearch' %>
+        <button type="submit" class="submitBtn"><span>Search</span></button>
+	  <% end %>
+	</div>
+	</div>
+</div>

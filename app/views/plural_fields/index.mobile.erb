@@ -1,0 +1,33 @@
+<% @page_title = @kontact_information.f %>
+
+<% draw_crumbs Crumb.new("Contacts", profile_kontacts_path(@profile)), 
+  Crumb.new(@kontact_information.f, [@profile, @kontact]) %>
+
+<% content_for :actions do %>
+	<ul>
+		<li>
+			<%= link_to "Add Phone Number", new_profile_kontact_kontact_information_phone_number_path(@profile, @kontact) %>
+		</li>
+		<li>
+			<%= link_to "Add Email Address", new_profile_kontact_kontact_information_email_path(@profile, @kontact) %>
+		</li>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<% @emails.each do |e| %>
+			<% content_tag_for(:li, e) do %>
+				Email (<%= e.field_type %>):
+				<big><%=link_to e.value, edit_profile_kontact_kontact_information_email_path(@profile, @kontact, e) %></big>
+			<% end %>
+		<% end %>
+	
+		<% @phone_numbers.each do |pn| %>
+		   <% content_tag_for(:li, pn) do %>
+				<%= pn.field_type %>:
+				<big><%= link_to pn.value, edit_profile_kontact_kontact_information_phone_number_path(@profile, @kontact, pn) %></a></big>
+			<% end %>
+		<% end %>
+	</ul>
+<% end %>

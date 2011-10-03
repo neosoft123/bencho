@@ -1,0 +1,3 @@
+class ChatReminderMessage < Message
+    
+end

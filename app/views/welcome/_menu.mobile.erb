@@ -1,0 +1,33 @@
+<ul>
+  <% build_menu_items %>
+  <% items_per_page = 8
+  page = params[:page] ? params[:page].to_i : 1
+  item_num = 1
+  start_item = ((page-1)*items_per_page)
+  end_item = (items_per_page*page-1)
+  @menu_items.slice(start_item..end_item).each do |menu_item| %>
+    <li class="arrow"><%= access_key_link_to menu_item[0], menu_item[1], item_num %></li>
+    <% item_num += 1
+  end %>
+  <% if page > 1 %>
+    <li class="arrow">
+      <%= access_key_link_to "Back..", main_menu_path + "?page=#{page-1}", 9 %>
+    </li>
+  <% end %>
+  <% if @menu_items.length > end_item + 1 %>
+    <li class="arrow">
+      <%= access_key_link_to "More..", main_menu_path + "?page=#{(params[:page]) ? (params[:page].to_i + 1) : 2 }", 0 %>
+    </li>
+  <% end %>
+  <!--li><%#= "page: #{page}, Items: #{items_per_page}" %></li>
+      <li><%#= "#{start_item+1}..#{end_item+1} of #{@menu_items.length} items" %></li-->
+  <li class="arrow">
+    <%= link_to 'Logout', logout_path %>
+  </li>
+  <!--li class="arrow">
+<%#= link_to 'Feedback', feedback_path %>
+      </li-->
+  <li class="device-info">
+    <%= "Device Info: " + link_to("#{@device.brand} #{@device.model}", device_check_path) if @device %>
+  </li>
+</ul>

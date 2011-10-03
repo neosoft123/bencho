@@ -1,0 +1,18 @@
+<% 
+	email = Email.new if email.nil?
+	new_or_existing = email.new_record? ? 'new' : 'existing'
+	prefix = "kontact[kontact_information][#{new_or_existing}_email_attributes][]"
+%>
+<div class="email">
+
+	<% fields_for prefix, email, :builder => ApplicationHelper::DefinitionListFormBuilder do |pn| %>
+		<%= pn.select :field_type, Email::TYPE %>
+		<dl class="contactfield">
+		<%= pn.text_field :value %>
+		</dl>
+	<% end -%>
+
+	<%= 	
+		observe_field(dom_id(email, prefix), :url => "add_email_link('Add Email');")
+	 %>
+</div>

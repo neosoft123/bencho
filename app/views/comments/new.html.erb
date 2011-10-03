@@ -1,0 +1,35 @@
+<div class="span-4">
+  <div class="navbar">
+    <div>
+      <div>
+        <%= render_sidebars %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="span-20 last">
+  <div class="contentheader">
+    <div class="contentheaderinner">
+      <h2 class="contentheading">New Comment</h2><h3 class="contentheadingsub"> for <%=h @resource.class.name.humanize %></h3>
+      <div class="neutralbar clearfix">
+        <%= span_link_to "Cancel","", company_shipment_categories_path(@company), :class => "linkbutton cancelicon" %>
+      </div>
+    </div>
+  </div>
+  <%= error_messages_for :comment %>
+  <% form_for @comment do |f| %>
+    <div class="block">
+      <dl>
+        <dt><%= f.label :message%></dt>
+        <dd><%= f.text_area :message, :rows => 5%></dd>
+      </dl>
+      <div class="formsubmit clearfix">
+        <div class="floatbutton">
+          <%= image_submit_tag("/images/fuego/imagebutton_create.png", {:alt => 'Create New Comment', :width => '72', :height => '20'}) %>
+        </div>
+        <%= span_link_to "Cancel","", company_shipment_categories_path(@company), :class => "linkbutton cancelicon" %>
+      </div>
+    </div>
+    <br />
+  <%end%>
+</div>

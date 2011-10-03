@@ -1,0 +1,23 @@
+<% @page_title = 'Twitter Settings' %>
+<% draw_crumbs Crumb.new('Settings', settings_path) %>
+
+<div>
+	<p>
+		7.am integrates with Twitter, allowing you to share your status updates from 7.am with your Twitter followers. If you decide to
+		enable this option, we will have to ask you to sign into your Twitter account, and will redirect you to their site - 
+		in most cases Twitter will be nice enough to send you right back here.
+	</p>
+<div>
+	
+<div>
+
+<% if @u.settings.authorized_with_twitter? %>
+    <ul><li><%= link_to "Deactivate Twitter settings", twitter_off_settings_path %></li></ul>
+  <% else %>   
+	<ul><li>
+		<%= link_to "Continue to Twitter settings", twitter_options_settings_path %>
+	</li></ul>
+	<% end %>
+	<br />
+</div>
+

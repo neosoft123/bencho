@@ -1,0 +1,9 @@
+<p class="gray_block">
+	<small>
+		<%  location = location_defined?(@profile) 
+			if location 
+		%>
+    		You are updating from <%= link_to location.title, profile_location_path(@profile, location) %>
+		<% end %>
+   	</small>
+</p>

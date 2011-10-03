@@ -1,0 +1,15 @@
+<% content_for :head do -%>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function() {
+      <% unless @show_login %>
+        $("#homeformlogin").hide();
+      <% else %>
+        $("#homesignupform").hide();
+      <% end %>
+      
+      $(".homeformtoggle").click(function () { 
+        $(".homeformfields").slideToggle(); 
+      });
+    });
+  </script>
+<% end -%>

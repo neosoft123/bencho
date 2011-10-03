@@ -1,0 +1,7 @@
+<% form_for [@p, @status] do |f| %>
+  <label>What's on your mind?</label>
+  <%= f.text_field :text %></li>  <br />
+  Post To Facebook <%= check_box_tag 'facebook_flag' %>
+   <%= hidden_field_tag('twitter_flag', '1')  %>
+  <%= f.submit 'Save', :disable_with => 'Saving..' %>
+<% end %>

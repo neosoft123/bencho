@@ -1,0 +1,28 @@
+<% @page_title = "Edit Contact" %>
+<% draw_crumbs Crumb.new("Contacts", [@profile, @kontact]) %>
+
+<% content_for :titlebar do %>
+  <%= link_to "Back", profile_path(@profile), :class => "nav", :id => "back-link" %>
+  <h1>Edit Profile</h1>
+<% end %>
+
+<% form_for @profile do |f| %>
+  <ul id="credentials" class="form">
+    <li>
+      <%= f.label :display_name -%><%= f.text_field :display_name %>
+    </li>
+    <li>
+      <%= f.label :given_name -%><%= f.text_field :given_name %>
+    </li>
+    <li>
+      <%= f.label :family_name -%><%= f.text_field :family_name %>
+    </li>
+    <li>
+      <%= f.label :note -%><%= f.text_field :note %>
+    </li>
+    <li>
+      <%= f.label :location -%><%= f.text_field :location %>
+    </li>
+  </ul>
+  <%= submit_tag 'Save', :disable_with => 'Saving..' %>
+<% end %>

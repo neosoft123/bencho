@@ -1,0 +1,21 @@
+# == Schema Information
+# Schema version: 20081206110601
+#
+# Table name: locations
+#
+#  id         :integer(4)    not null, primary key
+#  title      :string(255)   
+#  latitude   :decimal(15, 1 
+#  longitude  :decimal(15, 1 
+#  created_at :datetime      
+#  updated_at :datetime      
+#  profile_id :integer(4)    
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+# one:
+#   column: value
+#
+# two:
+#   column: value

@@ -1,0 +1,7 @@
+<div id="sync_reminder">
+  <p>Please remember to sync your contacts</p>
+  <p><%= link_to 'Re-send Sync Settings', provision_profile_path(@p) %></p>
+  <% form_tag(remind_me_to_sync_later_url, :method => :put) do -%>
+    <%= submit_tag 'Remind me later' %>
+  <% end -%>
+</div>

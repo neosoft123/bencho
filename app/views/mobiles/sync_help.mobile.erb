@@ -1,0 +1,41 @@
+<%= draw_crumbs %>
+
+<div id="provisioning">
+
+  <h2>Synchronise your mobile contacts!</h2>
+  <p>
+    One of the core features of 7.am is the ability to synchronise your mobile 
+    phonebook, all the contacts currently on your phone, to 7.am. This serves a dual purpose:
+    it allows you to invite them to 7.am as well as serving as a backup of all your
+    contacts that can later be synched back to this or another mobile phone.
+  </p>
+  
+  <p>
+    If you would like to sync we can set your phone up using over-the-air settings which 
+    we will send to you, which should be supported by most, but not all, phones. There are 
+    also manual instructions for phones which don't support this service.
+  </p>
+  
+  <p><b><%= link_to "Send sync settings to my phone", provisioning_profile_mobile_path(@p) %></b></p>
+
+  <h2>Problems with sync?</h2>
+  <p>
+    You can try <%= link_to 're-sending the sync settings', provision_profile_path(@p) %> or
+    read below for manual setup instructions.
+  </p>
+  
+  <h2>Manual sync setup</h2>
+  <p>Try the manual instructions if you are having problems</p>
+  <p>Please select an option below that matches your device</p>
+</div>
+
+<div id="actions">
+  <ul>
+    <li><%= link_to "Sony Ericsson W950i - Symbian", sony_ericsson_path %></li>
+    <li><%= link_to "Nokia E-Series - Symbian S60", nokia_e_series_path %></li>
+    <li><%= link_to "Nokia N-Series - Symbian S60", nokia_n_series_path %></li>
+    <li><%= link_to "Nokia 6630 - Symbian S60", nokia_6630_path %></li>
+    <li><%= link_to "Nokia 6230 or Similar", nokia_6230_path %></li>
+    <li><%= link_to "Nokia 6300", nokia_6300_path %></li>
+  </ul>
+</div>

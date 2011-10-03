@@ -1,0 +1,34 @@
+<% @page_title = 'Location' %>
+
+<%= draw_crumbs %>
+
+<% content_for :topbox do %>
+	<div>
+		<ul>
+		  <li>
+			<% if @current %>
+				Checked in at <%= link_to @current.title, profile_location_path(@profile, @current) %> <%= time_ago_in_words @current.created_at %> ago
+			<% end %>
+		  </li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+    <li>
+      <% form_for [@profile, @location] do |f| %>
+    	    <label>Where are you now?</label>
+    				<%= f.text_field :title %>
+    		<%= f.submit 'Find me', :disable_with => 'Looking it up, please wait..' %>
+    		&nbsp;<span style="font-size:10px">eg. "Sandton, South Africa"</span>
+    	<% end %>
+    </li>
+    <%= render :partial => 'locations/results' %>
+  </ul>
+<% end %>
+
+
+<% content_for :footer do %>
+  <%= will_paginate @locations %>
+<% end %>

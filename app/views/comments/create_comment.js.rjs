@@ -1,0 +1,3 @@
+page["new-comment-#{@comment.commentable.id}"].toggle()
+page.insert_html :top, "comment-list-#{@comment.commentable.id}", :partial => 'status_comment', :object => @comment
+page.visual_effect :highlight, "comment-#{@comment.id}", :duration => 2

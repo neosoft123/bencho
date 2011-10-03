@@ -1,0 +1,10 @@
+<% content_tag_for(:li, group) do %>
+  <%= content_tag(:div, link_to(avatar_icon_tag(group.owner), group.owner), :class => 'feed-avatar') %>
+	<%
+	 info = [] 
+		info << "Owned by #{name_link(group.owner, true, false)}"
+		info << pluralize(group.members.count, 'member')
+	%>
+	<div class="posted-by"><%= info.join(', ') %></div>
+  <%= link_to group.name, group_path(group) -%>
+<% end %>

@@ -1,0 +1,17 @@
+<p><%= error_messages_for :chat %></p>
+
+<p>We’re still working on this and need a little more time to detail out our algorithmic formulas 
+	for automagically forwarding passwords so in the mean time we ask you nicely to confirm your password again.
+</p>
+<% form_for [@profile, @chat] do |f| %>
+    <ul>
+		<li>
+			<%= f.text_field :jabber_password, :value => "Confirm password for #{@chat.jabber_username}", :onclick => "clickclear(this, 'Confirm password for #{@chat.jabber_username}')", :onblur => "clickrecall(this, 'Confirm password for #{@chat.jabber_username}')" %>
+		</li>
+		<li>
+			<%= f.text_field :topic, :value => 'Anything specific you want to talk about?', :onclick => "clickclear(this, 'Anything specific you want to talk about?')", :onblur => "clickrecall(this, 'Anything specific you want to talk about?')"%>
+		</li>
+    </ul>
+    <p>
+    <%= submit_tag "Start chatting", :disable_with => 'Setting up chatroom..' %>
+<% end %>

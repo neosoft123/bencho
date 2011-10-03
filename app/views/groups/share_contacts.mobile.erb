@@ -1,0 +1,33 @@
+<% @page_title = "Share contacts with '#{@group.name}'" %>
+<%
+crumbs = [Crumb.new('Groups', groups_path),
+          Crumb.new(@group.name, group_path(@group)),
+          Crumb.new('Shared contacts', shared_contacts_group_path(@group))
+         ]
+-%>
+<%= draw_crumbs crumbs %>
+
+<% content_for :topbox do %>
+	<div class="bio-info"><strong>Owner:</strong> <%= link_to @group.owner.f, @group.owner %></div>
+	<div class="bio-info"><strong>Members:</strong> <%= @group.members.map{|m|link_to(m.f,m)}.to_sentence %></div>
+	<div class="bio-info"><strong>Description:</strong> <%= @group.description %></div>
+<% end %>
+
+<% content_for :stories do %>
+	<% form_tag share_contacts_do_group_path(@group) do %>
+		<ul>
+			<li class="heading">Choose the contacts you would like to share with this group</li>
+			<li><%= submit_tag 'Share', :disable_with => 'Sharing..' %></li>
+			<% @contacts.each do |contact|
+				content_tag_for :li, contact do %>
+					<%= check_box_tag 'contacts[]', contact.id %> <%= contact.f %>
+				<% end
+			end %>
+			<li><%= submit_tag 'Share', :disable_with => 'Sharing..' %></li>
+		</ul>
+	<% end %>
+<% end %>
+
+<% content_for :footer do %>
+  <%= will_paginate @contacts %>
+<% end %>

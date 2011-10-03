@@ -1,0 +1,21 @@
+<br />
+<%= draw_crumbs %>
+<% content_for :actions do %>
+	<ul>
+	  <li><%= link_to "New Message", new_recipient_url %></li>
+	  <li><%= link_to "Delete All", destroy_all_received_messages_path(@p), :confirm => "This action cannot be undone. Are you sure?" %></li>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>	<% @new_mess = @p.received_messages.find(:all, :conditions => "saveto_inbox = '0'")%>
+		<% if @new_mess.length > 0 %>
+			<%= render :partial => 'message', :collection => @new_mess %>
+		<% else %>
+			<li>You have no messages in your mailbox</li>
+		<% end %>
+	</ul> 	
+<% end %>
+
+ 
+

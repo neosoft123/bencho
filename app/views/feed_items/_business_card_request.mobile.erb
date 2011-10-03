@@ -1,0 +1,11 @@
+<%
+feed_item ||= @feed_item
+r = feed_item.item
+%>
+
+<% content_for_feed_item feed_item, r.requester do %>
+	<%= name_link(r.requester, true, true) -%> <%= has_have(r.requester) %> requested that you share your contact details 
+	<%= link_to 'Accept', accept_share_business_card_path(r.requester) %> | <%= link_to 'Decline', decline_share_business_card_path(r.requester) %>
+<% end %>
+
+

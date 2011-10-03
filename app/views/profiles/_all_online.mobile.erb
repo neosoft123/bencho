@@ -1,0 +1,16 @@
+  <% begin %>
+<% @all_online = [] %>
+<% @all_online = Profile.online_users %>
+<% if @all_online.length > 0 %>
+  <% if(@p)%>
+   <%= link_to "#{pluralize(@all_online.length, 'person')} online", online_results_profile_path(@p) %>
+  <% else %>
+   <%= "241 people online" %>
+  <% end %>
+<% else %>
+ "Oh No's!' There's no-one online"
+ <% end %>
+<% rescue => e %>      
+  "Oh No's!' There's no-one online"
+<% end %>
+

@@ -1,0 +1,29 @@
+<% @page_title = 'Group Contacts' %>
+<%= draw_crumbs %>
+
+<% content_for :topbox do %>
+  Only checked group contacts will by synced to your mobile device
+<% end %>
+
+<% content_for :stories do %>
+  <% form_tag profile_shared_contacts_add_path(@p) do %>
+	<ul>
+	  <% if @kontacts.length > 0  %>
+		  <% @kontacts.each do |k| %>
+  		  <% content_tag_for(:li, k, :class=>"arrow") do %>
+  		    <div class="posted-by">Owned by <%= name_link(k.ki.owner, true, false) -%><%= ", added to contacts" if @added_kontacts.include?(k.ki) %></div>
+  		    <%= check_box_tag('add[]', k.ki.id, false) unless @added_kontacts.include?(k.ki) %>
+  		    <%= link_to(k.kontact_information.formal_name, [k.parent, k]) %>
+  		  <% end %>
+  		<% end %>
+		  <%= "<li>" + submit_tag("Add to contacts", :disable_with => 'Adding..') + "</li>" unless @p.shared_contacts_count == @added_kontacts.length %>
+		<% else %>
+		  <li>You currently have no shared contacts</li>
+		<% end %>
+	</ul>
+	<% end %>
+<% end %>
+
+<% content_for :footer do %>
+  <%= will_paginate @kontacts %>
+<% end %>

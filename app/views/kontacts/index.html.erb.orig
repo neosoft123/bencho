@@ -1,0 +1,46 @@
+<script type="text/javascript" charset="utf-8">
+    $(function(){
+        $('#contactlist').listnav();
+    });
+    $(document).ready(function(){
+        $(".vcard").hover(function(){
+			$(this).addClass('activecard');
+        }, function(){
+			$(this).removeClass('activecard');
+        });
+    });
+</script>
+<% content_for :primary_app_nav do %>
+	<ul id="appnav">
+	    <li>
+	        <a href="#" class="current">Kontacts</a>
+	    </li>
+	    <li>
+	        <a href="#">Your Network</a>
+	    </li>
+	</ul>
+<% end %>
+
+<% working_indicator do %>
+	<h3>Working</h3>
+<% end %>
+
+<div class="left clearfix" id="column_l">
+	<h2 class="contenttitle bottom">Kontacts</h2>
+	<div id="kontact_more_detail">
+	</div>
+	<div id="filteredkontacts">
+	    <%= render :partial => 'kontacts' %>
+	</div>
+</div>
+<div class="right" id="column_r">
+<<<<<<< HEAD:app/views/kontacts/index.html.erb
+        <div class="actionbar">
+		<div id="new_kontact">
+	       <%= render :partial => 'new_kontact', :locals => {:kontact => @kontact} %>
+		</div>
+    </div>
+=======
+    <%= render :partial => 'profiles/bio' %>
+>>>>>>> 0dea94e1412ff71b4bca61e9f6199c8b2c958342:app/views/kontacts/index.html.erb
+</div>

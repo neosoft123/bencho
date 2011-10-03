@@ -1,0 +1,13 @@
+flash_notice(page)
+
+sleep(1)
+page.replace_html 'filteredkontacts', :partial => 'kontacts'
+page.replace_html 'new_kontact', :partial => 'new_kontact'
+
+page[dom_id(@new_kontact)].effect(:highlight, {}, 4000)
+
+page << "$('#contactlist').listnav();"
+
+if params[:add_detail]
+  page.replace_html 'kontact_more_detail', :partial => 'form', :locals => {:kontact => @new_kontact}
+end

@@ -1,0 +1,22 @@
+<% @page_title = "Adverts" %>
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "New Advert", new_advert_path %>
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+  <% if @adverts.empty? %>
+    <li>There are no adverts</li>
+  <% else %>
+    <% @adverts.each do |ad| %>
+      <li class="arrow">
+        <%= link_to ad.title, ad %>
+      </li>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,25 @@
+<% page_title = "My Subscriptions" %>
+
+<% draw_crumbs Crumb.new(@profile.f, profile_path(@profile))%>
+
+<% content_for :topbox do %>
+  <%= render :partial => 'profiles/bio' %>
+<% end %>
+
+<% content_for :stories do %>
+
+  <% content_tag :ul do %>
+		<% content_tag :li, :class => "heading" do %>
+		  <%= @profile.f %> is subscribed to <%= pluralize(@subscriptions.length, 'person') %>
+		<% end %>
+		<% form_tag subscriptions_do_profile_path(@profile) do %>
+      <% @friends.each do |p| %>
+        <% content_tag_for :li, p do %>
+          <%= check_box_tag "subscribe_to[]", p.id, @subscriptions.include?(p) %><%= link_to p.f, p %>
+        <% end %>
+      <% end %>
+      <% content_tag :li do %><%= submit_tag("Save", :disable_with => "Saving..") %><% end %>
+    <% end %>
+  <% end %>
+
+<% end %>

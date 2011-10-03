@@ -1,0 +1,21 @@
+<%# @page_title = "Status" %>
+<%= draw_crumbs %>
+
+<% content_for :topbox do %>
+	<% services = []; services << link_to('Twitter','http://www.twitter.com') if @u.settings.has_twitter_login?; services << link_to('Facebook','http://m.facebook.com') if @u.settings.send_status_to_facebook? %>
+	<% if services.length > 0 %>
+		Your status updates will also be shared on <%= services.to_sentence %>.
+	<% end %>
+<% end %>
+
+<% content_for :searchbar do %>
+	<%= render :partial => 'remote_form',
+	  :locals => {:profile => @profile, :status => my_profile.profile_statuses.new} if is_my_profile?(@profile) %>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+	  <li class="heading">Recent Status Updates</li>	
+	  <%= render :partial => @statuses %>
+	</ul>
+<% end %>

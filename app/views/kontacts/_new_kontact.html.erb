@@ -1,0 +1,28 @@
+<% kontact ||= @kontact %>
+<div class="subcontentboxwrapper">
+    <div class="subcontentboxouter">
+        <div class="subcontentbox">
+            <% form_for([@parent, kontact], :html => {:class => 'addcontactform'}) do |f| %>
+            <% fields_for "kontact[kontact_information]", kontact.kontact_information do |ki| %>
+            <h4 class="addcontact">Add Contact</h4>
+            <p>
+                <%= ki.label :display_name, 'Name' %>
+                <%= ki.text_field :display_name %>
+            </p>
+            <p>
+                <%= ki.label :primary_phone_number, 'Phone Number' %>
+                <%= ki.text_field :primary_phone_number, :value => '+27' %>
+            </p>
+            <%= hidden_field_tag :new_kontact_flag , 1 %>
+            <% working_indicator do %>
+            <h3>Working</h3>
+            <% end %>
+            <p class="bottom addcontactbutton">
+             <%#= button_to_remote 'new_kontact_submit', 'Save Contact', :url => eval("#{@parent.class.name.underscore}_kontacts_path([@parent, kontact])") %>
+			<button onclick="form.submit();">
+			</p>
+            <% end %>
+            <% end %>
+        </div>
+    </div>
+</div>

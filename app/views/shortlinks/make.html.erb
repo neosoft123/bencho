@@ -1,0 +1,8 @@
+<% form_tag made_short_url do |f| %>
+  
+  <%= label_tag "URL:" %>
+  <%= text_field_tag :href %>
+  
+  <%= submit_tag "Make", :disable_with => "Making.." %>
+  
+<% end %>

@@ -1,0 +1,16 @@
+<%
+feed_item ||= @feed_item
+g = GroupInvitation.find(
+  feed_item.item_id, 
+	:include => [:invitee,:inviter,:group]
+)
+%>
+
+<% content_for_feed_item(feed_item, g.inviter) do %>
+	<%= name_link(g.inviter, true, true) -%> <%= has_have(g.inviter) %> invited <%= name_link(g.invitee, true, false) %> to join the group <%= link_to g.group.name, group_invite_path(g.group, g) %>
+	<% if g.invitee == @p -%>
+    <p><%= link_to 'Accept', group_invite_accept_path(g.group,g) %>
+    or <%= link_to 'Decline', group_invite_decline_path(g.group, g) %></p>
+  <% end -%>
+<% end %>
+

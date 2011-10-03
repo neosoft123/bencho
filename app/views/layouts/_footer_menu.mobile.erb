@@ -1,0 +1,30 @@
+<% if(@p)%>
+<div id="marquee_tabs" class="marquee">
+	<small class="marquee_tab<%= current_page?(profile_path(@p)) ? '_select' : ''%>">
+		<%= link_to "<span>Home</span>", profile_path(@p), :accesskey => "2" %>
+		</small>&nbsp;
+	<small class="marquee_tab<%= current_page?(public_stream_path) ? '_select' : ''%>">
+		<%= link_to "<span>Public Chat</span>", public_stream_path, :accesskey => "0" %>
+	</small>&nbsp;
+	<small class="marquee_tab<%= current_page?(welcome_path) ? '_select' : ''%>">
+		<%= link_to "<span>My Networks</span>", welcome_path, :accesskey => "1" %>
+		</small>&nbsp;
+	<small class="marquee_tab<%= current_page?(welcome_path) ? '_select' : ''%>">
+		<%= link_to "<span>Logout (#{@p.formatted_name}) </span>", logout_path, :accesskey => "1" %>
+	</small>&nbsp;
+	
+</div>
+<% else %>
+<div id="marquee_tabs" class="marquee">
+	<small class="marquee_tab">
+		<%= link_to "<span>Home</span>", new_session_path, :accesskey => "2" %>
+		</small>&nbsp;
+	<small class="marquee_tab">
+		<%= link_to "<span>Public Chat</span>", new_session_path, :accesskey => "0" %>
+	</small>&nbsp;
+	<small class="marquee_tab">
+		<%= link_to "<span>My Networks</span>", new_session_path, :accesskey => "1" %>
+	</small>&nbsp;
+	
+</div>
+<% end %>

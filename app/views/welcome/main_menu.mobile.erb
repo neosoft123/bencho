@@ -1,0 +1,16 @@
+<% draw_crumbs %>
+
+<% content_for :topbox do %>
+  <%#= render :partial => 'shared/remember_to_sync' if current_user && current_user.remind_me_to_sync? %>
+  <%= render :partial => 'profiles/bio' %>
+<% end %>
+
+<% build_menu_items %>
+
+<% content_for :stories do %>
+	<div id="menu">	
+		  <ul>
+			<%= render :partial => 'main_menu_item', :collection => @menu_items %>
+		  </ul>
+	  </div>
+<% end %>

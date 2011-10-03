@@ -1,0 +1,49 @@
+<% @page_title = 'Friends Request' %>
+<% draw_crumbs %>
+
+
+
+<% content_for :stories do%>
+ <!--  <h1> Latest Profiles </h1>
+  <ul>
+    <% @latest_profiles.each do |new_profile| %>
+
+      <li> <%= avatar_icon_tag new_profile  %><%= link_to new_profile.formatted_name, profile_path(new_profile) %> </li>
+
+    <% end %>
+    <li> <%= link_to "More..", profile_friends_url(@p, :latest_profile_page => @latest_profiles.next_page) if @latest_profiles.next_page %> </li>
+  </ul> -->
+  <!-- <h1> Most Popular Profiles </h1>
+  <ul>
+    <% @popular_profiles.each do |pop_profile| %>
+      <li> <%= avatar_icon_tag pop_profile  %><%= link_to pop_profile.formatted_name, profile_path(pop_profile) %> (<%= pop_profile.followers_count %> followers) </li>
+    <% end %>
+    <li> <%= link_to "More..", profile_friends_url(@p, :popular_profile_page => @popular_profiles.next_page) if @popular_profiles.next_page %> </li>
+  </ul> 
+ <h1> Friends Request </h1> -->
+ <% if(@friends_req.count > 0 ) %>
+ <ul>
+    <% @friends_req.each do |pop_profile| %>
+  
+	 <li> <%= avatar_icon_tag pop_profile  %><%= link_to pop_profile.formatted_name, profile_path(pop_profile) %>  
+	 
+        <% f = Friendship.find(:first, :conditions=>" friender_id = '#{pop_profile.id}' and friendee_id = '#{@p.id}' and state = 'pending'")%>
+	 <% if(f.state == 'pending') %>
+	   <%= has_have(f.friender) %> sent <%= name_link(f.friendee, true, false) -%> a friend request.
+           <% if f.friendee == @p -%>
+             <p>
+	     <%= link_to 'Accept', friend_path(f.friendee, f.friender) %>
+	      
+             or <%= link_to 'Ignore', friend_path(f.friendee, f.friender, :ignore => 'yes') %></p>
+           <% end -%>
+	
+        <% end %>
+    </li>
+    <% end %> 
+</ul> 
+<% else %>
+  No Friends request
+<% end %>
+<% end %>
+ 
+

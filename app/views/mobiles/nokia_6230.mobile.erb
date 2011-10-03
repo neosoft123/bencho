@@ -1,0 +1,32 @@
+<%= draw_crumbs Crumb.new('Sync', sync_help_profile_mobile_path(@p)) %>
+
+<ol>
+  <li>Select Menu key and open the Settings folder.</li>
+  <li>Select Configuration.</li>
+  <li>Select Personal configuration settings.<li>
+  <li>From the Options menu select Add new.</li>
+  <li>Select Synchronisation and enter the following values:
+    <ol>
+      <li>Account name: "<%= @sync_profile_name %>"</li>
+      <li>Server address: "<%= @server_address %>"</li>
+      <li>User name: "<%= @username %>"</li>
+      <li>Password: "<%= @password %>"</li>
+      <li>Select Contacts database</li>
+      <li>Enter contacts into the Database address field</li>
+      <li>Leave other fields empty and click Back to save your settings.</li>
+      <li>Ensure that Calendar database and Notes database fields are empty.</li>
+      <li>Ensure that Use preferred access point is set to Yes.</li>
+    </ol>
+  </li>
+  
+  <li>Select Back to exit this screen and save your settings.</li>
+  <li>Select Back three times to return to the main menu.</li>
+  <li>Select Organizer.</li>
+  <li>Select Sync.</li>
+  <li>Select Data transfer.</li>
+  <li>Select Server sync.</li>
+  <li>Select Data to be synchronized.</li>
+  <li>Mark Contact, select Done and select Yes to save settings.</li>
+  <li>Select Synchronize.</li>
+  <li>When asked Synchronize selected data?..., select Yes.</li>
+</ol>

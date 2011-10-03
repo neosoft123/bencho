@@ -1,0 +1,33 @@
+
+<% @page_title = "Add recipients" -%>
+<%= draw_crumbs Crumb.new("Mailbox", profile_messages_path(@p)) %>
+
+
+<% if @recipients.any? -%>
+  <% content_for :stories do %>
+    <% @recipients.each do |recipient| %>
+      <li class="recipient">
+        <%= link_to recipient.f, recipient %>
+        
+        <% exclude_current_recipient = @recipients.reject {|r| recipient == r } -%>
+        <% exclude_current_recipient = h(exclude_current_recipient.collect {|r| "#{r.id},"}) -%>
+        <% url = "/messages/new_recipient?cumulative_recipient_ids=#{exclude_current_recipient}" -%>
+        <%= link_to image_tag('delete.png'), url, :class => 'delete' %>
+      </li>
+    <% end -%>
+  <% end %>
+<% end -%>
+
+<% cumulative_recipient_ids = h(@recipients.collect {|recipient| "#{recipient.id},"}) -%>
+
+<% form_tag add_recipient_url do |f| %>
+  <dl>
+    <dt><%= label_tag 'message_receiver_id', (@recipients.any? ? 'Add another' : 'To') %></dt>
+    <dd><%= collection_select(:message, :receiver_id, @p.friends, :id, :f, {:prompt => true}) %></dd>
+    <dt><%= submit_tag 'Add recipient' %></dt>
+    <%= hidden_field_tag 'cumulative_recipient_ids', cumulative_recipient_ids %>
+  </dl>
+<% end -%>
+
+<% url = "/messages/new_multi_message?cumulative_recipient_ids=#{cumulative_recipient_ids}" -%>
+<%= link_to('Finished adding recipients', url) if @recipients.any? %>

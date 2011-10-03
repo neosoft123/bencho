@@ -1,0 +1,17 @@
+=== 0.0.3 / 2008-02-26
+
+* 2 Minor Enhancement:
+  * Now raises exception when there are too many markers.
+  * Now raises exception when the url becomes too long.
+
+=== 0.0.2 / 2008-02-25
+
+* 1 Major Enhancement:
+  * Now supports Markers!
+* 1 Minor Enhancement:
+  * Removed StaticGmaps::Map.to_blob
+
+=== 0.0.1 / 2008-02-25
+
+* 1 major enhancement
+  * Birthday!

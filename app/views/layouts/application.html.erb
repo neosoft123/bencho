@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title><%= @title || SITE_NAME %></title>
+    <%= javascript_include_tag 'jquery-1.2.6', 'justcorners', 'jquery.corners.min', 'truncator', 'thickbox' %>
+    <%= javascript_include_tag 'jquery-ui', 'jquery.scrollTo', 'jquery.listnav-1.0.1', 'jquery.inplace.pack' %>
+    <%= javascript_include_tag 'jrails', 'ui.datepicker', 'jquery.listnav-1.0.1', 'jquery.inplace.pack' %>
+    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag '7am' %>
+    <!--[if lte IE 7]><%= stylesheet_link_tag '7am_ie' %><![endif]-->
+      <%= yield :head %>
+    <!--[if lt IE 7.]>
+      <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
+    <![endif]-->
+    
+    <%= render :partial => 'shared/get_satisfaction'%>    
+    
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function(){
+        $('.custom').click(function(){
+          $('body').toggleClass('customtheme')
+        });
+      });
+    </script>
+  </head>
+  <body id="<%= current_controller%>">
+  	<div id="header">
+  		<div id="headerinner">
+  		  <%= render :partial => 'shared/sign_up_bar' %>
+        
+        <ul class="tabs">
+          <li><div class="logo">7.am - sync, connect, locate</div></li>
+          <% header = (@u.nil? or @u.new_record?) ? 'shared/header' : 'shared/header_logged_in' -%>
+          <%= render :partial => header %>
+        </ul>
+      </div>
+    </div>
+    
+    <div id="page">
+      <div id="messages">
+        <%= display_standard_flashes %>
+      </div>
+      
+      <div id="topflash" class="topflash" style="display:none">&nbsp;</div>
+      
+      <%= yield %>
+    </div>
+    
+    <%= render :partial => 'shared/footer' %>
+  </body>
+</html>

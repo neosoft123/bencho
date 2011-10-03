@@ -1,0 +1,22 @@
+<% @page_title = 'Settings' %>
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+	<ul id="tabbar">
+	  <li>
+	    <%= link_to "Privacy", privacy_settings_path %>
+    </li>
+		<!--li>
+			<%#= link_to 'Fire Eagle Settings', fireeagle_settings_path %> 
+		</li-->
+		<li>
+			<%= link_to 'Twitter Settings', twitter_settings_path %>
+		</li>
+		<li>
+			<%= link_to 'Facebook Settings', facebook_settings_path %>
+		</li>
+    <li>
+		  <%= link_to 'Change Password', change_password_user_path(@u) %>
+	  </li>
+	</ul>
+<% end %>

@@ -1,0 +1,32 @@
+<% @page_title = 'Inbox' -%>
+<%= draw_crumbs %> 
+  <% content_for :actions do %>
+	<ul>	 
+	  <li><%= link_to "Delete All", destroy_all_received_messages_path(@p), :confirm => "This action cannot be undone. Are you sure?" %></li>
+	</ul>
+<% end %>
+<% content_for :stories do %>
+	<ul>
+		<% @inbox_message = @p.received_messages.find(:all, :conditions => "saveto_inbox = '1'")  %>
+		<% if @inbox_message.length > 0 %>
+		<% @inbox_message.each do |message|%>
+		        <%
+			can_delete = (@p == message.receiver)
+			can_delete = message.receiver.is_owner?(@p) if message.receiver.is_a?(Group) unless can_delete
+			%>
+
+		<% content_tag_for :li, message do %>
+		<%= content_tag(:div, link_to(avatar_icon_tag(message.sender), message.sender), :class => 'feed-avatar') %>
+		<%= link_to(image_tag('delete.png'), profile_message_path(@p, message), :method => :delete, :confirm => 'Are you sure?', :class=>'delete') if can_delete %>
+  
+		<div class="posted-by"><%= name_link(message.sender, true, true) -%> <%= time_ago_in_words(message.created_at) %> ago</div>
+		<%= "* " unless message.read or message.receiver.is_a?(Group) %>
+		<%= link_to message.subject, (message.receiver.is_a?(Group)) ? [@group, message] : profile_message_path(@p, message) %>
+		<% end %>
+		<% end %>
+		<% else %>
+			<li>You have no messages in your mailbox</li>
+		<% end %>
+	</ul>  	
+<% end %>
+ 

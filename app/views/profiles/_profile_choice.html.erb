@@ -1,0 +1,5 @@
+<% if params[:public_view].blank? && my_profile && is_my_profile?(@profile) %>
+	<%= render :partial => "profiles/private" %>
+<% else %>
+	<%= render :partial => "profiles/public" %>
+<% end %>

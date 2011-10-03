@@ -1,0 +1,23 @@
+<% @page_title = "TX#{@account_entry.id}"%>
+<%= draw_crumbs Crumb.new("SmartBucks", profile_wallet_path(@profile)) %>
+
+<% content_for :stories do %>
+<ul>
+	<li class="heading">
+		<%= @account_entry.service.title -%>
+	</li>
+	<li>
+		<div class="posted-by"><%= time_ago_in_words(@account_entry.created_at) %> ago</div>
+		<%= @account_entry.aasm_state %>
+	</li>
+	<% if @account_entry.denied? %>
+		<li>
+			<%= @account_entry.reason %>
+		</li>
+	<% end %>
+	<li>
+		<%= @account_entry.formatted_amount %>
+	</li>
+	
+</ul>
+<% end %>

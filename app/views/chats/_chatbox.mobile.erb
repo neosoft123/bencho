@@ -1,0 +1,22 @@
+<form id="chat" name="chat" onsubmit="new Ajax.Request('<%= send_message_profile_chat_url(@profile, @chat) %>', {asynchronous:true, evalScripts:true, parameters:Form.serialize(this)}); return false;" method="post" action="#">
+    <%= hidden_field_tag("id", from.id) %>
+    <%= hidden_field_tag("to", @chat.to) %>
+    <%= hidden_field_tag("chat_id", chat_id) %>
+	<%= hidden_field_tag("transport", nil) %>
+    <%= text_area_tag "message", "" %><label for="message">
+        @<%= @chat.to %>
+    </label><br/>
+
+    <%= submit_tag "Send" %>
+</form>
+
+<% content_tag "div", (messages_html_options || {}).merge({:id=>"message_container"}) do -%>
+    <div id="chat_messages">
+        <% for_new_messages do |msg| %>
+					<p>
+					  [<%= msg.from %>] <%= msg.message %>
+					  <span style="font-size:10px;color:#c0c0c0;font-style:italic"><%= msg.timestamp %></span>
+					</p>
+        <% end %>
+    </div>
+<% end -%>

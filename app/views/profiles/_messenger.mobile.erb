@@ -1,0 +1,28 @@
+
+<% 
+online_friends = []
+active_chat = []
+$active_chat = [];
+begin
+  # @online_friends.compact! unless @online_friends.nil?
+  unless @online_friends.nil? || @online_friends.empty?
+    online_friends = @online_friends.slice(0..Profile::FRIENDS_DISPLAY_LIMIT-1).map { |f|
+      $active_chat << 1 if f[1] > 0
+      text = link_to(f[0].f, profile_chatter_path(f[0]))
+      text << " (#{f[1]})" if f[1] > 0
+      text
+      
+    }   
+    
+
+    online_friends << link_to("#{@online_friends.length - Profile::FRIENDS_DISPLAY_LIMIT} more..", my_online_friends_path(@p)) if @online_friends.length > Profile::FRIENDS_DISPLAY_LIMIT
+  end
+rescue => e
+  raise e if %w(development test).include? RAILS_ENV
+  HoptoadNotifier.notify(e)
+  online_friends = []
+end
+%>
+<b>Chat:</b> 
+<%= online_friends.length > 0 ? online_friends.to_sentence : 'No friends online' %>
+ 

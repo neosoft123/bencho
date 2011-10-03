@@ -1,0 +1,33 @@
+<% @page_title = 'Fire Eagle settings' %>
+<% draw_crumbs Crumb.new('Settings', settings_path) %>
+
+<% content_for :title do %>
+	<%= image_tag 'fe_logo_final3.png', :width=>"200" %>
+<% end %>
+
+<div>
+	<p>
+		<%= link_to 'Fire Eagle', 'http://fireeagle.yahoo.net' %> is a site that stores information about 
+		your location. With your permission, other services and devices can either update that information or 
+		access it. By helping applications respond to your location, Fire Eagle is designed to make the world 
+		around you more interesting! Use your location to power friend-finders, games, local information services, 
+		blog badges and stuff like that...
+	</p>
+</div>
+
+<% if my_profile.user.settings.authorized_with_fireeagle? %>
+  <div>
+  	<p>
+  			<strong>You have already activated your <%= link_to 'Fire Eagle', 'http://fireeagle.yahoo.net' %> account - 
+  			checking in on 7.am will also update your Fire Eagle location.</strong>
+  	</p>
+  </div>
+<% end %>
+
+<% content_for :actions do %>
+  <% if my_profile.user.settings.authorized_with_fireeagle? %>
+    <ul><li><%= link_to "Deactivate Fire Eagle", fireeagle_off_settings_path %></li></ul>
+  <% else %>
+    <ul><li><%= link_to "Authorize Fire Eagle", fireeagle_activate_settings_path %></li></ul>
+  <% end %>
+<% end %>

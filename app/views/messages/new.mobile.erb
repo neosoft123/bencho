@@ -1,0 +1,45 @@
+<%
+#locals
+message ||= @message
+message ||= Message.new params[:message]
+to_list ||= @to_list
+to_list ||= [@profile] #used on someone's profile page
+hide_header ||= false
+
+unless message.new_record?
+  message.subject = "RE: " + message.subject
+  message.body = "\n\n\n\n\n\n\n\n\n" + message.body.gsub(/^/, '> ')
+end
+%>
+
+<%
+crumbs = []
+if @parent.is_a?(Group)
+  @page_title = "Send message to '#{@parent.name}'"
+  crumbs << Crumb.new('Groups', groups_path)
+  crumbs << Crumb.new(@parent.name, group_path(@parent))
+else
+  @page_title = "Send message"
+  crumbs << Crumb.new('Mailbox', profile_messages_url(@p))
+end
+-%>
+
+<%= draw_crumbs crumbs %>
+
+<% content_for :formholder do %>
+	<%= error_messages_for :message %>
+	<% form_for [@parent, @message], :html => {:multipart => true , :id => 'remote-status-form' } do |f| %>
+		<ul>
+			<% unless @message.receiver %>
+				<li><%= f.label :to %><%= collection_select(:message, :receiver_id, @p.friends, :id, :f, {:prompt => true}) %></li>
+			<% else %>
+				<li><%= f.label :to %><%= link_to @message.receiver.f, @message.receiver %></li>
+				<%= f.hidden_field :receiver_id %>
+			<% end %>
+			<li><%= f.label :subject %><%= f.text_field :subject %></li>
+			<li><%= f.label :body %><%= f.text_area :body %></li>
+			<li><%= label_tag :pic %><%= file_column_field 'message', 'icon' %></li>
+			<li><%= f.submit 'Send', :disable_with => 'Sending..' -%> or <%= link_to 'Cancel', profile_messages_path(@p) %></li>
+		</ul>
+	<% end %>
+<% end %>

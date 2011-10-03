@@ -1,0 +1,36 @@
+<% @page_title = @group.name %>
+<%= draw_crumbs Crumb.new('Groups', groups_path) %>
+
+<% content_for :topbox do %>
+	<div class="bio-info"><strong>Owner:</strong> <%= link_to @group.owner.f, @group.owner %></div>
+	<%= render :partial => 'member_list' %>
+	<div class="bio-info"><strong>Description:</strong> <%= @group.description %></div>
+<% end %>
+
+<% content_for :actions do %>
+	<ul>
+	  <% if @group.is_member? @p %>
+  	  <li><%= link_to "Invite Friends", invite_group_path(@group) %></li>
+  	  <!--li><%= link_to "Shared Contacts", shared_contacts_group_path(@group) %></li-->
+  	  <li><%= link_to "Send Message", new_group_message_path(@group) %></li>
+  	  <li><%= link_to "Leave Group", leave_group_path(@group), :confirm => 'Are you sure you want to leave this group?' %></li>
+  	<% else %>
+	    <li><%= link_to "Join Group", join_group_path(@group) %></li>
+  	<% end %>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<li class="heading">Group Messages</li>
+		<% if @messages.length > 0 %>
+			<%= render :partial => @messages %>
+		<% else %>
+			<li>No messages have been sent to this group</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<% content_for :footer do %>
+	<%= will_paginate @messages, :page_links => false, :prev_label => 'Prev', :next_label => 'Next' %>
+<% end %>

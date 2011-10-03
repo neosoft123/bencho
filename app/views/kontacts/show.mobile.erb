@@ -1,0 +1,72 @@
+<% ki = @kontact.kontact_information 
+return if ki.nil?
+%>
+
+<% @page_title = ki.f -%>
+<% if @parent.is_a?(Group) %>
+  <%= draw_crumbs Crumb.new('Group Contacts', profile_shared_contacts_url(@p)) %>
+<% else %>
+  <%= draw_crumbs Crumb.new('Contacts', profile_kontacts_url(@p)) %>
+<% end %>
+
+
+<% content_for :topbox do %>
+	<div>
+		<ul class="profile">
+		  <li class="picture" style="background: #fff url(<%= kontact_icon_url(ki, :size => '62x62', :crop => "1:1", :name => "thumb")%>) no-repeat !important;">
+			<a href="#"></a></li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :actions do %>
+  <ul>
+    <li>
+      <%= link_to "Invite to 7.am", create_kontact_invitation_path(@profile || @p, @kontact) %>
+    </li>
+	<% if @kontact.is_owner?(@p) %>		
+		<li>
+		  <%= link_to "Edit", edit_profile_kontact_kontact_information_path(@profile, @kontact) %>
+		</li>
+	
+		<li>
+		  <%= link_to "Delete", profile_kontact_path(@profile, @kontact), :method => :delete, :confirm => 'Are you sure?' %>
+		</li>
+	<% end %>	
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+
+<ul>
+	  <% ki.emails.each do |e| %>
+	    <% content_tag_for(:li, e) do %>
+	      Email <%= "(#{e.field_type})" if e.field_type %>:
+	      <big><%= mail_to e.value %></big>
+	    <% end %>
+	  <% end %>
+	
+	  <% ki.phone_numbers.each do |pn| %>
+	    <% content_tag_for(:li, pn) do %>
+			<%= pn.field_type %>:
+		    <big><a href="tel:<%= pn.value %>"><%= pn.value %></a></big>
+	    <% end %>
+	  
+	  <% content_tag_for(:li, pn) do %>
+	      <%= pn.field_type %>[sms]:
+	      <big><a href="smsto:<%= pn.value %>"><%= pn.value %></a></big>
+	    <% end %>
+	  <% end %>
+	
+	  <% content_tag_for(:li, ki) do %>
+	    Location:
+	    <big><%= ki.location%>&nbsp;</big>
+	  <% end unless ki.location.blank? %>
+	
+	  <% content_tag_for(:li, ki) do %>
+	    Note:
+	    <div><big><%= ki.note %>&nbsp;</big></div>
+	  <% end unless ki.note.blank? %>
+</ul>
+
+<% end %>

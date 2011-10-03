@@ -1,0 +1,22 @@
+<% @page_title = 'Search' %>
+<%= draw_crumbs %>
+
+<% content_for :searchbar do %>
+	<% form_tag online_search_do_profile_path(@p) do %>
+		<!-- <%= text_field_tag 'q', nil, :class=>"search-box" -%> -->
+	       Age From:- <%= select_tag 'agefrom', options_for_select(%w{Select 10 20 30 40 50 60 70 80 90 100}) -%><br />
+	       Age To:- <%= select_tag 'ageto', options_for_select(%w{Select 10 20 30 40 50 60 70 80 90 100}) -%><br />
+	       Location:- <select name='location' id='location'>
+	       <option value='Select'>Select</option>
+		        <% @locations.each do |loc| %>
+		        <option value="<%= loc %>"><%= loc%></option>
+		        <% end %>
+			</select><br />
+		 Gender:-  <%= select_tag 'gender', options_for_select(%w{Select Male Female}) -%>	 <br />
+		Friends:-  <%= select_tag 'friends', options_for_select(%w{Select Yes No}) -%>	 <br />
+		       <%= submit_tag 'Search', :disable_with => 'Searching..' %>
+		 
+	<% end %>
+<% end %>
+
+

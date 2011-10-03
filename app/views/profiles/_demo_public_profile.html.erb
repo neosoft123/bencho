@@ -1,0 +1,29 @@
+<h3 class="profiletitle">Your Public Profile</h3>
+<p class="profileexplanation">This is what will be displayed to visitors to your page. You can change what your visitors, friends and followers will see by changing the privacy settings in the form on the left</p>
+<h3 class="sidetitle">Everyone will see this:</h3>
+<div class="newprofilewrapper">
+<div class="newprofile clearfix">
+	<div class="profile_l left">
+        <div class="left avatar">
+			<%= profile_icon(@profile, "medium") %>
+        </div>
+	</div>
+	<div class="profile_r right">
+		<%= render_all_information(@kontact_information, "everyone") %>
+	</div>
+</div>
+</div>
+<br />
+<h3 class="sidetitle">Your friends will see this:</h3>
+<div class="newprofilewrapper">
+<div class="newprofile clearfix">
+	<div class="profile_l left">
+	    <div class="left avatar">
+			<%= profile_icon(@profile, "medium") %>
+	    </div>
+    </div>
+	<div class="profile_r right">
+		<%= render_all_information(@kontact_information, "friends") %>
+	</div>
+</div>
+</div>

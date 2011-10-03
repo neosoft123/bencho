@@ -1,0 +1,25 @@
+<% @page_title = 'Search Results' %>
+<%= draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "Search again", basic_search_profile_path(@p) %></li>
+  </ul>
+<% end %>
+
+<% if @results %>
+	<% content_for :stories do %>
+	  <% content_tag :ul do %>
+			<li class="heading">Your search for "<%= h(@q) %>" returned <%= pluralize(@results.length, 'profile') %></li>
+	    <% @results.each do |p| %>
+	      <%= render :partial => 'profile_list_item', :locals => { :p => p } %>
+	    <% end %>
+	     <li><%= will_paginate @results, :params => {:q => params[:q]} %></li>
+	    <li class="heading">Your search for "<%= h(@q) %>" returned <%= pluralize(@kontacts.length, 'contact') %></li>
+	    <% @kontacts.each do |k| %>
+	      <%= content_tag :li, link_to(k.ki.f, k), :class=>"arrow" %>
+	    <% end %>
+	    <li><%= will_paginate @kontacts, :params => {:q => params[:q]} %></li>
+	  <% end %>
+	<% end %>
+<% end %>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <title><%= @title || SITE_NAME %></title>
+		<%= javascript_include_merged :defaults %>
+		<%= javascript_include_merged :base %>
+		<%= stylesheet_link_merged :base %>
+        <!--[if lt IE 7.]>
+            <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+    	 <%= display_standard_flashes %>
+        <div id="base_wrapper">
+            <div class="loginmiddle">
+                <div class="loginbottom">
+                    <div class="logintop">
+                        <%= yield %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

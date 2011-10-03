@@ -1,0 +1,182 @@
+<%= link_to('Return to your profile', @p, :class=>'profilelink') if @p %>
+<h2 class="contenttitle">Edit Your Profile <%= 'or '+link_to('Skip This Step', profile_path(@p)) if flash[:notice]=="Thanks for signing up!" %></h2>
+<p>Edit your profile information, add new email addresses and phone numbers, and choose how much of your personal information is displayed to the public.
+Double click directly on a field to edit it.
+</p>
+<div id="editor" class="clearfix">
+    <div class="avatarfield">
+    <h4 class="editoravatartitle">Current Avatar</h4>
+      <%= profile_icon(@profile, "medium") %>
+    <% form_tag(upload_icon_profile_path(:id => @profile) , :multipart => true) do -%>
+      <div class="avatarlink">
+        <%= file_column_field 'kontact_information', 'icon' , :size => "1x10"%>
+      </div>
+      <div class="avatarsubmit">
+        <%= submit_tag "Upload" %>
+      </div>
+    <% end -%>
+	<p class="avatardescription">Upload an icon for your account. It should be square, no larger than 600x600 pixels, and in JPG, Gif or PNG format</p>
+    </div>
+    <div class="editorform clearfix">
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Basic Information
+                </legend>
+                <div class="inlineeditsmall">
+                    <label>
+                        First Name:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :given_name %>
+                </div>
+                <div class="inlineeditsmall">
+                    <label>
+                        Last Name:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :family_name %>
+                </div>
+                <div class="inlineedit">
+                    <label>
+                        Display Name: <span>(the name that you want other people to see)</span>
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :display_name %>
+                </div>
+            </fieldset>
+        </div>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Additional Information
+                </legend>
+                <div class="inlineeditmini">
+                    <label>
+                        Birthday:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :birthday %>
+                </div>
+                <div class="inlineeditmini">
+                    <label>
+                        Gender:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :gender %>
+                </div>
+                <div class="inlineeditmini2">
+                    <label>
+                        Home:
+                    </label>
+                    <div id="inline_location">
+                    	<%= render :partial => "inline_location" %>
+					</div>
+                </div>
+                <div class="inlineeditmini3">
+                    <label>
+                        Biography:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :about_me , {} , {:field_type => 'textarea', :textarea_cols => 25, :textarea_rows => 10} %>
+                </div>
+                <div class="privacyoptions">
+<<<<<<< HEAD:app/views/profiles/_inplace_form.html.erb
+					<% form_remote_tag :url => additional_privacy_path(:id => @profile) do %>
+=======
+                    <!--<div id="remote-message-additional" class="remote-message-additional">
+                    <div>
+                    <label>
+                    Privacy Setting:
+                    </label>
+                    </div>
+                    </div>--><% form_remote_tag :url => additional_privacy_profile_path(:id => @profile) do %>
+>>>>>>> 4caaf54d7bb45de7d7989b9a91609a730dadc7e5:app/views/profiles/_inplace_form.html.erb
+                    Show this information to&nbsp;&nbsp;<%= options_for_privacy(@kontact_information , 'additional') %>
+                    <%= submit_tag "Set" %>
+                    <% end %>
+                </div>
+            </fieldset>
+        </div>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Contact Information
+                </legend>
+			    <div id="mobile_email_spinner" style="display:none;">
+					<%= image_tag 'spinner.gif' %>
+    			</div>
+				<div class="microheading">
+                    Email Addresses
+                </div>
+				<div class="clearfix">
+                <div class="inlineeditmini2">
+                    <label>
+                        Primary:
+                    </label>
+                    <%= in_place_editor_field :profile, :email %>
+					<div id="emails">
+						<%= render :partial => "email" , :collection => @emails %>
+					</div>
+                </div>
+				</div>
+                <div id="newemail" style="display:none;">
+                    <% form_remote_tag :url => add_email_profile_path(:id => @profile),
+					   :loading => "$('#mobile_email_spinner').show();" ,
+					   :success => "$('#mobile_email_spinner').hide();"  do %>
+   						<select name="email_type" class="inlineeditselect">
+	                        <option value="Work">work</option>
+	                        <option value="Home">home</option>
+	                        <option value="Other">other</option>
+	                    </select>
+	                    <input type="text" class="inplace_field" name="email"/>
+						<input class="inplace_save" type="submit" value="Save"/>
+					    <input type="submit" value="Cancel" class="inplace_cancel"  onclick="$('#newemail').toggle();"/>	
+					<% end -%>
+                </div>
+                <div class="clearfix">
+                    <a class="addlink" href="#" onclick="$('#newemail').toggle(); return false;">add new email address</a>
+                </div>
+                <div class="microheading">
+                    Phone Numbers
+                </div>
+				<div class="clearfix">
+                <div class="inlineeditmini2">
+                    <label>
+                        Primary:
+                    </label>
+                    <%= in_place_editor_field :phone_number, :value %>
+					<div id="phone_numbers">
+						<%= render :partial => "phone_number" , :collection => @phone_numbers %>
+					</div>
+                </div>
+				</div>
+				 <div id="newphone" style="display:none;">
+                    <% form_remote_tag :url => add_number_profile_path(:id => @profile),
+									   :loading => "$('#mobile_email_spinner').show();" ,
+									   :success => "$('#mobile_email_spinner').hide();"  do %>
+						<select name="number_type" class="inlineeditselect">
+	                        <option value="Mobile">mobile</option>
+	                        <option value="Fax">fax</option>
+	                        <option value="Pager">pager</option>
+	                    </select>
+					  <input type="text" class="inplace_field" name="phone_number"/>
+					  <input class="inplace_save" type="submit" value="Save"/>
+					  <input type="submit" value="Cancel" class="inplace_cancel"  onclick="$('#newphone').toggle();"/>	
+					<% end -%>
+                    
+                </div>
+                <div class="clearfix">
+                    <a class="addlink" href="#" onclick="$('#newphone').toggle(); return false;">add new phone number</a>
+                </div>
+                <div class="privacyoptions">
+                    <!--<div id="remote-message-contact" class="remote-message-contact">
+                    <div>
+                    <label>
+                    Privacy Setting:
+                    </label>
+                    </div>
+                    </div>-->
+                    <% form_remote_tag :url => contact_privacy_profile_path(:id => @profile) do %>
+                    Show this information to&nbsp;&nbsp;<%= options_for_privacy(@kontact_information , 'contact') %>
+                    <%= submit_tag "Set" %>
+                    <% end %>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>

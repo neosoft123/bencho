@@ -1,0 +1,27 @@
+<% @page_title = "Subscription Transaction History" %>
+
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to("Your Dating Profile", profile_dating_profile_url(@p)) %></li>
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+    <% @entries.each do |entry| %>
+      <li>
+        <div class="posted-by" style="padding-left:0px">
+          Payment of <%= number_to_currency(entry.service.price_in_cents/100, :unit => "R") %>
+          made <%= time_ago_in_words(entry.created_at) %> ago
+        </div>
+        <div><strong>Status: </strong><%= entry.aasm_state.humanize %></div>
+        <div><strong>Reference: </strong><%= entry.reference %></div>
+        <div class="feed-item-detail" style="padding-left:0px">
+          Transaction description: <%= entry.reason %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

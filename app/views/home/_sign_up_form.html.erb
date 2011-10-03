@@ -1,0 +1,22 @@
+<% if @user.errors.length > 0 %>
+  <p class="loginerror">
+    <% @user.errors.each do |error| 
+      error[0] = error[0].titleize %>
+      <%= error.join(' ') %><br/>
+      <% break %>
+    <% end %>
+  </p>
+<% end %>
+
+<% form_for :user, :url => register_path, :method => :post do |f| %>
+  <p><label>Username</label> <%= f.text_field :login %></p>
+  <p><label>Password</label> <%= f.password_field :password %></p>
+  <p><label>Mobile Number</label> <%= text_field_tag :phone_number, @user.mobile_number %></p>
+  
+  <p class="checkbox clearfix">
+    <%= check_box_tag :user_terms_of_service, 1, params[:terms_of_service], :checked => 'checked', :class => 'checkbox', :name => 'user[terms_of_service]' %> <label for="user_terms_of_service">Accept <a target="blank" href="/tos">Terms of Service</a></label>
+  </p>
+  
+  <span class="clear"></span>
+  <p><%= f.submit 'Sign-up Now', :class=> "homesignupbutton" %></p>
+<% end %>

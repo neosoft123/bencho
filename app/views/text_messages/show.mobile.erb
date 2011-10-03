@@ -1,0 +1,28 @@
+<% @page_title = 'View message' %>
+<% crumbs = [Crumb.new('Text messages', profile_text_messages_path(@profile)), Crumb.new(@page_title)] %>
+<% content_for :crumbs, render(:partial => 'shared/crumbs', :locals => {:crumbs => crumbs}) -%>
+
+<div>
+<p>
+  <b>Recipient:</b>
+  <%=h @text_message.recipient.f unless @text_message.recipient.nil? %>
+</p>
+<p>
+  <b>To:</b>
+  <%=h @text_message.to %>
+</p>
+
+<p>
+  <b>Message:</b>
+  <%=h @text_message.message %>
+</p>
+<p>
+  <b>Created At:</b>
+  <%=h @text_message.created_at.to_s(:db) %>
+</p>
+
+<p>
+  <b>Sent:</b>
+  <%=h @text_message.sent %>
+</p>
+</div>

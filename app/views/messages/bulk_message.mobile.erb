@@ -1,0 +1,20 @@
+<% form_tag(create_bulk_message_path, :multipart => true) do |f| %>
+<table class="form">
+        <tbody>
+		<tr>
+
+<td><span class="required">*</span>Subject : </td>
+          <td><%= text_field_tag :subject %>
+  </td>
+        </tr>
+<tr>
+<td><span class="required">*</span> Body : </td>
+          <td><%= text_area_tag :body %>  </td>
+        </tr>
+<tr>
+<td>Pic : </td>
+          <td><%= file_column_field 'message', 'icon' %>  </td>
+        </tr>
+<tr><td><%= submit_tag 'Send', :disable_with => 'Sending..' -%></td></tr>
+</table>
+<%end%>

@@ -1,0 +1,17 @@
+<h3 class="subtitle">Please confirm you mobile number</h3>
+
+<p>We have sent a confirmation code to the mobile number that you supplied. If the sms is taking a while to arrive at your phone you can confirm this later on your profile settings page</p>
+
+ <% form_remote_tag :url => confirm_mobile_path(:id => @user) do %>
+ <div class="profilefields clearfix">
+    <%= label_tag :mobile_activation_code, 'Please enter the confirmation code:' %>
+	<%= text_field_tag :mobile_activation_code %>
+	<%= link_to_remote "Resend Confirmation SMS" , 
+						:url => remote_resend_mobile_profile_path(:id => @profile),
+						:loading => "displaySpinner();",
+						:loaded => "$('#profile_spinner').hide()" %>
+</div>
+	<div class="rightbuttons">	
+	<%= submit_tag "Confirm" , :onclick => "displaySpinner();"%>
+	</div>	
+  <% end %>

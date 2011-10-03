@@ -1,0 +1,33 @@
+<% form_for @dating_profile, :url => profile_dating_profile_url(@p) do |f| %>
+  <%= f.error_messages %>
+	<ul>
+		<% if @p.gender.blank? %>
+			<li><%= f.label :gender, "I'm a" -%><%= f.select :gender, ['Male', 'Female'] %></li>
+		<% end %>
+		<li><%= f.label :seeking %><%= f.select :seeking, ['Male', 'Female'] %></li>
+		<li><%= f.label :age, "Age" %>
+		  <% ages = []
+		    18.upto(99){|i|ages << i}
+		  %>
+		  <%= f.select :age_lowest, ages, {}, {:style => "width:50px"} %>
+		  to <%= f.select :age_highest, ages, {}, {:style => "width:50px"} %>
+		</li>
+		<li>
+		  <%= f.label :for %>
+		  <% what_for = ["Anything", "Hanging Out", "Talking/Emailing", "Commitment", "Dating", 
+		    "Friendship", "Intimate Encounter"] %>
+		  <%= f.select :for, what_for %>
+		</li>
+		<li>
+		  <%= f.label :from %>
+		  <%= f.select :from_international_dialing_code_id, 
+		    InternationalDialingCode.all.map{|idc|(idc.country.downcase=="spare code") ? nil : [idc.country,idc.id]}.uniq %>
+		</li>
+		<li><%= f.label :interests, "Interests <small>(separate with commas)</small>" %>
+		  <%= f.text_area :interests, :cols => 25, :rows => 2 %></li>
+		<li><%= f.label :likes, "Likes <small>(separate with commas)</small>" %>
+		  <%= f.text_area :likes, :cols => 25, :rows => 2 %></li>
+		<li><%= f.label :dislikes, "Dislikes <small>(separate with commas)</small>" %>
+		  <%= f.text_area :dislikes, :cols => 25, :rows => 2 %></li>
+		<li><%= f.submit 'Create', :disable_with => 'Creating..' -%> or <%= link_to 'Cancel', @p %></li>
+<% end %>

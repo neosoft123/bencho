@@ -1,0 +1,103 @@
+<meta http-equiv="refresh" content="60">
+ <%= javascript_include_tag "jquery.js"%>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+$('#feedsearch').change(function() {
+          		
+   var action = $(this).val();
+   if(action == 'ALLFEEDS') {
+       window.location='/welcome/index';
+     }
+    if(action== '7AMONLY') {	
+       window.location = '/welcome/seven_stream';
+     }
+   if(action== 'TWITTERONLY'){
+       window.location='/welcome/twitter';
+     }
+    if(action== 'FACEBOOKONLY'){
+       window.location='/welcome/facebook';
+     }
+ 		
+});
+
+});
+</script>
+<link href="/stylesheets/mobile_mid.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="/stylesheets/mobile_mid.css" media="handheld" rel="stylesheet" type="text/css" />
+<%
+show_form = true if show_form.nil?
+show_filters = true if show_filters.nil?
+@active ||= :public_stream
+%>
+<%content_for :stories do %>
+<ul id='activity-stream'>
+
+<% if show_form == true %>
+<%= render :partial => 'profiles/stream_form' %>
+    <% end %>
+<% if (@active == :profile_stream) %>
+<br />
+<% end %>
+<div id="messenger"><b style="font-size:14px;"><%= caption_text(@active) %></b></div>
+<% unless @active == :preview %>
+<li>Filters 
+<br /> <br />
+<%= link_to(image_tag("myspace.png", :class => caption_class(@active, :public_stream)), welcome_path) %>
+&nbsp;<%= image_tag "equals.png" %> &nbsp;
+<%= link_to(image_tag("7button.png", :class => caption_class(@active, :seven_stream)), seven_stream_path) %>
+ <%= image_tag "expand.png" %>
+<%= link_to(image_tag("twitter.png", :class => caption_class(@active, :twitter)), twitter_path) %>
+<%= image_tag "expand.png" %>
+<%= link_to(image_tag("facebook.png", :class => caption_class(@active, :facebook)), facebook_path) %>
+  
+<br /> 	<br />
+  <% form_for :test do |f| %>
+ 
+  <select id ='feedsearch' name='feedsearch' >
+			    
+			    <option value='ALLFEEDS' selected="selected">ALL FEEDS</option>
+			    <option value='7AMONLY'> 7AM ONLY </option>
+			    <option value='TWITTERONLY'>TWITTER ONLY</option>
+			    <option value='FACEBOOKONLY'>FACEBOOK ONLY</option>
+			  </select>
+  
+  </li>
+  <% end %>
+<% end %>
+ 
+<% unless @feed_items.empty? %>
+   <% @feed_items.each do |feed_item| %>
+   <!-- <%= feed_item.item_id %><br />
+   <%= feed_item.item_type %><br/>
+  -->
+   <% begin %>
+     <% next unless feed_item.item %>
+	<% "#{feed_item.partial}"%> <!--<%= feed_item.partial%> -->
+     
+       <% # next unless me? if feed_item.private? if feed_item.respond_to?("private?") %>
+     <%= render :partial => "feed_items/#{feed_item.partial}", :locals => {:feed_item => feed_item} %>
+     <% rescue => e %>
+     <li><%= feed_item.class.name %></li>
+     <li><%= debug e %></li>
+     <% end %>
+   <% end %>
+   <% else %>
+   <li>
+     For the ultimate 7.AM experience it's recommended you enter your Facebook and/or Twitter details. These social network feeds will be seen in your <b>"My Networks"</b> page.
+   </li>
+   <li>Facebook user? Setup your <%= link_to "facebook settings", facebook_settings_path%></li>
+   <li>Twitter user? Setup your <%= link_to "twitter settings", twitter_settings_path%></li>
+   <li>Alternatively you can view the public 7.AM feeds in the "Public Stream". Click <%= link_to("here!", public_stream_path)%>  </li>
+   <% end %>
+</ul>
+<% end %>
+
+<% content_for :footer do %>
+<div class="digg_pagination">
+<div clas="page_info">
+<%= page_entries_info @feed_items rescue nil %>
+</div>
+<%= will_paginate @feed_items, :container => false rescue nil%>
+</div>
+<% end %>

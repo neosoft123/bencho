@@ -1,0 +1,206 @@
+module Jabber
+  class Simple
+    def safe_disconnect
+      disconnect!(false)
+    end
+  end
+end
+
+class ChatUser
+  
+  include DaemonLogging
+  
+  WATCH_INTERVAL = 3
+  PRESENCE_INTERVAL = 60
+  LOGIN_RETRY_COUNT = 3
+
+  class << self
+    
+    def jid_from_user(user, domain)
+      "#{user.login}@#{domain}/omfg"
+    end
+    
+    def login_from_jid(jid)
+      jid =~ Regexp.new("(.*)@#{@domain}") ? $1 : nil
+    end
+    
+  end
+  
+  def initialize(domain, user, log_callback)
+    #log "test"
+    @log_callback = log_callback
+    @domain = domain
+    @user = user
+    @login_retry_count = 0
+    log "initializing chat user for domain: #{domain}"
+  end
+  
+  def client
+    return @client if @client && @client.connected?
+    @client = Jabber::Simple.new(ChatUser.jid_from_user(@user, @domain), @password)
+    return @client
+  end
+  
+  def login(manager, password)
+    @manager = manager
+    @password = password
+    @user.online!
+    set_status :available
+    # client.accept_subscriptions = true
+    @manager.ready!(@user, self)
+    check_subscriptions
+    @counter = 0
+  rescue Jabber::ClientAuthenticationFailure
+    log red("Login to the XMPP server failed")
+    logout(true)
+  rescue => e # this is probably a timeout - in any case, make sure log the user out & mark him offline
+    raise e if RAILS_ENV == "development"
+    HoptoadNotifier.notify(e)
+    log red("Login failed: #{e.message}")
+    logout(true)
+  end
+  
+  def logout(reconnect=false)
+    log "logging out"
+    @user.offline! if @user.online?
+    # strange code in gem was stopping reconnect - added this method in a monkeypatch
+    # client.safe_disconnect rescue nil
+    if reconnect
+      @login_retry_count += 1
+      login(@manager, @password) if @login_retry_count < LOGIN_RETRY_COUNT
+    end
+  rescue => e
+    raise e if RAILS_ENV == "development"
+    HoptoadNotifier.notify e
+    log "LOGOUT ERROR: #{e.message}"
+    log e.backtrace
+  ensure
+    @manager.remove_user(@user)
+  end
+  
+  def send_message(to, message)
+    jid = ChatUser.jid_from_user(to, @domain)
+    log "SENDING message to #{jid} => #{message}"
+    JabberMessage.create!(:owner => @user, :from => @user, :to => to, :message => message) 
+    # client.deliver(jid, message)
+  end
+    
+  def log(message)
+    @log_callback.call "#{red("USER:")}    #{cyan(@user.login)}: #{message}"
+  end
+  
+  def check_subscriptions
+    # log "checking subscriptions"
+    @user.profile.friends.each do |f|
+      # log "checking #{f.user.login}"
+      subscribe(f.user)
+    end
+  end
+  
+  def subscribe(user)
+    jid = ChatUser.jid_from_user(user, @domain)
+    # unless client.subscribed_to?(jid)
+    #   client.add(jid)
+    # end
+  end
+  
+  def set_status(type, message=nil)
+    # unless message
+    #   message = @user.profile.reload.profile_statuses.current.text rescue nil
+    # end
+    # log "setting status to [#{type}] with message: #{message}"
+    log "setting status to [#{type}]"
+    case type
+    when :available
+      # client.status(nil, message)
+    when :away
+      # client.status(:away, message)
+    when :xa
+      # client.status(:xa, message)
+    end
+  end
+  
+  def handle_received_message msg
+    jid = msg.from.strip.to_s
+    log "RECEIVED message from #{jid} => #{msg.body}"
+    from = User.find_by_login(ChatUser.login_from_jid(jid))
+    if from
+      m = JabberMessage.create!(:owner => @user, :from => from, :to => @user, :message => msg.body)
+    else
+      log "UNKNOWN user, cannot deliver => #{jid} (#{ChatUser.login_from_jid(jid)})"
+    end
+  end
+  
+  def online_friends
+  end
+    
+  def watch
+    
+    @user.reload
+    
+    # client.received_messages do |msg|
+    #   handle_received_message msg
+    # end
+
+    # client.presence_updates do |update|
+    #   jid, status, message = *update
+    #   user_login = ChatUser.login_from_jid(jid)
+    #   unless user_login == @user.login
+    #     # log "#{jid} is #{status} (#{message})" 
+    #     from = User.find_by_login(user_login)
+    #     if from
+    #       
+    #       # NOTE this code was to show users as online that were
+    #       # logged in from jabber clients. Problem is that is can
+    #       # cause a situation where users are kept online that
+    #       # really aren't. Stopping the sending of constance
+    #       # "available" statuses from site users should solve this..
+    #       
+    #       case status
+    #       when :online
+    #         # log "#{jid} has come online"
+    #         from.online! unless from.online?
+    #       when :unavailable
+    #         # log "#{jid} has gone offline"
+    #         from.offline! unless from.offline?
+    #       end
+    #     end
+    #   end
+    # end
+
+    # client.new_subscriptions do |friend, presence|
+    #   # log "subscription ==> #{friend.jid} (#{presence.type})"
+    #   client.add(friend.jid) unless client.subscribed_to?(friend.jid) if friend && presence
+    # end
+    
+    @counter = 0 if @counter.nil?
+    @counter += 1
+    if @counter == PRESENCE_INTERVAL
+      p = @user.profile.reload
+      log "last activity was #{Time.now - p.last_activity_at} secs ago.." rescue nil
+      last_active = Time.now - p.last_activity_at rescue 0
+      if last_active > (PRESENCE_INTERVAL * 10)
+        unless ['development', 'production_local'].include?(RAILS_ENV)
+          logout
+        else
+          set_status :xa
+        end
+      elsif last_active > (PRESENCE_INTERVAL * 2)
+        set_status :xa
+      elsif last_active > PRESENCE_INTERVAL
+        set_status :away
+      else
+         set_status :available
+      end
+      @counter = 0
+    end
+    
+  rescue => e
+    raise e if RAILS_ENV == "development"
+    HoptoadNotifier.notify(e)
+    log "WATCH ERROR: #{e.message}"
+    log e.backtrace
+    logout(true)
+  end
+  
+end

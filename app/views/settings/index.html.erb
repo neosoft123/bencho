@@ -1,0 +1,37 @@
+<p><%= image_tag 'twitter_logo_s.png' %></p>
+<p>
+	<% unless my_profile.user.settings.has_twitter_login? %>
+		<br/>We support pushing your status updates to twitter, if you'd like to make use of this please 
+		provide your Twitter account details using the form below.
+		<% form_tag twitter_do_settings_path do %>
+			<dl>
+				<dt><%= label_tag 'Twitter Login' %></dt>
+				<dd>
+					<%= text_field_tag 'login' %>
+				<dd>
+				<dt><%= label_tag 'Twitter Password' %></dt>
+				<dd>
+					<%= password_field_tag 'password' %>
+				<dd>
+				<dd><%= submit_tag 'Activate', :disable_with => 'Checking..' %></dd>
+			</dt>
+		<% end %>
+	<% else %>
+		<br/>You have activated integration with your Twitter account.
+	<% end %>
+</p>
+
+<p><%= image_tag 'fe_logo_final3.png' %></p>
+<p>
+	<% if my_profile.user.settings.authorized_with_fireeagle? %>
+		<br/>You have already activated your <%= link_to 'Fire Eagle', 'http://fireeagle.yahoo.net' %> account. 
+		Checking in on 7.am will also update your Fire Eagle location.
+	<% else %>
+		<br/><%= link_to 'Fire Eagle', 'http://fireeagle.yahoo.net' %> is a site that stores information about 
+		your location. With your permission, other services and devices can either update that information or 
+		access it. By helping applications respond to your location, Fire Eagle is designed to make the world 
+		around you more interesting! Use your location to power friend-finders, games, local information services, 
+		blog badges and stuff like that...
+		<br/><br/><strong><%= link_to 'Authorise', fireeagle_activate_settings_path %> 7.am to use your Fire Eagle account.</strong>
+	<% end %>
+</p>

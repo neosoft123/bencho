@@ -1,0 +1,6 @@
+<% @page_title = 'Upload photo' %>
+<%= draw_crumbs Crumb.new('Photos', profile_photos_url(@p)) %>
+
+<% content_for :formholder do %>
+  <%= render :partial => 'form' if me? %>
+<% end %>

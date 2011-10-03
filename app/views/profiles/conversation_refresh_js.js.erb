@@ -1,0 +1,23 @@
+x$(window).load(function(e){
+	<%= 'chatPoll();' unless @messages %>
+});
+
+function refreshChatMessagesCallback(req) {
+	if(req.responseText.length > 0) {
+		var elm = x$('#chat_messages').html(req.responseText);
+	}
+	chatPoll();
+};
+
+function chatPoll() {
+	setTimeout(
+		function() {		
+			var options = {};
+			options.method = 'GET';
+			options.async = true;
+			options.callback = refreshChatMessagesCallback;
+			x$(window).xhr('<%= conversation_refresh_profile_path(@profile) %>' + "?" + getRandNum(), options);
+		},
+		5 * 1000
+	);
+};

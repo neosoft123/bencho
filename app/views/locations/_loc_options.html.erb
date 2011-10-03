@@ -1,0 +1,12 @@
+<p>We think you meant .. 
+<ul>
+  <li><%= link_to @result.full_address, set_location_path(@profile, @result.full_address) %></li>
+</ul>
+<% if @result.all.length > 1 %>
+	<p>Or you might be looking for..
+  <ul>
+  	<% @result.all.each do |option| %>
+  		<li><%= link_to option.full_address, set_location_path(@profile, option.full_address) %></li>
+  	<% end %>
+  </ul>
+<% end %>	

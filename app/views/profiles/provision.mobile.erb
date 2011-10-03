@@ -1,0 +1,14 @@
+<% @page_title = 'Send Sync settings' %>
+<%= draw_crumbs Crumb.new('Sync contacts', sync_help_profile_mobile_path(@p)) %>
+
+<p>For security reasons we require that you enter your password again.</p>
+
+<% form_tag provision_proc_profile_path(@p) do %>
+	<ul id="credentials" class="form">
+    <li><%= label_tag 'Password' %></li>
+    <li><%= password_field_tag 'password' %></li>
+    <li><%= label_tag 'Mobile Number' %></li>
+    <li><%= text_field_tag 'mobile', @p.mobile %></li>
+	</ul>
+	<%= submit_tag 'Send', :disable_with => 'Sending..' %>
+<% end %>

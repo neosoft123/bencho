@@ -1,0 +1,22 @@
+<% draw_crumbs %>
+
+<%= render :partial => 'twitter_bio' %>
+  
+<% content_for :stories do %>
+  <ul>
+  
+<% @followers.each do |follower| %><!--<%= debug follower %> -->
+      <% content_tag :li do %>
+        <%= link_to follower["name"], twitter_feed_path(follower["screen_name"]) %>
+        <div class="feed-item-detail" style="padding-left:0px">
+          <%= follower["friends_count"] %> Following,
+          <%= follower["followers_count"] %> Followers
+        </div>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :footer do %>
+	<%= will_paginate @followers %>
+<% end %>

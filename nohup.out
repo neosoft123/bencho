@@ -1,0 +1,24 @@
+02/28/2011 09:53:57: Starting social_daemon in the foreground..
+02/28/2011 09:53:57: Loading Rails in production environment
+./lib/daemons/../../config/../vendor/rails/railties/lib/rails/gem_dependency.rb:119:Warning: Gem::Dependency#version_requirements is deprecated and will be removed on or after August 2010.  Use #requirement
+02/28/2011 09:54:41: Starting social daemon
+02/28/2011 09:54:41: Workers will run every 900 secs
+02/28/2011 09:54:45: Stopping social daemon.. please wait
+Loaded suite script/social_daemon
+Started
+
+Finished in 0.000287 seconds.
+
+[32m0 tests, 0 assertions, 0 failures, 0 errors[0m
+02/28/2011 10:17:27: Starting social_daemon in the foreground..
+02/28/2011 10:17:27: Loading Rails in production environment
+./lib/daemons/../../config/../vendor/rails/railties/lib/rails/gem_dependency.rb:119:Warning: Gem::Dependency#version_requirements is deprecated and will be removed on or after August 2010.  Use #requirement
+02/28/2011 10:18:12: Starting social daemon
+02/28/2011 10:18:12: Workers will run every 900 secs
+02/28/2011 10:29:41: Stopping social daemon.. please wait
+Loaded suite script/social_daemon
+Started
+
+Finished in 0.000247 seconds.
+
+[32m0 tests, 0 assertions, 0 failures, 0 errors[0m

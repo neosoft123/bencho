@@ -1,0 +1,19 @@
+<%
+#locals
+blog ||= feed_item.item
+%>
+
+<li class="feed_item status_feed" id="<%= feed_item.dom_id rescue rand(1000) %>">
+  <div class ="lifecontent">
+	  <div class="lifeheader">
+	    <%= time_ago_in_words(feed_item.created_at) %> ago
+	  </div>
+	  <div class="lifebody">
+	      <p><%= link_to sanitize(blog.title), profile_blog_path(blog.profile, blog) %></p>
+	  </div>
+	  <div class="lifefooter clearfix">
+	    <div class="tilecomments"><%= blog.comments_count %><span>comments</span></div>
+		<%= link_to h(blog.profile.formatted_name), blog.profile %>
+  	</div>
+  </div>
+</li>

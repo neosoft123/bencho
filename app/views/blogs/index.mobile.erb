@@ -1,0 +1,24 @@
+<% @page_title = "#{get_name(@profile, true, true, true)} Diary" %>
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "New Entry", new_profile_blog_path(@profile) %>
+  </ul>
+<% end if me? %>
+
+<% content_for :stories do %>
+  <ul>
+    <% unless @profile.blogs.empty? %>
+      <% @p.blogs.each do |blog| %>
+        <li>
+          <%= posted_by blog.profile, blog.created_at %>
+          <%= link_to image_tag('delete.png'), profile_blog_path(@profile, blog), :method => :delete, :confirm => 'Are you sure?', :class=>'delete' if me? %>
+          <%= link_to blog.title, [@profile, blog] %>
+        </li>
+      <% end %>
+    <% else %>
+      <li><%= name_link(@profile, true, true) %> <%= has_have(@profile) %> no diary entries</li>
+    <% end %>
+  </ul>
+<% end %>

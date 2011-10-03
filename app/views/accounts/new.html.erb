@@ -1,0 +1,60 @@
+<% form_for @user, :url => create_session_path, :method => :post do |f| %>
+
+<div id="login_form">
+      <div class="clearfix">
+        <h1 class="plainheader"><%= "Sign in" %></h1>
+        <p class="logindescription">
+            <em>Sign in to your kontact account.  <%= link_to "I do not have an account yet", signup_url  %></em>
+        </p>
+    </div>
+    <div class="loginfields clearfix">
+        <%= f.label :login, 'Username:' %>
+        <%= f.text_field :login %>
+    </div>
+	<div class="loginfields clearfix">
+        <%= f.label :password, 'Password:' %>
+        <%= f.password_field :password %>
+    </div>
+	<div class="checkboxfields clearfix">
+<%= check_box_tag :remember_me, 1, params[:remember_me], :class => 'checkbox', :name => 'user[remember_me]' %>
+        <label for="remember_me">
+            remember me
+        </label>
+		</div>
+      <div class="buttonfields">
+        <%= f.submit 'Sign-in Now' %>
+    </div>
+	<div class="forgottext"><span id="forgot_text">Help, I forgot</span> my <a href="javascript:void(0);" id="forgot_password_clicker" style="display: inline;">password</a></span>
+	</div>
+</div>
+<div id="forgot_form" class="hidden">	
+  <h1>Retrieve My Password</h1>
+  <div class="instruction">Enter email address and your password will be sent to you.</div>
+  <div id="forgot_password">
+    <%= f.text_field :email, :label => "Enter Email Address" %>
+  </div>
+  <div class="button">
+    <%= f.submit 'Retrieve Password', :class => 'button' %>
+  </div>
+</div>
+<% end %>
+
+
+
+
+<script type="text/javascript" charset="utf-8">
+//<![CDATA[
+jQuery(function(){
+  tog("#forgot_password_clicker", "#login_form");
+  tog("#forgot_password_clicker", "#forgot_form", forgot_text);
+
+});
+function forgot_text(){
+  if (jQuery("#forgot_text").html() == "forgot")
+  jQuery("#forgot_text").html("remember");
+  else
+  jQuery("#forgot_text").html("forgot");
+
+}
+//]]>
+</script>

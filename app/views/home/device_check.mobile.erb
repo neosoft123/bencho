@@ -1,0 +1,18 @@
+<% @page_title = "Device Capability Check" %>
+<% draw_crumbs rescue nil%>
+
+<% content_for :stories do %>
+  <ul>
+    <% if mobile? %>
+      <li>Device: <strong><%= @wurfl_device.brand %> <%= @wurfl_device.model %></strong></li>
+      <li><%= "Device level: <strong>#{xhtml_support_level.to_s.capitalize}</strong>" %></li>
+      <li><%= image_tag (supports_css?) ? "tick.png" : "cross.png" %>&nbsp;CSS Support</li>
+      <li><%= image_tag (supports_external_css?) ? "tick.png" : "cross.png" %>&nbsp;External CSS Support</li>
+      <li><%= image_tag (supports_javascript?) ? "tick.png" : "cross.png" %>&nbsp;Javascript Support</li>
+      <li><%= image_tag (supports_javascript_css_manipulation?) ? "tick.png" : "cross.png" %>&nbsp;Javascript CSS Manipulation</li>
+      <li><%= image_tag (supports_ajax?) ? "tick.png" : "cross.png" %>&nbsp;AJAX Support</li>
+    <% else %>
+      <li>This is not a mobile device</li>
+    <% end %>
+  </ul>
+<% end %>

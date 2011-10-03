@@ -1,0 +1,272 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+
+    Methods
+
+  -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Methods</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link rel="stylesheet" href="rdoc-style.css" type="text/css" />
+  <base target="docwin" />
+</head>
+<body>
+<div id="index">
+  <h1 class="section-bar">Methods</h1>
+  <div id="index-entries">
+    <a href="classes/AuthenticatedSystem.html#M000220">access_denied (AuthenticatedSystem)</a><br />
+    <a href="classes/UsersController.html#M000090">activate (UsersController)</a><br />
+    <a href="classes/User.html#M000080">activate! (User)</a><br />
+    <a href="classes/UserMailer.html#M000065">activation (UserMailer)</a><br />
+    <a href="classes/User.html#M000082">active? (User)</a><br />
+    <a href="classes/ApplicationHelper.html#M000236">activerecord_error_list (ApplicationHelper)</a><br />
+    <a href="classes/Friend.html#M000008">add_follower (Friend)</a><br />
+    <a href="classes/User.html#M000068">after_create (User)</a><br />
+    <a href="classes/Friend.html#M000007">after_create (Friend)</a><br />
+    <a href="classes/Comment.html#M000037">after_create (Comment)</a><br />
+    <a href="classes/ForumTopic.html#M000135">after_create (ForumTopic)</a><br />
+    <a href="classes/Photo.html#M000133">after_create (Photo)</a><br />
+    <a href="classes/UserObserver.html#M000002">after_create (UserObserver)</a><br />
+    <a href="classes/Blog.html#M000039">after_create (Blog)</a><br />
+    <a href="classes/User.html#M000069">after_destroy (User)</a><br />
+    <a href="classes/UserObserver.html#M000003">after_save (UserObserver)</a><br />
+    <a href="classes/FriendsController.html#M000125">allow_to (FriendsController)</a><br />
+    <a href="classes/ApplicationController.html#M000117">allow_to (ApplicationController)</a><br />
+    <a href="classes/MessagesController.html#M000017">allow_to (MessagesController)</a><br />
+    <a href="classes/BlogsController.html#M000049">allow_to (BlogsController)</a><br />
+    <a href="classes/UsersController.html#M000096">allow_to (UsersController)</a><br />
+    <a href="classes/AccountsController.html#M000132">allow_to (AccountsController)</a><br />
+    <a href="classes/CommentsController.html#M000167">allow_to (CommentsController)</a><br />
+    <a href="classes/FeedItemsController.html#M000161">allow_to (FeedItemsController)</a><br />
+    <a href="classes/LocationsController.html#M000159">allow_to (LocationsController)</a><br />
+    <a href="classes/SessionsController.html#M000054">allow_to (SessionsController)</a><br />
+    <a href="classes/PhotosHelper.html#M000204">allowed_photo_sizes (PhotosHelper)</a><br />
+    <a href="classes/User.html#M000072">authenticate (User)</a><br />
+    <a href="classes/User.html#M000075">authenticated? (User)</a><br />
+    <a href="classes/AuthenticatedTestHelper.html#M000213">authorize_as (AuthenticatedTestHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000218">authorized? (AuthenticatedSystem)</a><br />
+    <a href="classes/LessFormBuilder.html#M000157">back (LessFormBuilder)</a><br />
+    <a href="classes/User.html#M000067">before_create (User)</a><br />
+    <a href="classes/Comment.html#M000038">between_profiles (Comment)</a><br />
+    <a href="classes/Profile.html#M000029">blog= (Profile)</a><br />
+    <a href="classes/BlogsHelper.html#M000246">blog_body_content (BlogsHelper)</a><br />
+    <a href="classes/BlogsHelper.html#M000245">blogs_li (BlogsHelper)</a><br />
+    <a href="classes/Forum.html#M000099">build_topic (Forum)</a><br />
+    <a href="classes/LessFormBuilder.html#M000155">calendar_field (LessFormBuilder)</a><br />
+    <a href="classes/User.html#M000071">can_mail? (User)</a><br />
+    <a href="classes/MessagesController.html#M000018">can_send (MessagesController)</a><br />
+    <a href="classes/Profile.html#M000034">can_send_messages (Profile)</a><br />
+    <a href="classes/User.html#M000079">change_password (User)</a><br />
+    <a href="classes/LessFormBuilder.html#M000154">check_box (LessFormBuilder)</a><br />
+    <a href="classes/ApplicationController.html#M000112">check_featured (ApplicationController)</a><br />
+    <a href="classes/ApplicationController.html#M000118">check_permissions (ApplicationController)</a><br />
+    <a href="classes/FeedItemsHelper.html#M000209">commentable_text (FeedItemsHelper)</a><br />
+    <a href="classes/HomeController.html#M000100">contact (HomeController)</a><br />
+    <a href="classes/PhotosController.html#M000139">create (PhotosController)</a><br />
+    <a href="classes/ForumTopicsController.html#M000109">create (ForumTopicsController)</a><br />
+    <a href="classes/SessionsController.html#M000051">create (SessionsController)</a><br />
+    <a href="classes/UsersController.html#M000089">create (UsersController)</a><br />
+    <a href="classes/ForumPostsController.html#M000144">create (ForumPostsController)</a><br />
+    <a href="classes/BlogsController.html#M000042">create (BlogsController)</a><br />
+    <a href="classes/CommentsController.html#M000164">create (CommentsController)</a><br />
+    <a href="classes/MessagesController.html#M000013">create (MessagesController)</a><br />
+    <a href="classes/FriendsController.html#M000122">create (FriendsController)</a><br />
+    <a href="classes/ForumsController.html#M000060">create (ForumsController)</a><br />
+    <a href="classes/AccountsController.html#M000127">create (AccountsController)</a><br />
+    <a href="classes/Friend.html#M000004">create_feed_item (Friend)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000216">current_user (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000217">current_user= (AuthenticatedSystem)</a><br />
+    <a href="classes/ProfilesController.html#M000177">delete_icon (ProfilesController)</a><br />
+    <a href="classes/Friend.html#M000006">description (Friend)</a><br />
+    <a href="classes/ForumsController.html#M000062">destroy (ForumsController)</a><br />
+    <a href="classes/UsersController.html#M000093">destroy (UsersController)</a><br />
+    <a href="classes/ForumTopicsController.html#M000111">destroy (ForumTopicsController)</a><br />
+    <a href="classes/FriendsController.html#M000123">destroy (FriendsController)</a><br />
+    <a href="classes/ProfilesController.html#M000178">destroy (ProfilesController)</a><br />
+    <a href="classes/FeedItemsController.html#M000160">destroy (FeedItemsController)</a><br />
+    <a href="classes/BlogsController.html#M000046">destroy (BlogsController)</a><br />
+    <a href="classes/SessionsController.html#M000052">destroy (SessionsController)</a><br />
+    <a href="classes/ForumPostsController.html#M000146">destroy (ForumPostsController)</a><br />
+    <a href="classes/PhotosController.html#M000140">destroy (PhotosController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000235">display_standard_flashes (ApplicationHelper)</a><br />
+    <a href="classes/BlogsController.html#M000044">edit (BlogsController)</a><br />
+    <a href="classes/ProfilesController.html#M000175">edit (ProfilesController)</a><br />
+    <a href="classes/ForumTopicsController.html#M000108">edit (ForumTopicsController)</a><br />
+    <a href="classes/ForumPostsController.html#M000143">edit (ForumPostsController)</a><br />
+    <a href="classes/ForumsController.html#M000059">edit (ForumsController)</a><br />
+    <a href="classes/User.html#M000084">email= (User)</a><br />
+    <a href="classes/User.html#M000074">encrypt (User)</a><br />
+    <a href="classes/User.html#M000073">encrypt (User)</a><br />
+    <a href="classes/User.html#M000086">encrypt_password (User)</a><br />
+    <a href="classes/User.html#M000070">f (User)</a><br />
+    <a href="classes/Profile.html#M000022">f (Profile)</a><br />
+    <a href="classes/ApplicationController.html#M000119">failed_check_permissions (ApplicationController)</a><br />
+    <a href="classes/Profile.html#M000025">featured (Profile)</a><br />
+    <a href="classes/UsersController.html#M000095">find_user (UsersController)</a><br />
+    <a href="classes/Profile.html#M000036">fix_http (Profile)</a><br />
+    <a href="classes/ApplicationController.html#M000115">flickr (ApplicationController)</a><br />
+    <a href="classes/Profile.html#M000030">flickr= (Profile)</a><br />
+    <a href="classes/ApplicationController.html#M000116">flickr_images (ApplicationController)</a><br />
+    <a href="classes/AccountMailer.html#M000171">follow (AccountMailer)</a><br />
+    <a href="classes/Profile.html#M000032">followed_by? (Profile)</a><br />
+    <a href="classes/Profile.html#M000033">following? (Profile)</a><br />
+    <a href="classes/AccountMailer.html#M000170">forgot_password (AccountMailer)</a><br />
+    <a href="classes/User.html#M000078">forgot_password (User)</a><br />
+    <a href="classes/ForumsHelper.html#M000185">forum_details (ForumsHelper)</a><br />
+    <a href="classes/ForumsHelper.html#M000186">forum_last_post_info (ForumsHelper)</a><br />
+    <a href="classes/ForumPostsHelper.html#M000207">forum_posts_li (ForumPostsHelper)</a><br />
+    <a href="classes/Profile.html#M000031">friend_of? (Profile)</a><br />
+    <a href="classes/LessFormBuilder.html#M000156">front (LessFormBuilder)</a><br />
+    <a href="classes/Profile.html#M000024">full_name (Profile)</a><br />
+    <a href="classes/FriendsHelper.html#M000196">get_friend_link (FriendsHelper)</a><br />
+    <a href="classes/BlogsController.html#M000047">get_profile (BlogsController)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000230">handle_remember_cookie! (AuthenticatedSystem)</a><br />
+    <a href="classes/Profile.html#M000021">has_network? (Profile)</a><br />
+    <a href="classes/Profile.html#M000027">has_wall_with (Profile)</a><br />
+    <a href="classes/ProfilesHelper.html#M000210">icon (ProfilesHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000241">if_admin (ApplicationHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000198">if_authorized? (UsersHelper)</a><br />
+    <a href="classes/PhotosHelper.html#M000202">image (PhotosHelper)</a><br />
+    <a href="classes/PhotosHelper.html#M000206">image_path_with_photo (PhotosHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000223">included (AuthenticatedSystem)</a><br />
+    <a href="classes/HomeController.html#M000101">index (HomeController)</a><br />
+    <a href="classes/LocationsController.html#M000158">index (LocationsController)</a><br />
+    <a href="classes/CommentsController.html#M000163">index (CommentsController)</a><br />
+    <a href="classes/ForumTopicsController.html#M000105">index (ForumTopicsController)</a><br />
+    <a href="classes/BlogsController.html#M000041">index (BlogsController)</a><br />
+    <a href="classes/ProfilesController.html#M000174">index (ProfilesController)</a><br />
+    <a href="classes/PhotosController.html#M000137">index (PhotosController)</a><br />
+    <a href="classes/ForumPostsController.html#M000141">index (ForumPostsController)</a><br />
+    <a href="classes/FriendsController.html#M000124">index (FriendsController)</a><br />
+    <a href="classes/Admin/UsersController.html#M000242">index (Admin::UsersController)</a><br />
+    <a href="classes/ForumsController.html#M000056">index (ForumsController)</a><br />
+    <a href="classes/MessagesController.html#M000012">index (MessagesController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000237">inline_tb_link (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000240">is_admin? (ApplicationHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000231">kill_remember_cookie! (AuthenticatedSystem)</a><br />
+    <a href="classes/LessFormBuilder.html#M000149">label (LessFormBuilder)</a><br />
+    <a href="classes/HomeController.html#M000103">latest_comments (HomeController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000233">less_form_for (ApplicationHelper)</a><br />
+    <a href="classes/ApplicationHelper.html#M000234">less_remote_form_for (ApplicationHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000201">link_to_current_user (UsersHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000200">link_to_login_with_IP (UsersHelper)</a><br />
+    <a href="classes/UsersHelper.html#M000199">link_to_user (UsersHelper)</a><br />
+    <a href="classes/Profile.html#M000023">location (Profile)</a><br />
+    <a href="classes/ProfilesHelper.html#M000211">location_link (ProfilesHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000215">logged_in? (AuthenticatedSystem)</a><br />
+    <a href="classes/User.html#M000083">login= (User)</a><br />
+    <a href="classes/AuthenticatedTestHelper.html#M000212">login_as (AuthenticatedTestHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000225">login_from_basic_auth (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000226">login_from_cookie (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000224">login_from_session (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000219">login_required (AuthenticatedSystem)</a><br />
+    <a href="classes/AccountsController.html#M000129">logout (AccountsController)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000227">logout_keeping_session! (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000228">logout_killing_session! (AuthenticatedSystem)</a><br />
+    <a href="classes/HomeMailer.html#M000055">mail (HomeMailer)</a><br />
+    <a href="classes/User.html#M000085">make_activation_code (User)</a><br />
+    <a href="classes/Friend.html#M000009">make_friends (Friend)</a><br />
+    <a href="classes/ApplicationHelper.html#M000239">me (ApplicationHelper)</a><br />
+    <a href="classes/LessFormBuilder.html#M000147">method_missing (LessFormBuilder)</a><br />
+    <a href="classes/PhotosHelper.html#M000205">missing_photo_path (PhotosHelper)</a><br />
+    <a href="classes/AuthenticatedTestHelper.html#M000214">mock_user (AuthenticatedTestHelper)</a><br />
+    <a href="classes/MessagesController.html#M000014">new (MessagesController)</a><br />
+    <a href="classes/AccountsController.html#M000128">new (AccountsController)</a><br />
+    <a href="classes/UsersController.html#M000088">new (UsersController)</a><br />
+    <a href="classes/SessionsController.html#M000050">new (SessionsController)</a><br />
+    <a href="classes/ForumsController.html#M000058">new (ForumsController)</a><br />
+    <a href="classes/ForumTopicsController.html#M000107">new (ForumTopicsController)</a><br />
+    <a href="classes/HomeHelper.html#M000191">new_members (HomeHelper)</a><br />
+    <a href="classes/ForumMailer.html#M000097">new_post (ForumMailer)</a><br />
+    <a href="classes/HomeController.html#M000102">newest_members (HomeController)</a><br />
+    <a href="classes/HomeHelper.html#M000189">newest_pictures (HomeHelper)</a><br />
+    <a href="classes/Profile.html#M000026">no_data? (Profile)</a><br />
+    <a href="classes/SessionsController.html#M000053">note_failed_signin (SessionsController)</a><br />
+    <a href="classes/ApplicationController.html#M000113">pagination_defaults (ApplicationController)</a><br />
+    <a href="classes/CommentsController.html#M000165">parent (CommentsController)</a><br />
+    <a href="classes/SizedGravatarSource.html#M000121">parse_options (SizedGravatarSource)</a><br />
+    <a href="classes/FeedItem.html#M000168">partial (FeedItem)</a><br />
+    <a href="classes/LessFormBuilder.html#M000152">password_field (LessFormBuilder)</a><br />
+    <a href="classes/User.html#M000087">password_required? (User)</a><br />
+    <a href="classes/PhotosHelper.html#M000203">photo_path (PhotosHelper)</a><br />
+    <a href="classes/UsersController.html#M000094">purge (UsersController)</a><br />
+    <a href="classes/HomeHelper.html#M000190">recent_comments (HomeHelper)</a><br />
+    <a href="classes/HomeHelper.html#M000192">recent_forum_posts (HomeHelper)</a><br />
+    <a href="classes/User.html#M000081">recently_activated? (User)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000222">redirect_back_or_default (AuthenticatedSystem)</a><br />
+    <a href="classes/AuthMailer.html#M000019">registration (AuthMailer)</a><br />
+    <a href="classes/User.html#M000076">remember_me (User)</a><br />
+    <a href="classes/AccountsController.html#M000131">remember_me (AccountsController)</a><br />
+    <a href="classes/User.html#M000077">remember_token? (User)</a><br />
+    <a href="classes/Friend.html#M000011">reset (Friend)</a><br />
+    <a href="classes/Profile.html#M000035">search (Profile)</a><br />
+    <a href="classes/ProfilesController.html#M000173">search (ProfilesController)</a><br />
+    <a href="classes/LessFormBuilder.html#M000150">select (LessFormBuilder)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000232">send_remember_cookie! (AuthenticatedSystem)</a><br />
+    <a href="classes/MessagesController.html#M000015">sent (MessagesController)</a><br />
+    <a href="classes/ApplicationController.html#M000114">set_profile (ApplicationController)</a><br />
+    <a href="classes/FeedItemsController.html#M000162">setup (FeedItemsController)</a><br />
+    <a href="classes/BlogsController.html#M000048">setup (BlogsController)</a><br />
+    <a href="classes/FriendsController.html#M000126">setup (FriendsController)</a><br />
+    <a href="classes/CommentsController.html#M000166">setup (CommentsController)</a><br />
+    <a href="classes/UserMailer.html#M000066">setup_email (UserMailer)</a><br />
+    <a href="classes/PhotosController.html#M000138">show (PhotosController)</a><br />
+    <a href="classes/ForumPostsController.html#M000142">show (ForumPostsController)</a><br />
+    <a href="classes/BlogsController.html#M000043">show (BlogsController)</a><br />
+    <a href="classes/ForumsController.html#M000057">show (ForumsController)</a><br />
+    <a href="classes/ForumTopicsController.html#M000106">show (ForumTopicsController)</a><br />
+    <a href="classes/ProfilesController.html#M000172">show (ProfilesController)</a><br />
+    <a href="classes/MessagesController.html#M000016">show (MessagesController)</a><br />
+    <a href="classes/AccountsController.html#M000130">signup (AccountsController)</a><br />
+    <a href="classes/AccountMailer.html#M000169">signup (AccountMailer)</a><br />
+    <a href="classes/UserMailer.html#M000064">signup_notification (UserMailer)</a><br />
+    <a href="classes/SizedGravatarSource.html#M000120">sizes (SizedGravatarSource)</a><br />
+    <a href="classes/Friend.html#M000010">stop_being_friends (Friend)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000221">store_location (AuthenticatedSystem)</a><br />
+    <a href="classes/UsersController.html#M000091">suspend (UsersController)</a><br />
+    <a href="classes/ApplicationHelper.html#M000238">tb_video_link (ApplicationHelper)</a><br />
+    <a href="classes/HomeController.html#M000104">terms (HomeController)</a><br />
+    <a href="classes/LessFormBuilder.html#M000153">text_area (LessFormBuilder)</a><br />
+    <a href="classes/LessFormBuilder.html#M000151">text_field (LessFormBuilder)</a><br />
+    <a href="classes/ForumTopic.html#M000134">to_param (ForumTopic)</a><br />
+    <a href="classes/Forum.html#M000098">to_param (Forum)</a><br />
+    <a href="classes/Blog.html#M000040">to_param (Blog)</a><br />
+    <a href="classes/Profile.html#M000020">to_param (Profile)</a><br />
+    <a href="classes/ForumTopicsHelper.html#M000188">topic_details (ForumTopicsHelper)</a><br />
+    <a href="classes/ForumTopicsHelper.html#M000187">topic_last_post_info (ForumTopicsHelper)</a><br />
+    <a href="classes/HpricotTruncator/TextNode.html#M000195">truncate (HpricotTruncator::TextNode)</a><br />
+    <a href="classes/HpricotTruncator/NodeWithChildren.html#M000193">truncate (HpricotTruncator::NodeWithChildren)</a><br />
+    <a href="classes/HpricotTruncator/IgnoredTag.html#M000194">truncate (HpricotTruncator::IgnoredTag)</a><br />
+    <a href="classes/TextHelper.html#M000244">truncate_html (TextHelper)</a><br />
+    <a href="classes/Message.html#M000001">unread? (Message)</a><br />
+    <a href="classes/UsersController.html#M000092">unsuspend (UsersController)</a><br />
+    <a href="classes/ForumsTestHelper.html#M000180">unvalid_forum_attributes (ForumsTestHelper)</a><br />
+    <a href="classes/ForumsTestHelper.html#M000182">unvalid_forum_post_attributes (ForumsTestHelper)</a><br />
+    <a href="classes/ForumsTestHelper.html#M000181">unvalid_forum_topic_attributes (ForumsTestHelper)</a><br />
+    <a href="classes/ForumTopicsController.html#M000110">update (ForumTopicsController)</a><br />
+    <a href="classes/Admin/UsersController.html#M000243">update (Admin::UsersController)</a><br />
+    <a href="classes/ProfilesController.html#M000176">update (ProfilesController)</a><br />
+    <a href="classes/ForumPostsController.html#M000145">update (ForumPostsController)</a><br />
+    <a href="classes/BlogsController.html#M000045">update (BlogsController)</a><br />
+    <a href="classes/ForumsController.html#M000061">update (ForumsController)</a><br />
+    <a href="classes/ForumsController.html#M000063">update_positions (ForumsController)</a><br />
+    <a href="classes/ForumTopic.html#M000136">users (ForumTopic)</a><br />
+    <a href="classes/ForumsTestHelper.html#M000179">valid_forum_attributes (ForumsTestHelper)</a><br />
+    <a href="classes/ForumsTestHelper.html#M000184">valid_forum_post_attributes (ForumsTestHelper)</a><br />
+    <a href="classes/ForumsTestHelper.html#M000183">valid_forum_topic_attributes (ForumsTestHelper)</a><br />
+    <a href="classes/AuthenticatedSystem.html#M000229">valid_remember_cookie? (AuthenticatedSystem)</a><br />
+    <a href="classes/Friend.html#M000005">validate (Friend)</a><br />
+    <a href="classes/Profile.html#M000028">website= (Profile)</a><br />
+    <a href="classes/LessFormBuilder.html#M000148">wrap (LessFormBuilder)</a><br />
+    <a href="classes/FriendsHelper.html#M000197">wrap_get_friend_link (FriendsHelper)</a><br />
+    <a href="classes/FeedItemsHelper.html#M000208">x_feed_link (FeedItemsHelper)</a><br />
+  </div>
+</div>
+</body>
+</html>

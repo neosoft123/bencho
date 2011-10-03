@@ -1,0 +1,13 @@
+<% @page_title = "Privacy Settings" %>
+<%= draw_crumbs Crumb.new("Settings", settings_path) %>
+
+<% content_for :stories do %>
+<% form_tag privacy_do_settings_path do %>
+  <ul>
+    <li><%= check_box_tag :search_show, true, @u.settings.show_in_public_searches? %>Allow people to find me in searches</li>
+    <li><%= check_box_tag :timeline_show, true, @u.settings.show_in_public_timeline? %>Show my updates in the public activity stream</li>
+    <li><%= submit_tag 'Save', :disable_with => "Saving.." %></li>
+  <ul>
+<% end %>
+<% end %>
+

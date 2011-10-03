@@ -1,0 +1,16 @@
+<h1>Editing wallet</h1>
+
+<% form_for(@wallet) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :balance %><br />
+    <%= f.text_field :balance %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @wallet %> |
+<%= link_to 'Back', wallets_path %>

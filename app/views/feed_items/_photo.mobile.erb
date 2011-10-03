@@ -1,0 +1,45 @@
+<%-
+feed_item ||= @feed_item
+p = feed_item.item
+var  ||= "#{p.profile.icon}"
+ab ||= var.split("/")
+k ||= ab.count-1
+cd ||= Array.new
+for i in 8..k do
+cd[i] = ab[i]
+end
+f ||= cd.delete_if {|x| x == nil}
+url ||= f.join("/")
+
+%>
+
+<% if @p %>
+<% content_for_feed_item feed_item, p.profile do %>
+  <%= link_to image(p, :square, :style=>'margin:10px'), profile_photo_path(p.profile, p) %>
+  
+<div class="feed-item-detail">Caption: <% if p.caption.include?("ruby/object:Tempfile")%> <% else %><%= link_to p.caption, profile_photo_path(p.profile, p) %>
+<%end%></div>
+  <%= feed_comments p %>
+  <%= feed_location feed_item %>
+<% end %>
+
+
+<% else %><!--<%= debug feed_item.item%><br/><%= debug p.profile %> -->
+   <li class="public_feed_item" id="public_feed_item_260384"><div class="posted-by"><% if p.profile.icon != nil %> <a href="session/new"><img style="margin:10px;width:32px;height:32px" src="<%= url %>" /> </a>
+<% else %>
+<%= link_to image_tag("avatar_default_thumb.png", :style => 'margin:10px;width:32px;height:32px;' ), new_session_path%> <% end %> 
+              <a href="/session/new">
+                   <% if p.profile.display_name == nil%> <%= p.profile.user.login %>
+                      <% else %> <%= p.profile.display_name%> <% end %>
+          </a> <%= distance_of_time_in_words(Time.now, feed_item.item.created_at)%> ago</div>
+
+        <%= link_to image(p, :square, :style=>'margin:10px'), new_session_path %>
+<div class="feed-item-detail">Caption: <% if p.caption.include?("ruby/object:Tempfile")%> <% else %><%= link_to p.caption, new_session_path %>
+<%end%>
+</div>
+
+  <div class="feed-item-detail"><a href="/session/new"><%= feed_item.item.comments_count%> Comments</a> - <a href="/session/new">Add comment</a></div>
+  
+</li>
+
+<% end %>

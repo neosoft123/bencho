@@ -1,0 +1,10 @@
+<% age_string = age_and_sex(@profile) %>
+<% unless age_string.blank? %>
+  <p class="profileinfo smaller"><em><%= age_string %></em></p>
+<% end %>
+<% unless @profile.location.blank? %>
+  <p class="profileinfo smaller"><%= @profile.location %></p>
+<% end %>
+<% unless @profile.about_me.blank? %>
+  <p class="profilebio"><b>About me:</b> <%= @profile.about_me %></p>
+<% end %>

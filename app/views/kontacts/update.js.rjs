@@ -1,0 +1,5 @@
+flash_notice(page)
+
+sleep(1)
+page.replace dom_id(@kontact), :partial => 'kontact', :object => @kontact
+page.replace_html 'kontact_more_detail', ''

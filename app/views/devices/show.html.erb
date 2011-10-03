@@ -1,0 +1,14 @@
+<p>
+  <b>User agent:</b>
+  <%=h @device.user_agent %>
+</p>
+
+<p>
+  <b>Stylesheet level:</b>
+  <%=h @device.stylesheet_level %>
+</p>
+
+
+<%= link_to 'Edit', edit_device_path(@device) %> |
+<%= link_to 'Back', devices_path %>
+<%= link_to 'Device Attributes', device_device_attributes_path(@device) %>

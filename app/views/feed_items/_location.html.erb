@@ -1,0 +1,18 @@
+<% l = feed_item.item %>
+<li class="feed_item status_feed" id="<%= feed_item.dom_id rescue rand(1000) %>">
+  <div class="lifecontent">
+    <div class="lifeheader">
+      <%= time_ago_in_words(feed_item.created_at) %>ago
+    </div>
+    <div class="lifebody">
+      <div class="photo_feed_photo">
+        <%= static_map_tag(l, {:height => 150, :width => 120, :marker => :tiny, :zoom => 5}) %>
+      </div>
+    </div>
+    <div class="lifefooter clearfix">
+      <div class="tilecomments">
+        <%= l.comments_count %><span>comments</span>
+      </div><%= link_to h(l.profile.formatted_name), l.profile %>
+    </div>
+  </div>
+</li>

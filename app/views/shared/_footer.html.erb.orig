@@ -1,0 +1,12 @@
+<div class="text_c" style="padding-top: 20px;">
+<<<<<<< HEAD:app/views/shared/_footer.html.erb
+&nbsp;
+=======
+  Kontact is a Social Network Platform</a> by <a href="http://agilisto.com" target="blank">Agilisto</a><br>
+  It makes substantial use of the <a href="http://lovdbyless.com/download.html">Lovd By Less</a> project and we thank Less Everything for the hard workd | 
+  <a href="http://agilisto.com/contact">Contact Us</a> | <a href="http://agilisto.com/blog" target="_blank">Blog</a>
+>>>>>>> 0b210ed70b7f7dca383c5bf23a6467766813b303:app/views/shared/_footer.html.erb
+
+</div>
+
+<div id="message" class="fixed"></div>

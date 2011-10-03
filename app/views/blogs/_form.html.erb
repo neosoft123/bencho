@@ -1,0 +1,17 @@
+<%
+#locals
+blog ||= @blog
+%>
+
+
+
+
+<div id="blog">
+  <% form_for [@profile, blog] do |f| %>
+    <%= f.text_field :title %>
+    <%= f.text_area :body %>
+	<div class="buttonpadder">
+	<%= f.submit 'Save', :class=>'button' %>
+	</div>
+  <% end %>
+</div>

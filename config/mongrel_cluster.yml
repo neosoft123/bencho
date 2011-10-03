@@ -1,0 +1,9 @@
+cwd: /var/www/dev7am/current
+port: 8000
+environment: production
+group: notroot
+user: notroot
+address: 127.0.0.1
+pid_file: /var/www/dev7am/current/log/mongrel.pid
+log_file: /var/www/dev7am/current/log/mongrel.log
+servers: 3

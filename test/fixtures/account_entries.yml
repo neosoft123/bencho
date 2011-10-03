@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  debit: 1
+  credit: 1
+  status: MyString
+  reason: MyString
+
+two:
+  debit: 1
+  credit: 1
+  status: MyString
+  reason: MyString

@@ -1,0 +1,25 @@
+development: &defaults
+  pid_file: chat_daemon.pid
+  log_file: chat_daemon.log
+  xmpp_server: talk.localhost
+  xmpp_domain: talk.localhost
+  drb_server: druby://localhost:3333
+  monitor_interval: 10
+
+production_local:
+  <<: *defaults
+  xmpp_server: devlocal.7.am
+  xmpp_domain: devlocal.7.am
+
+test:
+  <<: *defaults
+  xmpp_server: talk.localhost
+  xmpp_domain: talk.localhost
+
+production:
+  <<: *defaults
+  xmpp_server: talk.7.am
+  xmpp_domain: talk.7.am
+  monitor_interval: 30
+
+

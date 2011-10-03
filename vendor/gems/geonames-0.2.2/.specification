@@ -1,0 +1,87 @@
+--- !ruby/object:Gem::Specification 
+name: geonames
+version: !ruby/object:Gem::Version 
+  prerelease: false
+  segments: 
+  - 0
+  - 2
+  - 2
+  version: 0.2.2
+platform: ruby
+authors: 
+- Adam Wisniewski
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2008-01-09 00:00:00 +02:00
+default_executable: 
+dependencies: []
+
+description: 
+email: adamw@tbcn.ca
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README
+files: 
+- geonames-0.2.2.gem
+- geonames.gemspec
+- lib
+- lib/address.rb
+- lib/country_subdivision.rb
+- lib/geonames.rb
+- lib/intersection.rb
+- lib/main.rb
+- lib/postal_code.rb
+- lib/postal_code_search_criteria.rb
+- lib/Rakefile.rb
+- lib/timezone.rb
+- lib/toponym.rb
+- lib/toponym_search_criteria.rb
+- lib/toponym_search_result.rb
+- lib/web_service.rb
+- lib/wikipedia_article.rb
+- nbproject
+- nbproject/private
+- nbproject/private/private.properties
+- nbproject/private/private.xml
+- nbproject/private/profiler
+- nbproject/project.properties
+- nbproject/project.xml
+- README
+- test
+has_rdoc: true
+homepage: http://www.tbcn.ca/ruby_geonames
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.6
+signing_key: 
+specification_version: 2
+summary: Ruby library for Geonames Web Services (http://www.geonames.org/export/)
+test_files: []
+

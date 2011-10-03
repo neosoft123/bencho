@@ -1,0 +1,9 @@
+<div id="footerwrapper">
+    <div id="footer">
+		<% link_to 'Forums', forums_path, :id=>'nav-forums' %>&nbsp;
+		<% link_to 'Developers', oauth_clients_path, :nav=>'nav-applications' %>
+		<% link_to('Admin', admin_users_path) if @p && @p.user.is_admin %>	
+        <div id="message" class="fixed">
+        </div>
+    </div>
+</div>

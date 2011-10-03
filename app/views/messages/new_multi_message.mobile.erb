@@ -1,0 +1,18 @@
+
+<% cumulative_recipient_ids = h(@recipients.collect {|recipient| "#{recipient.id},"}) -%>
+<% url = "/messages/new_recipient?cumulative_recipient_ids=#{cumulative_recipient_ids}" -%>
+<%= draw_crumbs Crumb.new("Mailbox", profile_messages_path(@p)), Crumb.new('Add Recipients', url) %>
+
+<% content_for :formholder do %>
+  <%= error_messages_for :message %>
+  <% form_tag(create_multi_message_path, :multipart => true) do |f| %>
+    <ul>
+      <li><%= label_tag :subject, :subject %><%= text_field_tag :subject %></li>
+      <li><%= label_tag :body %><%= text_area_tag :body %></li>
+      <li><%= label_tag :pic %><%= file_column_field 'message', 'icon' %></li>
+      <li><%= submit_tag 'Send', :disable_with => 'Sending..' -%></li>
+    </ul>
+    
+    <%= hidden_field_tag 'cumulative_recipient_ids', cumulative_recipient_ids %>
+  <% end %>
+<% end %>

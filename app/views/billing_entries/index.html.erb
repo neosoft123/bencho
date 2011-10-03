@@ -1,0 +1,24 @@
+<h1>Listing billing_entries</h1>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Reference</th>
+    <th>Reason</th>
+  </tr>
+
+<% for billing_entry in @billing_entries %>
+  <tr>
+    <td><%=h billing_entry.code %></td>
+    <td><%=h billing_entry.reference %></td>
+    <td><%=h billing_entry.reason %></td>
+    <td><%= link_to 'Show', billing_entry %></td>
+    <td><%= link_to 'Edit', edit_billing_entry_path(billing_entry) %></td>
+    <td><%= link_to 'Destroy', billing_entry, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New billing_entry', new_billing_entry_path %>

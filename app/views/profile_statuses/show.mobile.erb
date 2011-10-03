@@ -1,0 +1,15 @@
+<% @page_title = "#{get_name(@profile, true, true, true)} status #{time_ago_in_words(@status.created_at)} ago" %>
+<%= draw_crumbs Crumb.new("Statuses", profile_profile_statuses_path(@profile)) %>
+
+<% content_for :topbox do %>
+  <div class="avatar"><%= avatar_icon_tag @profile %></div>
+	<h3><%= linkify(shortlinkify(sanitize(@status.text))) %></h3>
+<% end %>
+
+<% content_for :actions do %>
+  <ul><li><%= link_to 'Add Comment', new_profile_profile_status_comment_path(@status.profile, @status) %></li></ul>
+<% end %>
+
+<% content_for :stories do %>
+	<%= render :partial => 'comments/comment_list', :locals => { :parent => @status } %>
+<% end if @status.comments_count && @status.comments_count > 0 %>

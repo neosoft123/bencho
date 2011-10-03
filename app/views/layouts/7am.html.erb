@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <title><%= @title || SITE_NAME %></title>
+	<%= javascript_include_merged :base %>
+	<%= stylesheet_link_merged :base %>
+
+    <%= yield :head %>
+    <!--[if IE ]>
+<%= stylesheet_link_tag 'ie' %>
+            <![endif]-->
+        <!--[if lt IE 7.]>
+            <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
+        <![endif]-->
+        <% if RAILS_ENV == 'production' %>
+      	<style type='text/css'>@import url('http://s3.amazonaws.com/getsatisfaction.com/feedback/feedback.css');</style>
+		<script src='http://s3.amazonaws.com/getsatisfaction.com/feedback/feedback.js' type='text/javascript'></script>
+		<script type="text/javascript" charset="utf-8">
+		  var tab_options = {}
+		  tab_options.placement = "left";  // left, right, bottom, hidden
+		  tab_options.color = "#222"; // hex (#FF0000) or color (red)
+		  GSFN.feedback('http://getsatisfaction.com/agilisto/feedback/topics/new?display=overlay&style=problem', tab_options);
+		</script>
+      <%= %>
+    <% end %>
+  </head>
+  <body id="<%= current_controller %>">
+    <div id="wrapper">
+      <div id="headerwrapper">
+        <div id="header" class="clearfix">
+          <h1 class="sitelogo">Kontact</h1>
+          <div id="headernav" class="clearfix">
+            <%= link_to 'Home', home_path %>
+          </div>
+          <div class="right text_r">
+            <% if @u.nil? or @u.new_record? %>
+              You must <%= link_to 'Login', login_path %> or <%= link_to 'Sign-up', signup_path %> to participate<% else %>
+              <%= icon(@p, :tiny) unless @p.blank? %>Hi, <strong><%= @p.formatted_name.blank? ? @p.user.login : @p.formatted_name %></strong>
+              &#124; <%= link_to 'logout', logout_path %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div id="newappbarwrapper">
+        <div id="newappbar">
+          <% if @p %>
+            <h4>Your Applications</h4>
+          <% else %>
+            <div class="appspacer">&nbsp;</div>
+          <% end %>
+          <div id="appbar">
+            <ul id="appnav" class="clearfix">
+              <li id="nav-profile"><span><%= link_to('Profile', @p) if @p %><span></li>
+              <li id="nav-kontacts"><span><%= link_to('Phone Book', profile_kontacts_path(@p)) if @p %><span></li>
+              <li id="nav-friends"><span><%= link_to 'Friendss', profile_friends_path(@p) if @p %></span></li>
+              <!-- not in use atm
+                    <li><%= link_to 'Blog', profile_blogs_path(@p), :id => 'nav-blogs' %></li>
+                    <li><%= link_to 'Photos', profile_photos_path(@p), :id => 'nav-photos' %></li>
+                    -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div id="appwrapper">
+        <div id="app" class="clearfix">
+          <ul id="messages">
+            <%= display_standard_flashes %>
+          </ul>
+          <div id="topflash" class="topflash" style="display:none">&nbsp;</div>
+          <%= yield %>
+        </div>
+      </div>
+      <%= render :partial => 'shared/footer' %>
+    </div>
+  </body>
+</html>

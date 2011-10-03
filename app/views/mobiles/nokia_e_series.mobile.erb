@@ -1,0 +1,38 @@
+<%= draw_crumbs Crumb.new('Sync', sync_help_profile_mobile_path(@p)) %>
+
+<ol>
+  <li>Open your Contacts application</li>
+  <li>Select 'Synchronization > Settings' from the 'Options' menu. This will open the Sync application.</li>
+  <li>From the Options menu select 'New sync profile'</li>
+  <li>Profile name: "<%= @sync_profile_name %>"</li>
+  <li>Select and click 'Applications'</li>
+  <li>Note: You will see a list of all content types that your phone can synchronize</li>
+  <li>Select and click 'Contacts'</li>
+  <li>Make sure the 'Include in Sync' option is set to 'Yes'</li>
+  <li>Define the 'Remote Database' option as 'contacts'.
+  It needs to be spelled exactly like this (lower case)</li>
+  <li>Click 'Back' to exit this screen and save your settings</li>
+  <li>Ensure that only Contacts have 'Settings defined'
+  and all other content types say 'Sett. not defined'</li>
+  <li>Click 'Back' to exit this screen and save your settings</li>
+  <li>Select and click 'Connection Settings'</li>
+  <li>Enter the following values:
+    <ol>
+      <li>Server version: "<%= @server_version %>"</li>
+      <li>Server ID: "<%= @server_id %>"</li>
+      <li>Data bearer: "<%= @data_bearer %>"</li>
+      <li>Access point: "<%= @access_point %>"</li>
+      <li>Host address: "<%= @server_address %>"</li>
+      <li>Port: <%= @port %></li>
+      <li>User name: "<%= @username %>"</li>
+      <li>Password: "<%= @password %>"</li>
+      <li>Leave other values unchanged</li>
+    </ol>
+  </li>
+  
+  <li>Click 'Back' to exit this screen and save your settings</li>
+  <li>Click 'Back' again to exit the Sync profile settings</li>
+  <li>Highlight the your Sync profile and select 'Synchronize' from the 'Options' menu
+  to synchronize your contacts with 7AM</li>
+</ol>
+

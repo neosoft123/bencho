@@ -1,0 +1,7 @@
+<ul class="device-update">
+  <% if subscribed_to?(@profile)%>
+    <li><%= link_to "Turn SMS updates OFF", unsubscribe_profile_path(@profile) %></li>
+  <% elsif !me? %>
+    <li><%= link_to "Turn SMS updates ON", subscribe_profile_path(@profile) %></li>
+  <% end %>
+</ul>

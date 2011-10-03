@@ -1,0 +1,18 @@
+<p>
+  <b>Code:</b>
+  <%=h @billing_entry.code %>
+</p>
+
+<p>
+  <b>Reference:</b>
+  <%=h @billing_entry.reference %>
+</p>
+
+<p>
+  <b>Reason:</b>
+  <%=h @billing_entry.reason %>
+</p>
+
+
+<%= link_to 'Edit', edit_billing_entry_path(@billing_entry) %> |
+<%= link_to 'Back', billing_entries_path %>

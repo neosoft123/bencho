@@ -1,0 +1,6 @@
+Your dating subscription is not up to date.
+<% unless @dating_profile.last_billed.nil? %>
+  Your last payment was on <%= @dating_profile.last_billed.to_formatted_s(:short) %>.
+<% end %>
+Please <%= link_to "click here", pay_profile_dating_profile_url(@p) %>
+to process payment, or check your transaction history below.

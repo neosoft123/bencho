@@ -1,0 +1,21 @@
+<div class="left" id="column_l">
+    <div class="dashboard">
+        <%= javascript_include_tag "profile.js" %>
+        <div id="sub_nav">
+            <%= link_to 'View Public Profile', profile_path(@p).add_param(:public_view => true) %>
+            <%= link_to('&larr; Jump to Dashboard', @p) if @p %>
+        </div>
+    </div>
+    <div id="profile_mobile_container" >
+        <%= render :partial => "mobile" %>
+    </div>
+	<div id="profile_location_container" style='display:none;'>
+        <%= render :partial => "location" %>
+    </div>
+    <div id="profile_spinner" style="display:none;">
+        <%= image_tag 'spinner.gif' %>
+    </div>
+    <div id= "profile_main_container" style='display:none;'>
+    	<%= render :partial => 'profile_details' %>
+    </div>
+</div>

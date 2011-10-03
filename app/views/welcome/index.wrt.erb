@@ -1,0 +1,35 @@
+<%= remove_body_css('normal') %>
+
+<% update_element :header do %>
+	<h1>Welcome</h1>
+<% end %>
+
+<% update_element :message_holder do %>
+	<%= render :partial => 'shared/flashes' %>
+<% end %>
+
+<% update_element :content do %>
+
+	<%= render :partial => 'profiles/bio' %>
+
+	<ul id="tabbar">
+		<li class="arrow">
+			<%= link_to_remote "You",
+			    :url => profile_url(@p)
+			%> 
+		</li>
+		<li class="arrow"><%= link_to_remote "Kontacts", 
+			:url => profile_kontacts_url(@p)
+			%>
+		</li>
+		<li class="arrow"><%= link_to_remote "Location", 
+			:url => profile_locations_url(@p) %>
+		</li>
+		<li class="arrow" onclick="javascript:connect();">
+			Connect
+		</li>
+	</ul>
+	<script type="text/javascript">
+
+	</script>
+<% end %>

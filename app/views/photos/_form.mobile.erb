@@ -1,0 +1,7 @@
+<% form_for [@p,@photo], :html => {:multipart=>true} do |f| %>
+ <%= f.file_field(:image, :label => 'Photo: '){ file_column_field "photo", "image", :size => 15} %><br/>
+ <%= f.text_field :caption %>
+ <br /> Post To Facebook <%= check_box_tag 'facebook_flag' %>
+ <br /><br />
+ <%= f.submit 'Upload', :disable_with => 'Uploading..' -%> or <%= link_to 'Cancel', profile_photos_url(@p) %>
+<% end %>

@@ -1,0 +1,27 @@
+development: &defaults
+   adapter: mysql
+   database: dev7am_production
+   username: adverts
+   password: adverts123!@#
+   encoding: utf8
+   pool: 50
+   wait_timeout: 30
+
+test:
+  <<: *defaults
+  database: lovdbyless_test
+  
+production:
+  <<: *defaults
+  adapter: mysql
+  database: dev7am_production
+  host: localhost
+  username: adverts
+  password: adverts123!@# 
+  port: 3306
+
+reporting:
+  <<: *defaults
+  database: 7am_reporting
+
+  

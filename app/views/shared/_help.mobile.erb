@@ -1,0 +1,43 @@
+<% return unless @help || (current_user && current_user.is_admin?) %>
+
+<% if current_user && current_user.is_admin? -%>
+  <div id="help">
+    <div class="content">
+      <% if @help -%>
+        <%= @help.content %>
+        <p><%= link_to 'Edit help', edit_admin_help_path(@help) %></p>
+      <% else -%>
+        <p><%= link_to 'Add help', new_admin_help_path(:c => params[:controller], :a => params[:action]) %></p>
+      <% end -%>
+    </div>
+  </div>
+<% elsif @help -%>
+  <div id="help">
+    <div class="content"><%= @help.content %></div>
+  </div>
+<% end -%>
+
+<div id="help_links"><%= help_image_link %></div>
+
+<script type="text/javascript">
+  <% if session[:show_help] == false or @help_has_been_shown -%>
+    x$('#help').addClass('hidden');
+    x$('#hide_help').addClass('hidden');
+  <% else -%>
+    x$('#show_help').addClass('hidden');
+  <% end -%>
+  
+  document.getElementById('hide_help').onclick = function() {
+    x$('#help').addClass('hidden');
+    x$('#hide_help').addClass('hidden');
+    x$('#show_help').removeClass('hidden');
+    return false;
+  }
+  
+  document.getElementById('show_help').onclick = function() {
+    x$('#help').removeClass('hidden');
+    x$('#show_help').addClass('hidden');
+    x$('#hide_help').removeClass('hidden');
+    return false;
+  }
+</script>

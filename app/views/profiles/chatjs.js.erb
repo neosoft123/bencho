@@ -1,0 +1,96 @@
+function refreshChatCallback(text) {
+	try {
+		alert('refreshChatCallback(' + text + ')');
+		document.getElementById('queue').innerHTML = g_ajax_obj._dm_queue.length;
+		if((text != null) && (text.length > 0)) {
+			var elm = x$('#chat_messages').html('top', text);
+		}
+		chatPoll();
+	}catch(e){
+		alert('refreshChatCallback (Exception)' + e.message);
+	}
+};
+
+function refreshPartialCallback(param) {
+	alert('Server got poll message');
+};
+
+function refreshMessageCallback(param) {
+	alert('Server got sent chat');
+};
+
+x$(window).load(function(e){
+	chatPoll();
+});
+
+function chatPoll() {
+	try {
+	setTimeout(
+		function() {
+			g_ajax_obj.CallXMLHTTPObjectGETParamPartial('<%= profile_chatter_refresh_url(@profile) %>' + "?" + getRandNum(), refreshChatCallback, null, refreshPartialCallback, null);
+//			SimpleAJAXCall('<%= profile_chatter_refresh_url(@profile) %>' + "?" + getRandNum(), refreshChatCallback, 'GET', null);
+			document.getElementById('queue').innerHTML = g_ajax_obj._dm_queue.length;
+		},
+		3 * 1000
+	);
+	}
+	catch(e){
+		alert('chatPoll (Exception)' + e.message);
+	}
+};
+
+function setActive(name) {
+	document.getElementById('to').value = name;
+	document.getElementById('to_header').innerHTML = name;
+	appendMessage('info', 'Now chatting to ' + name);
+}
+
+
+function sendMessageCallback(text) {
+	try {
+	document.getElementById('queue').innerHTML = g_ajax_obj._dm_queue.length;
+	var btn = document.getElementById('send_button');
+	btn.disabled = false;
+	btn.value = 'Send';
+	//alert(message);
+	}
+	catch(e){
+		alert('sendMessageCallback (Exception)' + e.message);
+	}
+};
+
+function sendMessage(form) {
+	try {
+		var btn = document.getElementById('send_button');
+		btn.value = 'Sending';
+//		btn.disabled = true;
+		g_ajax_obj.CallXMLHTTPObjectGETParamPartial('<%= profile_chatter_send_url(@profile) %>' + '?' + getMessageVars(form) + "&" + getRandNum(), sendMessageCallback, null, refreshMessageCallback, null);
+//		SimpleAJAXCall('<%= profile_chatter_send_url(@profile) %>' + '?' + getMessageVars(form), sendMessageCallback, 'POST', null);
+		document.getElementById('queue').innerHTML = g_ajax_obj._dm_queue.length;
+		var msg = document.getElementById('message');
+		appendMessage(<%= "'#{@profile.user.login}'" %>, msg.value);	
+		msg.value = '';
+		return false;
+	}catch(e) {
+		alert(e.message);
+		btn.disabled = false;
+		btn.text = 'Send';
+		return false;
+	}
+};
+
+
+function appendMessage(from, message) {
+	var html = '<li>' + message + '</li>'
+	x$('#chat_messages').html('top', html);
+};
+
+function hideLoading() {
+	var loading = document.getElementById('roster_loading');
+	loading.style.display = 'none';
+};
+
+function getMessageVars(form) {
+	var poststr = "message=" + encodeURI( document.getElementById("message").value);
+	return poststr;
+};

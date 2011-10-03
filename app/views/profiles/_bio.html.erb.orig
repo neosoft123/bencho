@@ -1,0 +1,20 @@
+<%
+<<<<<<< HEAD:app/views/profiles/_bio.html.erb
+profile ||= @profile %>
+<div class="newprofilewrapper">
+<div class="newprofile clearfix">
+=======
+profile ||= (@profile ? @profile : @p) %>
+<div id="profile" class="clearfix">
+>>>>>>> 96679967f42e3473330acefcd152c9874ec93c54:app/views/profiles/_bio.html.erb
+    <div class="profile_l left">
+        <div class="left avatar">
+            <%= icon profile, :big %>
+        </div>
+    </div>
+    <div class="profile_r right">
+        <h1><%= h profile.kontact_information.f %></h1>
+        <h3><%= h profile.kontact_information.location %></h3>
+    </div>
+</div>
+</div>

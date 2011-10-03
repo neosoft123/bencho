@@ -1,0 +1,6 @@
+<ul class="profilewizard clearfix">
+	<li><%= link_to_function "1. Sync Settings" , "toggleMobile();" , :id => "profile_mobile",:class => "profile_mobile#{ mobile }" %></li>
+	<li><%= link_to_function "2. Your Location" , "toggleLocation();" , :id => "profile_location", :class => "profile_location#{ location }" %></li>
+	<li><%= link_to_function "3. Profile Details" , "toggleProfile();" , :id => "profile_details",:class => "profile_details#{ details }" %></li>
+	
+</ul>

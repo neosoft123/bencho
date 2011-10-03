@@ -1,0 +1,23 @@
+<div class="statuslink">
+  Check in
+</div>
+<div class="transparentboxwrapper">
+    <div class="transparentboxouter">
+        <div class="transparentbox" id="statusupdate">
+  <% remote_form_for [my_profile, @location],
+		:update => 'loc-results',
+    :html => { :id => 'remote-status-form' },
+    :before => "$('#status-spinner').show()",
+    :complete => "$('#status-spinner').hide()" do |f| %>
+    <label>
+      Where are you?
+    </label>
+    <%= f.text_area :title -%>
+    <div class="statussubmit">
+      <span id="status-spinner" style="display:none;"><%= image_tag 'spinner.gif' -%></span>
+      <%= f.submit 'Check In', :disable_with => 'Checking in..' %>
+    </div>
+  <% end %>
+</div>
+</div>
+</div>

@@ -1,0 +1,62 @@
+<% profile ||= (@profile ? @profile : @p) %>
+ 
+<div>
+
+	<div class="avatar">
+        <%= avatar_icon_tag profile, :iphone %><br/>
+	<% if me? %>
+		<%= link_to "Upload New", change_avatar_profile_url(@p) %>
+	
+	<% end %>
+	</div>
+	<% if @p %>
+	 <div class="bio-info">	 
+	<h1 style="margin:0px 0px 0px 0px;"><%= "#{formatted_profile_name(profile)} Profile" %>  &nbsp;
+	<span style="font-size:13px;"><%= link_to "Edit", edit_profile_url(@p) if me? %></span> </h1>
+	</div>
+	 <br />
+	<div class="bio-info">
+	<%= link_to "My Photos", profile_photos_url(@p) if me? %>
+	</div>	 
+	 
+	<% if me? || @p.has_business_card_for?(@profile) %>
+	  <div class="bio-info"><%= mail_to profile.email %></div>
+	<% end %>
+	<% else %>
+	 <div class="bio-info">  <h1 style="margin:0px 0px 0px 0px;"><%= "#{formatted_profile_name(profile)} Profile" %>  &nbsp;	</div>
+	<br />
+	<% end %>
+	<div class="bio_info">
+	  ABOUT ME: &nbsp;<%= @profile.relation_status %>&nbsp;<%= @profile.gender %> interested in  <%= @profile.interest %>
+	</div>
+	 <% unless @location.blank? %>
+	  <div class="bio-info">LOCATION: &nbsp;<%= @location %> &nbsp;<%= link_to "Edit location", profile_locations_path(@p), :style => "text-decoration:underline" if me? %></div>
+	<% else %>
+          <div class="bio-info"><%= link_to "Update location", profile_locations_path(@p), :style => "text-decoration:underline" if me? %></div> 
+	<% end %>			
+	<% unless @profile.description.blank? %>
+	  <div class="bio-info">INFO:  &nbsp <%= @profile.description %> &nbsp;</div>
+	<% end %>
+		
+	<% unless @status.blank? %>
+	  <div id="messenger-notification" "style='background-color:#B2D281;font-size:14px;color:#FFFFFF;'"><li><strong>Status: &nbsp</strong> <%= tweetify(linkify(shortlinkify(sanitize(@status)))) %></li></div>
+	<% end %>
+	<% if !me? %>
+	
+	<div id="messenger-notification" "style='background-color:#3C99D2;font-size:14px;color:#FFFFFF;'"><b>GALLERY</b></div>
+	You can click the image to enlarge and comment on them
+	<div class="image">
+		
+	<% if(@profile) %>	   
+            <% @photos.each do |pics|%> 			
+		<%= link_to image_tag('delete.png'), profile_photo_path(@profile, pics), :method => :delete, :confirm => 'Are you sure?', :class=>'delete' if me? %>
+		<%= link_to image(pics, :small, :style=>'margin:10px 0px 0px -5px; align:middle;'), profile_photo_path(pics.profile, pics)  %><br/>
+		<%= pics.caption %>	   		  
+		<% end %>   <br />
+	  <%= will_paginate @photos, :container => false rescue nil%>
+				  	
+	<% end %>
+	</div>
+	<% end %>
+	
+</div>

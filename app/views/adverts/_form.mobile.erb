@@ -1,0 +1,15 @@
+<% content_for :formholder do %>
+  <% form_for @advert, :html => {:multipart=>true} do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    <%= f.label :send_to %>
+    <%= f.text_field :send_to %>
+    <%= f.label :image %>
+    <%= file_column_field 'advert', 'image' %>
+    <%= f.label :run_from %>
+    <%= f.date_select :run_from, :start_year => Date.today.year, :include_blank => false %>
+    <%= f.label :run_to %>
+    <%= f.date_select :run_to, :start_year => Date.today.year, :include_blank => false %>
+    <%= f.submit "Save", :disable_with => "Saving.." %>
+  <% end %>
+<% end %>

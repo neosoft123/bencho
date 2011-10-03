@@ -1,0 +1,21 @@
+<% profile ||= (@profile ? @profile : @p) %> 
+
+
+<% if(@p) %>
+
+<%= draw_crumbs %>
+<% end   %>
+<% content_for :topbox do %>        
+	<%= render :partial => 'bio_full' %>
+	<br/>
+	<ul>
+		<%= render :partial => 'stream_form' %>
+	</ul>
+
+<% end %>
+
+<%= render :partial => 'actions' %>
+
+<% unless me? %>
+	<%= render(:partial => 'stream', :locals => {:show_form => false, :show_filters => false })  %>
+<% end %>

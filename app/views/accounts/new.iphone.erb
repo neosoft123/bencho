@@ -1,0 +1,17 @@
+	<div id="login_form" class="toolbar">
+	  <h1 id="pageTite">Log-in</span>
+	   <a id="backButton" href="#" style="display:none"></a>
+	</div>
+
+	<% less_form_for @user, :url => create_session_path, :method => :post do |f| %>
+
+	  <%= f.text_field :login, :class => "focus_first" %>
+	  <%= f.password_field :password %>
+	  <%= f.wrap(:remember_me, :for => :remember_me){ check_box_tag 'remember_me',1,false, :class=>"checkbox" } %>
+
+
+	  <div class="button">
+	    <%= f.submit 'Log-in Now', :class=>'button' %>
+	  </div>
+		  <% end %> 
+	</div>

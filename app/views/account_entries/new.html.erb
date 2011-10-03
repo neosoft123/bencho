@@ -1,0 +1,23 @@
+<% content_for :titlebar do %>
+  <%= link_to "Back", profile_kontacts_url(@p), :id => "back-link" %>
+  <h1>Bank</h1>
+<% end %>
+
+<% content_for :topbox do %>
+	<div>
+		<ul>
+		  <li>
+			Current <strong><%= @wallet.balance.format %></strong>
+		  </li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :stories do %>
+<ul>
+	<li class="heading">
+		Packages
+	</li>
+	<%= render :partial => 'service', :collection => @services %>
+</ul>
+<% end %>

@@ -1,0 +1,31 @@
+staging:
+    username: cftuser
+    host: ec2.7.am
+    port: 1390
+    local_port: 1389
+    
+production:
+    username: notroot
+    host: dev.7.am
+    port: 1389
+    local_port: 1389
+    
+development:
+    username: 993440e2
+    pass: p3nqu1n
+    host: 993440e2.fb.joyent.us
+    port: 3000
+    local_port: 3000
+    
+reporting:
+    username: 993440e2
+    pass: p3nqu1n
+    host: 993440e2.fb.joyent.us
+    port: 3000
+    local_port: 3000
+    
+test:
+    username: notroot
+    host: dev.7.am
+    port: 1389
+    local_port: 1389

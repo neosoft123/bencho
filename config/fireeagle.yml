@@ -1,0 +1,8 @@
+# see http://fireeagle.yahoo.net/developer/manage for your keys
+fireeagle:
+  consumer_key: RJJovC4LM00S
+  consumer_secret: MRGkmWR6MaCxxBrNFxcdaQ63kxMs6KMZ
+  general_purpose_access_token: 9Iu7mRFqCHSu
+  general_purpose_token_secret: o3D9RTkf3hegdDnla2PS0LKMXGnSwMZf
+  # https://fireeagle.yahoo.net/oauth/mobile_auth/XXX
+  # mobile_app_id:

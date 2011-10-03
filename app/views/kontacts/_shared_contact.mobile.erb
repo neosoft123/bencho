@@ -1,0 +1,8 @@
+<% 
+	ki = shared_contact.kontact_information 
+	@kontact_information = ki
+	return if ki.nil?
+%>
+<% content_tag_for(:li, ki, :profile, :class => "arrow") do  %>
+	<%= link_to "#{ki.formatted_name}", [shared_contact.parent, shared_contact], :style=>'display:inline' %> (owned by <%= link_to ki.owner.f, ki.owner, :style=>'display:inline' %>)
+<% end %>

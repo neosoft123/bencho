@@ -1,0 +1,27 @@
+# == Schema Information
+# Schema version: 20081206110601
+#
+# Table name: feeds
+#
+#  id           :integer(4)    not null, primary key
+#  profile_id   :integer(4)    
+#  feed_item_id :integer(4)    
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+    profile: user
+    feed_item: one
+
+two:
+    profile: user
+    feed_item: three
+
+three:
+    profile: user
+    feed_item: three
+
+four:
+    profile: user
+    feed_item: four

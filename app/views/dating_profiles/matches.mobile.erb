@@ -1,0 +1,29 @@
+<% @page_title = "Matches" %>
+
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to("Your Dating Profile", profile_dating_profile_url(@p)) %></li>
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+    <% unless @matches.empty? %>
+      <% @matches.each do |match| %>
+        <%= render :partial => 'match', :locals => { :match => match } %>
+      <% end %>
+    <% else %>
+      <% if @dating_profile.valid_subscription? %>
+        <li>No matches could be found for your requirements</li>
+      <% else %>
+        <li>Finding matches is only enabled for up to date subscriptions</li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :footer do %>
+  <%= will_paginate @matches %>
+<% end %>

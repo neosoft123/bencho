@@ -1,0 +1,24 @@
+<h1>Sent Text Messages</h1>
+
+<table>
+  <tr>
+    <th>To</th>
+    <th>Message</th>
+    <th>Sent</th>
+    <th>Profile</th>
+  </tr>
+<% for text_message in @text_messages %>
+  <tr>
+    <td><%=h text_message.to %></td>
+    <td><%=h text_message.message %></td>
+    <td><%=h text_message.sent %></td>
+    <td><%=h text_message.profile_id %></td>
+    <td><%= link_to 'Show', text_message %></td>
+    <td><%= link_to 'Edit', edit_text_message_path(text_message) %></td>
+    <td><%= link_to 'Destroy', text_message, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'New text_message', new_text_message_path %>

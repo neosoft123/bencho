@@ -1,0 +1,8 @@
+<% unless @profile.email.blank? %>
+  <h4 class="profilesubheader">Email Address</h4>
+  <p class="profileinfo smaller"><a href="mailto:<%= @profile.email %>"><%= @profile.email %></a></p>
+<% end %>
+<% unless @profile.mobile.blank? %>
+  <h4 class="profilesubheader">Mobile</h4>
+  <p class="profileinfo smaller"><%= @profile.mobile %></p>
+<% end %>

@@ -1,0 +1,41 @@
+<%
+feed_item ||= @feed_item
+f = feed_item.item
+var  ||= "#{f.follower.icon}"
+ab ||= var.split("/")
+k ||= ab.count-1
+cd ||= Array.new
+for i in 8..k do
+cd[i] = ab[i]
+end
+m ||= cd.delete_if {|x| x == nil}
+url ||= m.join("/")
+
+%>
+
+<% if @p %>
+<% content_for_feed_item feed_item, f.follower, "#{name_link(f.follower, true, true)} #{is_are(f.follower)} now following #{name_link(f.followed)}" %>
+<% else %>
+            <li class="public_feed_item" id="public_feed_item_260545">
+              <div class="posted-by"><% if f.follower.icon != nil %> <a href="session/new"><img style="margin:10px;width:32px;height:32px" src="<%= url %>" /> </a>
+<% else %>
+<%= link_to image_tag("avatar_default_thumb.png", :style => 'margin:10px;width:32px;height:32px;' ), new_session_path%> <% end %>
+                                     <a href="/session/new"><% if f.follower.display_name == nil%>       
+                                                                <%= f.follower.user.login %>
+                                                            <% else %> 
+                                                                <%= f.follower.display_name%>
+                                                            <% end %>
+          </a>  <%= distance_of_time_in_words(Time.now, feed_item.item.created_at)%> ago </div>
+           <a href="/session/new"><% if f.follower.display_name == nil%>       
+                                                                <%= f.follower.user.login %>
+                                                            <% else %>
+                                                                <%= f.follower.display_name%>
+                                                            <% end %>
+          </a> is now following <a href="/session/new"><% if f.followed.display_name == nil%>
+                                                                <%= f.followed.user.login %>
+                                                            <% else %>
+                                                                <%= f.followed.display_name%>
+                                                            <% end %>
+</a>
+         </li>
+<% end %>

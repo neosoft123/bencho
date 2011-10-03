@@ -1,0 +1,32 @@
+<% @page_title = 'Twitter Settings' %>
+<% draw_crumbs Crumb.new('Settings', settings_path) %>
+
+<% content_for :stories do %>
+	<% form_tag twitter_do_settings_path do %>
+	<ul>
+		<li><%= check_box_tag :send_status, 'true', @u.settings.send_status_to_twitter %> Allow sending of status to Twitter</li>
+		<li><%= submit_tag 'Save', :disable_with => 'Saving..' %></li>
+	</ul>
+	<% end %>
+	
+	<!--ul>
+	  <% if @u.has_twitter_login? %>
+	    <li><b>You have provided us with your Twitter username and login so that tweets can be imported and read on 7am.</b>
+	  <% end %>
+	  <li>
+	    While the Twitter API allows us to get your temporary permission to access Twitter on your behalf by sending you to
+	    their site to login, to allow us to fetch your tweets and use them to update your 7.am status, as well as to be able 
+	    to read the tweets of the people you follow on Twitter, you will need to provide your Twitter login credentials.
+	  </li>
+    <li>
+      <% form_tag twitter_key_path do %>
+        <%= label_tag 'Twitter Login' %>
+		    <%= text_field_tag 'login', @u.settings.twitter_login %>
+        <%= label_tag 'Twitter Password' %>
+  			<%= password_field_tag 'password', @u.settings.twitter_password %>
+        <%= submit_tag "Save", :disable_with => "Saving.." %>
+      <% end %>
+	  </li>
+  </ul-->
+	
+<% end %>

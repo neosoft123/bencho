@@ -1,0 +1,37 @@
+<% @page_title = "Chatting with #{@profile.f}" %>
+<%= draw_crumbs %>
+
+<% unless supports_ajax? %>
+  <% content_for :head, '<meta http-equiv="refresh" content="10">' %>
+<% else %>
+  <% content_for :head do %>
+  	<%= javascript_include_tag formatted_conversation_refresh_js_profile_url(@profile, :js) %>
+  <% end %>
+<% end %>
+
+<% unless supports_ajax? %>
+  <% content_for :searchbar, link_to("Send message to #{get_name(@profile)}", send_chat_message_path(@profile)) %>
+<% else %>
+  <% content_for :searchbar do %>
+  	<!--a href="#" onclick="javascript:hideShow(document.getElementById('message_form'));">New Message</a>
+  	<small> (<a href="<%= profile_chatter_send_url(@profile)%>" onclick="javascript:window.location.reload();return false;">Refresh Now</a>)</small-->
+  	  <%= render :partial => "chat_message_form" %>
+  <% end %>
+<% end %>
+  
+<% content_for :stories do %>
+  <div class="greenblock">
+    <% if @profile.user.online? %>
+	    <%= "#{name_link(@profile)} is online." %>
+	  <% else %>
+      <%= "#{name_link(@profile)} is offline. All messages will be saved until the user logs on again." %>
+	  <% end %>
+  </div>
+	<ul id='chat_messages'>
+		<% if @messages %>
+			<%= render :partial => 'chat_messages' %>
+		<% else %>
+			<li>Loading messages..</li>
+		<% end %>
+	</ul>
+<% end %>

@@ -1,0 +1,13 @@
+<% @page_title = "New Diary Entry" %>
+<% draw_crumbs Crumb.new("#{get_name(@profile, true, true, true)} Diary", profile_blogs_path(@profile))%>
+
+<% content_for :formholder do %>
+	<%= error_messages_for :message %>
+	<% form_for [@profile, Blog.new] do |f| %>
+		<ul>
+			<li><%= f.label :title %><%= f.text_field :title %></li>
+			<li><%= f.label :body %><%= f.text_area :body %></li>
+			<li><%= f.submit 'Save', :disable_with => 'Save..' -%> or <%= link_to 'Cancel', profile_blogs_path(@profile) %></li>
+		</ul>
+	<% end %>
+<% end %>

@@ -1,0 +1,10 @@
+<% draw_crumbs %>
+
+
+
+<%= render :partial => 'public_stream' %>
+
+<% content_for :footer do %>
+	<%= will_paginate @feed_items rescue nil %>
+<% end %>
+  

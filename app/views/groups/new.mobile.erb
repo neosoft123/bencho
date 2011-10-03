@@ -1,0 +1,28 @@
+<% @page_title = 'New group' %>
+<%= draw_crumbs Crumb.new('Groups', groups_path) %>
+
+<% content_for :topbox do %>
+	<ul class="form">
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	
+	<% form_for @group, :html => { :id => 'remote-status-form' } do |f| %>
+
+	<ul class="form">
+		<p><%= error_messages_for :group %></p>
+			<li><%= f.label :name %><%= f.text_field :name %></li>
+			<li><%= f.label :description %><%= f.text_area :description %></li>
+			<li><%= f.check_box :is_public %>Public group</li>
+	    
+		<li><%= f.submit 'Save', :disable_with => 'Saving..' %></li>
+  	<li class="heading">Invite Friends</li>
+		<% @friends.each do |friend| %>
+			<li><%= check_box_tag 'friends[]', friend.id %> <%= name_link friend %>
+		<% end %>
+		<li><%= f.submit 'Save', :disable_with => 'Saving..' %></li>
+	</ul>
+<% end %>
+  
+<% end %>

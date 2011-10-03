@@ -1,0 +1,22 @@
+<% @page_title = "Advert" %>
+<% draw_crumbs Crumb.new("Adverts", adverts_path) %>
+
+<% content_for :topbox do %>
+  <%= @advert.title %>
+<% end %>
+
+<% content_for :actions do %>
+  <ul><li><%= link_to "Edit", edit_advert_path(@advert) %></li></ul>
+  <ul><li><%= link_to "Delete", @advert, :method => :delete, :confirm => "Are you sure you want to delete this advert?" %></li></ul>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+    <li><%= image_tag url_for_file_column(@advert, :image) %></li>
+    <li>URL: <%= link_to @advert.send_to, shortlinkify(@advert.send_to) unless @advert.send_to.blank? %></li>
+    <li>Views: <%= @advert.views %></li>
+    <li>Clicks: <%= @advert.clicks %></li>
+  </ul>
+<% end %>
+
+

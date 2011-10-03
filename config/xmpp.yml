@@ -1,0 +1,29 @@
+# config/config.yml
+development:
+  xmpp_server: talk.localhost
+  xmpp_domain: talk.localhost
+  drb_server: druby://localhost:3333
+  pid_file: jabber.pid
+  log_file: jabber.log
+
+production_local:
+    xmpp_server: devlocal.7.am
+    xmpp_domain: devlocal.7.am
+    drb_server: druby://localhost:3333
+    pid_file: jabber.pid
+    log_file: jabber.log
+
+test:
+    xmpp_server: talk.localhost
+    xmpp_domain: talk.localhost
+    drb_server: druby://localhost:3333
+    pid_file: jabber.pid
+    log_file: jabber.log
+
+production:
+    xmpp_server: talk.7.am
+    xmpp_domain: talk.7.am
+    drb_server: druby://localhost:3333
+    pid_file: jabber.pid
+    log_file: jabber.log
+    

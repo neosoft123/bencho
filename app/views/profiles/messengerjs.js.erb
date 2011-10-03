@@ -1,0 +1,23 @@
+x$(window).load(function(e){
+	messagePoll();
+});
+
+function refreshMessagesCallback(req) {
+	if(req.responseText.length > 0) {
+		var elm = x$('#messenger').html(req.responseText);
+	}
+	messagePoll();
+};
+
+function messagePoll() {
+	setTimeout(
+		function() {		
+			var options = {};
+			options.method = 'GET';
+			options.async = true;
+			options.callback = refreshMessagesCallback;
+			x$(window).xhr('<%= profile_unread_messages_path(@p) %>' + "?" + getRandNum(), options);
+		},
+		20 * 1000
+	);
+};

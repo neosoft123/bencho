@@ -1,0 +1,27 @@
+--- 
+javascripts: 
+- base: 
+  - jquery
+  - thickbox
+  - truncator
+  - jquery
+  - jquery-ui
+  - jquery.scrollTo
+  - jquery.listnav-1.0.1
+  - jquery.inplace.pack
+  - jrails
+  - ui.datepicker
+  - effects
+  - mobile_nokia
+  - mobile
+- mobile:
+  - xui
+  - simple_ajax_queue
+
+stylesheets: 
+- base: 
+  - reset
+  - ie
+  - application
+- mobile:
+  - mobile

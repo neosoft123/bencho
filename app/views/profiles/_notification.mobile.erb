@@ -1,0 +1,19 @@
+    <% @count = @p.unread_messages.length 				     
+       @count = @count + @p.friendships_requested.count
+       @count = @count + $active_chat.length
+       @inbox_message = @p.received_messages.length
+
+  %>
+
+   <% if @inbox_message != 0 %>
+  <ul>
+      <li><%= link_to "You have #{@count} Notifications", profile_path(@p), :accesskey => "2"  %></li>   
+  </ul>
+   <% else %>
+  <ul>
+      <li><%= link_to "You have 1 Notifications", profile_path(@p), :accesskey => "2"  %></li>
+  </ul>
+   <% end %>
+
+  
+ 

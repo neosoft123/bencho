@@ -1,0 +1,28 @@
+<h1>Editing account_entry</h1>
+
+<% form_for(@account_entry) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :debit %><br />
+    <%= f.text_field :debit %>
+  </p>
+  <p>
+    <%= f.label :credit %><br />
+    <%= f.text_field :credit %>
+  </p>
+  <p>
+    <%= f.label :status %><br />
+    <%= f.text_field :status %>
+  </p>
+  <p>
+    <%= f.label :reason %><br />
+    <%= f.text_field :reason %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @account_entry %> |
+<%= link_to 'Back', account_entries_path %>

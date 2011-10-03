@@ -1,0 +1,88 @@
+  <div id="flasher">
+  	<ul id="message_holder" class="data" <% unless flash[:notice] || flash[:error] || flash[:invite] %>style="display:none;"<% end %>>
+    	<%= render :partial => 'shared/flashes' %>
+  	</ul>
+  </div>
+
+  <div id="content">
+    <ul id="spinner" class="data" style="display:none;">
+      <p>Loading...</p>
+    </ul>
+            
+  	<% topbox = yield :topbox %>
+  	<% if topbox %>
+  		<div class="top-box">
+  			<%= topbox %>
+  		</div>
+  	<% end %>
+
+  	<% searchbar = yield :searchbar %>
+  	<% if searchbar %>
+  		<div id="search-bar">
+  			<%= searchbar %>
+  		</div>
+  	<% end %>
+	
+  	<% title = yield :title %>
+  	<% if title %>
+  		<div id="content-title">
+          	<%= title %>
+  		</div>
+  	<% end %>
+  
+  	<% actions = yield :actions %>
+  	<% if actions %>
+  		<div id="actions">
+  			<%= actions %>
+  		</div>
+  	<% end %>
+
+  	<% stories = yield :stories %>
+  	<% if stories %>
+  		<div id="stories">
+  			<%= stories %>
+  		</div>
+  	<% end %>
+	
+  	<% formholder = yield :formholder %>
+  	<% if formholder %>
+  		<div id="form-holder">
+  			<%= formholder %>
+  		</div>
+  	<% end %>
+
+    <% content_body = yield %>
+    <% if content_body %>
+      <div id="content-body">
+      	<%= content_body %>
+  		</div>
+    <% end %>
+
+  	<% footer = yield :footer %>
+  	<% if footer %>
+  		<div id="content-footer">
+        	<%= footer %>
+  		</div>
+  	<% end %>
+	
+  </div>
+
+  <div id="footer-menu">
+	<% unless current_user.nil? %>
+		<%= link_to "Twitter Settings", twitter_settings_path %>  • 
+		<%= link_to "Facebook Settings", facebook_settings_path %> • 
+		<%= link_to "Change Password", change_password_user_path(@u) %>
+	<% end %>
+        
+  </div>
+    <%= render :partial => 'layouts/footer_menu' %>
+  <%#= yield :crumbs %>
+
+  <%#= render :partial => 'content_reporting/form' if supports_javascript_css_manipulation? %>
+
+  <div id="footer">© 2010 7.am - Sync. Chat. Locate. All Rights Reserved.</div>
+
+</div>
+
+</body>
+</html>

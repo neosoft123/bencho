@@ -1,0 +1,28 @@
+
+<% @page_title = 'Device content management' -%>
+
+<ul>
+  <li><%= link_to 'New device content', new_admin_device_content_url %></li>
+</ul>
+
+<h3>List of devices</h3>
+
+<% if @device_contents.any? -%>
+  <table>
+    <thead>
+      <tr>
+        <td>Vendor</td>
+        <td>Model</td>
+      </tr>
+    </thead>
+    
+    <% @device_contents.each do |device_content| -%>
+      <tbody>
+        <tr>
+          <td><%= link_to device_content.vendor, edit_admin_device_content_url(device_content) %></td>
+          <td><%= link_to device_content.model, edit_admin_device_content_url(device_content) %></td>
+        </tr>
+      </tbody>
+    <% end -%>
+  </table>
+<% end -%>

@@ -1,0 +1,12 @@
+<h1><%= ki.display_name %></h1>
+<p class="profileinfo smaller"><em><%= age_and_sex(ki) %></em></p>
+<p class="profilebio"><b>About me:</b> <%= ki.about_me %></p>
+<p class="profileinfo smaller"><b>Location</b></p>
+<p class="profileinfo"><%= ki.location %></p>
+<p class="profileinfo smaller"><b>Email</b></p>
+<p class="profileinfo smaller"><a href="mailto:<%= @profile.email %>"><%= ki.primary_email %></a></p>
+<p class="profileinfo smaller"><b>Phone</b></p>
+<p class="profileinfo smaller"><em>Mobile:</em><%= ki.primary_phone_number %></p>
+<% ki.phone_numbers.secondary.each do |number| -%>
+	<p class="profileinfo smaller"><em><%= number.field_type%>:</em><%= number.value %></p>
+<% end -%>

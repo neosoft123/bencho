@@ -1,0 +1,12 @@
+<% @page_title = 'Feedback' %>
+<% content_for :crumbs, render(:partial => 'shared/crumbs', :locals => {:crumbs => [Crumb.new(@page_title)]}) -%>
+
+<% content_for :formholder do %>
+	<% form_tag feedback_send_path do %>
+		<ul>
+			<li><%= label_tag :subject %><%= text_field_tag :subject %></li>
+			<li><%= label_tag :message %><%= text_area_tag :message, nil, :rows => 10, :cols => 40 %></li>
+			<li><%= submit_tag 'Send', :disable_with => 'Sending..' %></li>
+		</ul>
+	<% end %>
+<% end %>

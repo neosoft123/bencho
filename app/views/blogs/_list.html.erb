@@ -1,0 +1,15 @@
+<%-
+#locals
+profile ||= @profile
+size ||= 10
+blogs ||= profile.blogs.find :all, :limit => size
+total = profile.blogs.count
+-%>
+
+<% unless blogs.empty? %>
+	<h2 class="contenttitle">Updates <span>(latest <%= blogs.size %> of <%= total > size ? link_to( total, profile_blogs_path(profile)) : total%>)</span></h2>
+	<ul class="lifestream">       
+	<%= blogs_li blogs %>
+	</ul>
+
+<% end %>

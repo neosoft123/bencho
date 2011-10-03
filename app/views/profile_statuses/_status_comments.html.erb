@@ -1,0 +1,5 @@
+<% if status.comments.count > 3 %>
+  <p id="more-button">
+    <%= link_to_remote("#{status.comments.count - 3} more comments..", :url => more_profile_status_comments_path(status)) %>
+  </p>
+<% end %>

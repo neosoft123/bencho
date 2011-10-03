@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+#require File.join(File.dirname(__FILE__), '../vendor/plugins/canhaschat/lib/can_has_chat/remote/boot_server')
+#require File.join(File.dirname(__FILE__), '../lib/xmpp/boot_jabber_server')
+require File.join(File.dirname(__FILE__), '../lib/daemons/chat/boot_chat_daemon')

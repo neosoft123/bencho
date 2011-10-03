@@ -1,0 +1,21 @@
+sqlite:
+  :adapter: sqlite
+  :dbfile: vendor/plugins/mobile_atlas/test/mobile_atlas_plugin.sqlite.db
+
+sqlite3:
+  :adapter: sqlite3
+  :dbfile: vendor/plugins/mobile_atlas/test/mobile_atlas_plugin.sqlite3.db
+
+postgresql:
+  :adapter: postgresql
+  :username: postgres
+  :password: postgres
+  :database: mobile_atlas_plugin_test
+  :min_messages: ERROR
+
+mysql:
+  :adapter: mysql
+  :host: localhost
+  :username: root
+  :password: password
+  :database: mobile_atlas_plugin_test

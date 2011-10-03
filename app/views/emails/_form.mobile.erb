@@ -1,0 +1,8 @@
+<ul id="credentials" class="form">
+	<li>
+		<%= f.label 'Type' -%><%= f.select :field_type, Email::TYPE %>
+	</li>
+	<li>
+		<%= f.label :value -%><%= f.text_field :value %>
+	</li>
+</ul>

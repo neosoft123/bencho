@@ -1,0 +1,18 @@
+<% 
+#locals
+blogs ||= @blogs
+@count = blogs.total_entries
+
+unless blogs.empty? 
+    
+%>
+
+
+<div class="right" id="column_r">
+    <h2 class="sidetitle">Blog Post History</h2>
+    <ul id="post_history">
+      <%= blogs_li blogs %>
+    </ul>
+    <%= will_paginate blogs %>
+</div>
+<% end %>

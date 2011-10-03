@@ -1,0 +1,15 @@
+<%
+#locals
+topic ||= feed_item.item
+%>
+
+
+<li class="feed_item forum_feed" id="<%= feed_item.dom_id %>" style="display:none;">
+  <div class="lifeheader">
+	 forum post
+	</div> 
+  	<div class="lifecontent">
+    <%= link_to h(topic.owner.f), topic.owner %> posted <%= link_to sanitize(textilize(topic.title)), forum_topic_path(topic.forum, topic) %> in <%= link_to sanitize(textilize(topic.forum.name)), forum_path(topic.forum) %>
+  	</div>
+	<div class="lifefooter small bottom"><%= time_ago_in_words topic.created_at %> ago</div>
+</li>

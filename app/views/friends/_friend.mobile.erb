@@ -1,0 +1,12 @@
+<% content_tag_for(:li, friend, :profile, :class => "arrow") do  %>
+  <div class="<%= friend.online? ? "online-status" : "offline-status" %>"><%= online_status(friend) %></div>
+  <%= link_to friend.formatted_name, profile_path(friend) %>
+  <% if friend.friend_of? @p %>
+    <div class="feed-item-detail" style="padding-left:0px">
+      <%= link_to("chat", profile_chatter_path(friend)) + " - " if friend.online? %>
+      <%= link_to "send chat invite", chat_invite_profile_path(friend) %> - 
+      <%= link_to "send message", message_sendto_path(@p, friend) %>
+    </div>
+  <% end %>
+<% end %>
+ 

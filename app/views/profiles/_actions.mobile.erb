@@ -1,0 +1,394 @@
+
+<meta http-equiv="refresh" content="60">
+<script type="text/javascript" src="/javascripts/jquery.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+$('#messagesearch').change(function() {
+         		
+   var action = $(this).val();
+   if(action == 'New') {
+       window.location='/messages/new_message';
+     }
+    if(action== 'Inbox')
+     {	
+     name = $('#test_personnel').val();
+     window.location = '/profiles/'+name+'/messages';
+     }
+   if(action== 'Create'){
+       window.location='/messages/new_recipient';
+     }
+  		
+});
+
+
+$('#chatsearch').change(function() {
+   name = $('#test_personnel').val();        		
+   var action = $(this).val();
+   if(action == 'FriendsOnline') {   
+           window.location='/profiles/'+name+'/friends/online';
+     }
+    if(action== 'Active')
+     {	
+       window.location='/profiles/'+name+'/friends/active_chat';    
+     }
+   if(action== 'Request'){
+    window.location='/profiles/'+name+'/friends/active_chat';
+     }
+  		
+});
+
+
+$('#onlinesearch').change(function() {
+   name = $('#test_personnel').val();        		
+   var action = $(this).val();
+   if(action == 'Friends') {
+          window.location='/profiles/'+name+'/friends/online';
+     }	      
+    if(action== 'All/Public')
+     {	
+     	window.location='/profiles/'+name+'/everyone/online';
+     }
+   if(action== 'Search'){
+       window.location='/profiles/'+name+'/basic_search';
+     }
+  		
+});
+       
+$('#circlesearch').change(function() {
+   name = $('#test_personnel').val();        		
+   var action = $(this).val();
+   if(action == 'Friends') {
+          window.location='/profiles/'+name+'/friends/friends';
+     }	      
+    if(action== 'FriendRequests')
+     {	
+     	window.location='/profiles/'+name+'/friends';
+     }
+   if(action== 'Followers'){
+       window.location='/profiles/'+name+'/followers';
+     }
+
+    if(action== 'Following'){
+       window.location='/profiles/'+name+'/following';
+     }
+  		
+});
+      
+$('#searchsearch').change(function() {
+   name = $('#test_personnel').val();        		
+   var action = $(this).val();
+   if(action == 'Advanced Search') {
+          window.location='/profiles/'+name+'/all_search';
+     }	      
+    if(action== 'New Profiles')
+     {	
+     	window.location='/profiles/'+name+'/newprofile_search';
+     }
+   	
+});
+  
+$('#privacysearch').change(function() {
+   usersid = $('#test_personnel_id').val();        		
+   var action = $(this).val();
+   if(action == 'Privacy') {
+          window.location='/settings/privacy';
+     }	      
+    if(action== 'TwitterSet')
+     {	
+     	window.location='/settings/twitter';
+     }
+   if(action== 'FacebookSet'){
+       window.location='/settings/facebook';
+     }
+
+    if(action== 'ChangePass'){
+       window.location='/users/'+usersid+'/change_password';
+     }
+  		
+});
+});
+</script>
+<% content_for :stories do %>
+	<div id="menu">
+	  	<ul>
+		  <% unless me? %>
+		          <% if(@p && @profile) %>
+			  <% unless @p.friend_of?(@profile) %>
+			  <div id="messenger_profile">
+			    <li>
+			      <% if @p.following?(@profile) %>
+						<%= link_to 'Stop Following', stop_following_path(@p, @profile),  :style=>"color:#FFFFFF;" %>
+					<% else %>
+						<%= link_to 'Follow Updates', follow_path(@p, @profile), :style=>"color:#FFFFFF;" %>
+					<% end %>
+			    </li>
+					<% unless @p.friend_of?(@profile) or @p.want_to_be_friend_of?(@profile) or @p.wants_to_be_my_friend?(@profile) %>
+						<li>
+							<%= link_to 'Send Friend Request', friend_path(@p, @profile), :style=>"color:#FFFFFF;" %>
+						</li>
+						<li>
+							<%= link_to 'Send Message', message_sendto_path(@p, @profile), :style=>"color:#FFFFFF;" %>
+						</li>
+					<% end %>
+					<% if @p.wants_to_be_my_friend?(@profile) %>
+						<li>
+							<%= link_to 'Accept Friend Request', friend_path(@p, @profile) %>
+						</li>
+					<% end %>
+
+	  		<% else %> <!-- End Friend Of -->
+	                    </div>	
+               	<div id="messenger_profile">
+	    		<li>
+	    			<%= link_to 'Send Message', message_sendto_path(@p, @profile), :style=>"color:#FFFFFF;" %></span>
+	    		</li>
+	    		<li>
+	    			<%= link_to "Send Chat Invite", chat_invite_profile_path(@profile), :style=>"color:#FFFFFF;"  %>
+	    		</li>
+	    		<li>
+	    			<%= link_to "Chat", profile_chatter_path(@profile), :style=>"color:#FFFFFF;"  %>
+	    		</li>
+
+		        <li>
+		                <%= link_to "Gallery", profile_photos_path(@profile), :style=>"color:#FFFFFF;"  %>
+		        </li>
+			<!-- <li>
+		          <%= link_to "Request Business Card", profile_photos_path(@profile), :style=>"color:#FFFFFF;"  %>
+		        </li> -->
+			<% unless @profile.followers.empty? %>
+		        <li>
+		             <%= link_to "Followers (#{@profile.followers_count})", followers_profile_path(@profile), :style=>"color:#FFFFFF;"  %>
+		        </li>
+		        <% end %>	
+		        <% unless @profile.followed.empty? %>
+		        <li>
+		             <%= link_to "Following (#{@profile.followed_count})", following_profile_path(@profile), :style=>"color:#FFFFFF;"  %>
+		        </li>
+			<% end %>
+			<li>
+		             <%= link_to "My Group", profile_shared_contacts_url(@p), :style=>"color:#FFFFFF;"  %>
+		        </li>
+						
+			</div>
+	        	<% end %>
+
+			<% else %>
+			  <div id="messenger_profile">
+	    		<li>
+	    			<a href="#" style="color:#A2A2A2;"> Send Message </a>
+	    		</li>
+	    		<li>
+	    			<a href="#" style="color:#A2A2A2;">Send Chat Invite </a>
+	    		</li>
+	    		<li>
+	    			<a href="#" style="color:#A2A2A2;">Chat </a>
+	    		</li>
+		        <li>
+		          <a href="#" style="color:#A2A2A2;">Gallery </a>
+		        </li>
+			<!-- <li>
+		         <a href="#" style="color:#A2A2A2;">Request Business Card </a>
+		        </li> -->
+			<li>
+			 <a href="#" style="color:#A2A2A2;"> Send Friend Request </a>
+			</li>			
+			<% unless @profile.followers.empty? %>
+		        <li>
+		             <a href="#" style="color:#A2A2A2;">Followers <%= "(#{@profile.followers_count})" %></a>
+		        </li>
+		        <% end %>	
+		        <% unless @profile.followed.empty? %>
+		        <li>
+		             <a href="#" style="color:#A2A2A2;">Following <%= "(#{@profile.followed_count})"%> </a>
+		        </li>
+			<li>
+		             <a href="#" style="color:#A2A2A2;"> My Group </a>
+		        </li>
+			  </div>
+			<% end %>
+			
+			<% end %> 
+		  <% else %> <!-- My Own Profile-->
+	      
+		      <li>
+	 		<%= link_to "Invite a Friend", new_profile_invitation_url(@p) %>
+	              </li>
+	      	      <!-- <li>
+			<%= link_to "Sharing & Privacy", settings_path %>
+			</li> -->
+
+			 <li class="heading">
+			<div id="messenger"> SHARING & PRIVACY </div>	
+			 </li>
+			
+			<li>
+			<% form_for :testsharing, :url => 'new_message_url' do |f| %>
+			<%= f.hidden_field :personnel_id, :value => @u.id %>					 
+			  <select id ='privacysearch' name='privacysearch' >
+			    <option>Select</option>			    
+			    <option value="Privacy">Privacy </option>
+			    <option value="TwitterSet">Twitter Settings </option>
+			    <option value= "FacebookSet">Facebook Settings</option>
+			    <option value="ChangePass">Change Password</option>
+			  </select>
+			 
+			 <% end %>
+			 </li>
+
+
+			<!-- Messages -->
+			<li class="heading">
+			<div id="messenger"> MY MESSAGES(<% if @p.unread_messages.length > 0 %><span style='color:red;font-size:12px;'><%= @p.unread_messages.length %></span><%else%> <%= @p.unread_messages.length %><%end%>)</div>	
+			 </li>
+			
+			<li>
+			<% form_for :test, :url => 'new_message_url' do |f| %>
+			<%= f.hidden_field :personnel, :value => @u.login %>	
+					 
+			  <select id ='messagesearch' name='messagesearch' >
+			    <option> Select</option>			    
+			    <option value='New'>New (<%= @p.unread_messages.length %>) </option>
+			    <option >Inbox </option>
+			    <option>Create</option>
+			  </select>
+			 
+			 <% end %>
+			 </li>
+			
+					               
+			
+			 <!-- Chat -->
+			 <% active_chat = []
+			@active_chat = [];
+			begin
+			 # @online_friends.compact! unless @online_friends.nil?
+  
+    			 active_chat = @online_friends.slice(0..Profile::FRIENDS_DISPLAY_LIMIT-1).map { |f|
+			      if f[1] > 0
+			      @active_chat << 1
+			      end        
+			}
+			end
+			 %>
+			<li class="heading">
+			<div id="messenger">MY CHATS(<% if @active_chat.length > 0 %><span style='color:red;font-size:12px;'> <%= @active_chat.length%></span><%else%><%= @active_chat.length%><%end%>)</div>	
+			</li>
+			
+			  <li>
+			<% form_for :testchat, :url => 'new_message_url' do |f| %>			
+			
+			 <select id ='chatsearch' name='chatsearch' >
+			    <option> Select</option>			    
+			    <option value='FriendsOnline'>Friends Online (<%= @online_friends.length %>) </option>
+			    <option value='Active'>Active (<%= @active_chat.length %>)</option>
+			    <option>Request</option>
+			  </select>
+			 
+			 <% end %> 
+			 </li> 		
+			
+			
+			
+			<!-- Online -->
+			<li class="heading">
+			<div id="messenger">MY ONLINE </div>	 
+			</li>
+			
+			 <li>
+			<% form_for :testonline, :url => 'new_message_url' do |f| %>
+					
+			 <select id ='onlinesearch' name='onlinesearch' >
+			    <option> Select</option>			    
+			    <option value='Friends'>Friends (<%= @profile.online_friends.count %>) </option>
+			    <option value='All/Public'>All/Public (<%= Profile.online_users.count %>)</option>
+			    <option>Search</option>
+			  </select>		 
+			 <% end %> 
+			 </li>
+
+			
+			 
+			<li class="heading">
+			<div id="messenger"> MY CIRCLE(<% if @profile.friendships_requested.count > 0 %><span style='color:red;font-size:12px;'><%= @profile.friendships_requested.count %></span><%else%><%= @profile.friendships_requested.count %><%end%>) </div>
+			</li>
+			
+			<li>
+			<% form_for :testcircle, :url => 'new_message_url' do |f| %>
+			 <% unless @profile.followers.empty? %>
+			 <% begin %>
+			 <% @tfoler = @u.settings.getfollowers %>
+			 <% rescue %>
+			 <% end %>
+			 <% unless @profile.followed.empty? %>			  
+			  <% begin %>
+			  <% @tfoling = @u.settings.getfollowing %>
+			  <% rescue %>
+			 <% end %>
+			  <select id ='circlesearch' name='circlesearch' >
+			    <option> Select</option>
+			    <option value='Friends'>Friends(<%= @p.friendships.count %>)</option>
+			    <option value='FriendRequests'>Friend Requests(<%= @profile.friendships_requested.count%>) </option>
+			    <option value='Followers'>Followers (<%= @profile.followers_count %>)<% if(!@tfoler.nil? ) %> T(<%= @tfoler.count%>) <% end %></option>
+			    <option value='Following'>Following (<%= @profile.followed_count %>) <% if(!@tfoling.nil? )%> T(<%= @tfoling.count%>) <% end %></option>
+			  </select>
+			 
+			 <% else %>
+			     <select id ='circlesearch' name='circlesearch' >
+			    <option> Select</option>
+			    <option>Friends </option>
+			    <option value='FriendRequests'>Friend Requests (<%= @profile.friendships_requested.count%>)</option>
+			    <option value='Followers'>Followers (<%= @profile.followers_count %>) <% if(!@tfoler.nil? )%> T(<%= @tfoler.count%>)<% end %></option>
+			  </select>
+			 <% end %>
+			 <% else %>
+			  <select id ='circlesearch' name='circlesearch' >
+			    <option> Select</option>
+			    <option>Friends </option>
+			    <option value='FriendRequests'>Friend Requests(<%= @profile.friendships_requested.count%>) </option>
+			    
+			  </select>
+			 <% end %> 
+			 <% end %> 
+			 </li>
+
+			
+			<!-- Search -->
+			<li class="heading">
+			
+			<div id="messenger"> SEARCH </div>
+			</li>
+			
+			<li> 
+			<% form_for :testsearch, :url => 'new_message_url' do |f| %>
+						
+			 <select id ='searchsearch' name='searchsearch' >
+			    <option> Select</option>			    
+			    <option >Advanced Search </option>
+			    <option >New Profiles</option>
+			    
+			  </select>
+			 <% end %> 
+			 </li>
+			 
+			 </div>
+		     <!--  <% if me? %>
+				<li class="heading">
+				<div id="subscription_heading"><a href="#"> My SUBSCRIPTION </a></div>
+				</li>
+				<div id="sub_subscription" style="display:none">
+		        <li>
+		          <%= link_to "My Subscriptions", subscriptions_profile_path(@profile) %>
+		        </li>
+			</div>
+		      <% end %> -->
+		    <% end %>
+		  
+	  </ul>
+	</div>
+<!--	<% if(@p)%>
+	<% if @p.following?(@profile) %>
+		<%= render :partial => 'subscription' %>
+	<% end %>
+	<% end %> -->
+<% end %>

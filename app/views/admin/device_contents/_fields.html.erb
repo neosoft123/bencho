@@ -1,0 +1,24 @@
+
+<%= error_messages_for :device_content %>
+
+<% form_for [:admin, @device_content] do |f| %>
+  <fieldset>
+    <legend><%= create_new_or_update %> device content</legend>
+    <dl>
+      <dt><%= f.label :vendor %></dt>
+      <dd><%= f.text_field :vendor %></dd>
+      
+      <dt><%= f.label :model %></dt>
+      <dd><%= f.text_field :model %></dd>
+      
+      <dt><%= f.label :sync_instructions %></dt>
+      <dd><%= f.textile_editor :sync_instructions, :rows => 10, :cols => 100 %></dd>
+      
+      <dt><%= f.submit create_or_update %></dt>
+    </dl>
+  </fieldset>
+<% end -%>
+
+<script type="text/javascript">
+  TextileEditor.initialize('device_content_sync_instructions', 'extended');
+</script>

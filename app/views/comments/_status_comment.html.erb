@@ -1,0 +1,9 @@
+<div class="statuscomments clearfix" id="comment-<%= status_comment.id %>">
+	<div class="statuscommentavatar">
+	  <%= icon status_comment.profile, :small %>
+	</div>
+  <%= status_comment.comment %>
+  <div class="statuscommentsmetadata">
+    <%= time_ago_in_words(status_comment.created_at) %> ago by <%= link_to status_comment.profile.formatted_name, profile_path(status_comment.profile)%>.
+  </div>
+</div>

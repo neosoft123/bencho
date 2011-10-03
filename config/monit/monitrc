@@ -1,0 +1,6 @@
+set mailserver smtp.gmail.com port 587 username "support@agilisto.com" password "m@!l3r" using tlsv1
+               with timeout 15 seconds
+set alert admin@agilisto.com
+
+include /var/www/dev7am/current/config/monit/dev7am_monit.conf
+include /var/www/dev7am/current/config/monit/dev7am_monit_ldap.conf

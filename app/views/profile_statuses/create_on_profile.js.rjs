@@ -1,0 +1,2 @@
+page['profile_status_text'].value = ''
+page.insert_html :top, 'lifelist', :partial => "feed_items/#{@feed_item.partial}", :locals => {:feed_item => @feed_item}

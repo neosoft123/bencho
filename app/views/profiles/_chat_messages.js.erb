@@ -1,0 +1,5 @@
+<% @messages.each do |msg| %>
+	<% content_tag_for(:li, msg) do %>
+		<strong><%= msg.message %></strong> <span>from <%= link_to(msg.from.f, msg.from.profile, :style=>'display:inline') %>  <%= time_ago_in_words(msg.created_at) %> ago</span>
+	<% end %>
+<% end %>

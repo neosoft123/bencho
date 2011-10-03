@@ -1,0 +1,75 @@
+# == Schema Information
+# Schema version: 20081206110601
+#
+# Table name: users
+#
+#  id                        :integer(4)    not null, primary key
+#  login                     :string(255)   
+#  crypted_password          :string(40)    
+#  salt                      :string(40)    
+#  created_at                :datetime      
+#  updated_at                :datetime      
+#  remember_token            :string(255)   
+#  remember_token_expires_at :datetime      
+#  is_admin                  :boolean(1)    
+#  can_send_messages         :boolean(1)    default(TRUE)
+#  email_verification        :string(255)   
+#  email_verified            :boolean(1)    
+#  activation_code           :string(40)    
+#  activated_at              :datetime      
+#  state                     :string(255)   default("passive")
+#  deleted_at                :datetime      
+#  mobile_activation_code    :string(255)   
+#  mobile_activated_at       :datetime      
+#  last_sync_started         :datetime      
+#  last_sync_finished        :datetime      
+#
+
+
+user:
+    login: user
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+    state: active
+
+user2:
+    login: user2
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+    state: active
+
+user3:
+    login: user3
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+    state: active
+    
+inactive:
+    login: inactive
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: true
+    state: active
+
+cant_message:
+    login: cant_message
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: false
+    can_send_messages: false
+    state: active
+
+admin:
+    login: admin
+    crypted_password: 00742970dc9e6319f8019fd54864d3ea740f04b1 # test
+    salt:  7e3041ebc2fc05a40c60028e2c4901a81035d3cd
+    is_admin: true
+    can_send_messages: true
+    state: active

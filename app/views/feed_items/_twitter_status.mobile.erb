@@ -1,0 +1,13 @@
+<%
+feed_item ||= @feed_item
+status ||= feed_item.item
+%>
+ <% begin %>
+<% content_for_tweet_feed_item feed_item, status do %>
+  <!--div class="posted-by"><%= link_to "Posted on Twitter", twitter_settings_path %></div-->
+  <span class="status-text"><%= tweetify(linkify(shortlinkify(h(status.text)))) %></span>
+<% end %>
+ <% rescue => e %>
+    
+ <% end %>
+

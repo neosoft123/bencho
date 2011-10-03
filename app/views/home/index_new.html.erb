@@ -1,0 +1,111 @@
+<% content_for :head do -%>
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+  <% unless @show_login %>
+        $("#homeformlogin").hide();
+  <% else %>
+        $("#homesignupform").hide();
+  <% end %>
+      $(".homeformtoggle").click(function () {
+        $(".homeformfields").slideToggle();
+      });
+    });
+  </script>
+<% end -%>
+
+<div id="page" class="clearfix">
+  <% if @user.errors.length > 0 %>
+    <!-- div id="error-wrapper">
+                      <div id="error-top">
+                          <p class="loginerror">
+  <% @user.errors.each do |error|
+    error[0] = error[0].titleize %>
+    <%= error.join(' ') %><br/>
+  <% end %>
+                          </p>
+                      </div>
+                  </div-->
+                <% end %>
+  <div id="homeformwrapper">
+    <div id="homeform">
+      <h3 class="homesignup homeformtoggle">
+        Sign up for free
+      </h3>
+      <div id="homesignupform" class="homeformfields">
+        <% if @user.errors.length > 0 %>
+          <p class="loginerror">
+            <% @user.errors.each do |error|
+              error[0] = error[0].titleize %>
+              <%= error.join(' ') %><br/>
+              <% break %>
+            <% end %>
+          </p>
+        <% end %>
+        <% form_for :user, :url => register_path, :method => :post do |f| %>
+          <p>
+            <label>Username</label> <%= f.text_field :login %>
+          </p>
+          <p>
+            <label>Password</label> <%= f.password_field :password %>
+          </p>
+          <p>
+            <label>Mobile Number</label> <%= text_field_tag :phone_number, @user.mobile_number %>
+          </p>
+          <p class="checkbox clearfix">
+            <%= check_box_tag :user_terms_of_service, 1, params[:terms_of_service], :checked => 'checked', :class => 'checkbox', :name => 'user[terms_of_service]' %> <label for="user_terms_of_service">Accept <a target="blank" href="/tos">Terms of Service</a></label>
+          </p>
+          <p>
+            <%= f.submit 'Sign-up Now', :class=>"homesignupbutton" %>
+          </p><% end %>
+      </div>
+      <h3 class="homelogin homeformtoggle">
+        <a href="#">Already a member?</a>
+      </h3>
+      <% if @show_login %>
+        <p class="loginerror">
+          Could not log you in, please try again.
+        </p>
+      <% end %>
+      <div id="homeformlogin" class="homeformfields">
+        <% form_for @user, :url => session_path, :method => :post do |f| -%>
+          <p>
+            <%= f.label :login, 'Login:' %> <%= f.text_field :login %>
+          </p>
+          <p>
+            <%= f.label :password, 'Password:' %> <%= f.password_field :password %>
+          </p>
+          <p class="checkbox">
+            <input type="checkbox" name="remember_me" value="" id="remember_me">
+            <label>
+              Remember me
+            </label>
+          </p>
+          <p>
+            <%= submit_tag 'Login Now', :class=>"homeloginbutton" %>
+          </p>
+        </div><% end %>
+    </div>
+  </div>
+  <h1 id="homepitch">
+    7.am - Sync. Chat. Locate. Connect with your most valuable social network - the friends and family on your mobile phonebook
+  </h1>
+</div>
+<div id="homepoints">
+  <ul class="tabs">
+    <li class="sync">
+      <p>
+        7.am seamlessly backs up and synchronises your mobile phone contacts and lets you manage and edit them online
+      </p>
+    </li>
+    <li class="connect">
+      <p>
+        Share your photos, videos and location with your social network and view their updates on your mobile phone.
+      </p>
+    </li>
+    <li class="locate">
+      <p>
+        Find people in your neighbourhood that share your interests and passions and chat online with them for free.
+      </p>
+    </li>
+  </ul>
+</div>

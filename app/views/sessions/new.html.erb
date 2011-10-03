@@ -1,0 +1,70 @@
+<% form_tag session_path do -%>
+<div id="login_form">
+    <div class="clearfix">
+        <h1 class="plainheader"><%= "Sign in" %></h1>
+        <p class="logindescription">
+            <em>Sign in to your 7.am account. 
+                <br/>
+                <%= link_to "I do not have an account yet", signup_url %>
+            </em>
+        </p>
+    </div>
+    
+    <% form_for @user, :url => url_for(:controller => :sessions, :action => :create) do |f| -%>
+      <div class="loginfields clearfix">
+        <%= label_tag :login, 'Login:' %>
+        <%= f.text_field :login %>
+      </div>
+      
+      <div class="loginfields clearfix">
+          <%= label_tag :password, 'Password:' %>
+          <%= f.password_field :password %>
+      </div>
+      
+      <div class="buttonfields">
+          <%= f.submit 'Log-in Now' %>
+      </div>
+    <% end %>
+    
+</div>
+<% end %>
+<div class="forgottext">
+    <span><span id="forgot_text">Help I forgot</span> my <a href="javascript:void(0);" id="forgot_password_clicker" style="display: inline;">password</a></span>
+</div>
+<% form_tag forgot_password_path do -%>
+<div id="forgot_form" class="hidden">
+    <div class="clearfix">
+        <h1 class="forgotheader"><%= "Retrieve your Password" %></h1>
+        <p class="forgotdescription">
+            <em>Enter your email address and your password will be sent to you.
+            </em>
+        </p>
+    </div>
+    <div id="forgot_password">
+    <div class="loginfields clearfix">
+        <%= label_tag :email, "Email Address:" %>
+        <%= text_field_tag :email %>
+		</div>
+    </div>
+    <div class="buttonfields">
+        <%= submit_tag 'Retrieve Password' %>
+    </div>
+</div>
+<% end %>
+<script type="text/javascript" charset="utf-8">
+    //<![CDATA[
+    jQuery(function(){
+        tog("#forgot_password_clicker", "#login_form");
+        tog("#forgot_password_clicker", "#forgot_form", forgot_text);
+        
+    });
+    function forgot_text(){
+        if (jQuery("#forgot_text").html() == "I remember") 
+            jQuery("#forgot_text").html("Help, I forgot");
+        else 
+            jQuery("#forgot_text").html("I remember");
+        
+    }
+    
+    //]]>
+</script>

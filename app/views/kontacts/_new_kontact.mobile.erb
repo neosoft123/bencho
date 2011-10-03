@@ -1,0 +1,15 @@
+<% 
+	kontact ||= @kontact
+%>
+<% content_for :toolbar do %>
+<%= link_to "Back", welcome_url, :html => {:class => "nav", :id => "backButton"} %>
+<h1>Add Kontact</h1>
+<% end %>
+<% form_for([@parent, kontact], :html => {:class => 'actionform clearfix'}) do |f| %>
+		<% fields_for "kontact[kontact_information]", kontact.kontact_information do |ki| %>
+	<ul class="form">
+        <li><%= ki.text_field :display_name, :value => 'Name', :onclick => "clickclear(this, 'Name')", :onblur => "clickrecall(this,'Name')" %></li>
+   		<li><%= ki.text_field :primary_phone_number, :value => 'Phone Number', :onclick => "clickclear(this, 'Phone Number')", :onblur => "clickrecall(this,'Phone Number')" %></li>
+	</ul>
+	<p><%= ki.submit 'Sign-up Now' %></p>
+	<% end %>

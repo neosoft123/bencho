@@ -1,0 +1,174 @@
+<p>Edit your kontact, add new email addresses and phone numbers. Double click directly on a field to edit it.
+</p>
+<div id="editor" class="clearfix">
+    <div class="avatarfield">
+    <h4 class="editoravatartitle">Current Avatar</h4>
+  	<%= kontact_icon(@kontact, "medium") %>
+    <% form_tag(upload_icon_kontact_path(:id => @profile, :kontact_id => @kontact) , :multipart => true) do -%>
+      <div class="avatarlink">
+        <%= file_column_field 'kontact_information', 'icon' , :size => "1x10"%>
+      </div>
+      <div class="avatarsubmit">
+        <%= submit_tag "Upload" %>
+      </div>
+    <% end -%>
+	<p class="avatardescription">Upload an icon for your account. It should be square, no larger than 600x600 pixels, and in JPG, Gif or PNG format</p>
+    </div>
+    <div class="editorform clearfix">
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Basic Information
+                </legend>
+                <div class="inlineeditsmall">
+                    <label>
+                        First Name:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :given_name %>
+                </div>
+                <div class="inlineeditsmall">
+                    <label>
+                        Last Name:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :family_name %>
+                </div>
+                <div class="inlineedit">
+                    <label>
+                        Display Name: <span>(the name that you want other people to see)</span>
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :display_name %>
+                </div>
+            </fieldset>
+        </div>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Additional Information
+                </legend>
+                <div class="inlineeditmini">
+                    <label>
+                        Birthday:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :birthday , {} , { :datepicker => 'datepicker'}%>
+                </div>
+                <div class="inlineeditmini">
+                    <label>
+                        Gender:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :gender , {} , {:field_type => 'select', :select_options =>  [ 'Male' , 'Female' ] } %>
+                </div>
+                <div class="inlineeditmini2">
+                    <label>
+                        Location:
+                    </label>
+                    <div id="inline_location">
+                    	<%= render :partial => "inplace_location" %>
+					</div>
+                </div>
+                <div class="inlineeditmini3">
+                    <label>
+                        Biography:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :about_me , {} , {:field_type => 'textarea', :textarea_cols => 25, :textarea_rows => 10} %>
+                </div>
+                <div class="inlineeditmini3">
+                    <label>
+                        Notes:
+                    </label>
+                    <%= in_place_editor_field :kontact_information, :note , {} , {:field_type => 'textarea', :textarea_cols => 25, :textarea_rows => 10} %>
+                </div>
+                <div class="privacyoptions">
+                    <!--<div id="remote-message-additional" class="remote-message-additional">
+                    <div>
+                    <label>
+                    Privacy Setting:
+                    </label>
+                    </div>
+                    </div>-->
+                </div>
+            </fieldset>
+        </div>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Contact Information
+                </legend>
+			    <div id="mobile_email_spinner" style="display:none;">
+					<%= image_tag 'spinner.gif' %>
+    			</div>
+				<div class="microheading">
+                    Email Addresses
+                </div>
+				<div class="clearfix">
+                <div class="inlineeditmini2">
+                	<label>
+                        Primary:
+                    </label>
+                    <%= in_place_editor_field :email, :value %>
+					<div id="emails">
+						<%= render :partial => "inplace_email" , :collection => @emails %>
+					</div>
+                </div>
+				</div>
+                <div id="newemail" style="display:none;">
+                    <% form_remote_tag :url => add_email_profile_path(:id => @profile, :kontact_id => @kontact),
+					   :loading => "$('#mobile_email_spinner').show();" ,
+					   :success => "$('#mobile_email_spinner').hide();"  do %>
+   						<select name="email_type" class="inlineeditselect">
+	                        <option value="Work">work</option>
+	                        <option value="Home">home</option>
+	                        <option value="Other">other</option>
+	                    </select>
+	                    <input type="text" class="inplace_field" name="email"/>
+						<input class="inplace_save" type="submit" value="Save"/>
+					    <input type="submit" value="Cancel" class="inplace_cancel"  onclick="$('#newemail').toggle();"/>	
+					<% end -%>
+                </div>
+                <div class="clearfix">
+                    <a class="addlink" href="#" onclick="$('#newemail').toggle(); return false;">add new email address</a>
+                </div>
+                <div class="microheading">
+                    Phone Numbers
+                </div>
+				<div class="clearfix">
+                <div class="inlineeditmini2">
+                    <label>
+                        Primary:
+                    </label>
+                    <%= in_place_editor_field :phone_number, :value %>
+					<div id="phone_numbers">
+						<%= render :partial => "inplace_phone_number" , :collection => @phone_numbers %>
+					</div>
+                </div>
+				</div>
+				 <div id="newphone" style="display:none;">
+                    <% form_remote_tag :url => add_number_profile_path(:id => @profile, :kontact_id => @kontact),
+									   :loading => "$('#mobile_email_spinner').show();" ,
+									   :success => "$('#mobile_email_spinner').hide();"  do %>
+						<select name="number_type" class="inlineeditselect">
+	                        <option value="Mobile">mobile</option>
+	                        <option value="Fax">fax</option>
+	                        <option value="Pager">pager</option>
+	                    </select>
+					  <input type="text" class="inplace_field" name="phone_number"/>
+					  <input class="inplace_save" type="submit" value="Save"/>
+					  <input type="submit" value="Cancel" class="inplace_cancel"  onclick="$('#newphone').toggle();"/>	
+					<% end -%>
+                    
+                </div>
+                <div class="clearfix">
+                    <a class="addlink" href="#" onclick="$('#newphone').toggle(); return false;">add new phone number</a>
+                </div>
+                <div class="privacyoptions">
+                    <!--<div id="remote-message-contact" class="remote-message-contact">
+                    <div>
+                    <label>
+                    Privacy Setting:
+                    </label>
+                    </div>
+                    </div>-->
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<% @page_title = 'Facebook Settings' %>
+<% draw_crumbs Crumb.new('Settings', settings_path) %>
+
+<div>
+	<p>
+		7.am integrates with <%= link_to 'Facebook', 'm.facebook.com' %>, allowing you to share your status updates 
+		and your photos from 7.am with your Facebook friends. If you decide to enable this option, we may occasionally
+		have to ask you to sign into your Facebook account, and will redirect you to their site - in most cases Facebook
+		will be nice enough to send you right back here.
+	</p>
+<div>
+
+<div>
+	<% if @u.settings.has_facebook_login? %>
+    <ul><li><%= link_to "Deactivate Facebook settings", facebook_off_settings_path %></li></ul>
+  <% else %>   
+	<ul><li>
+		<%= link_to "Continue to Facebook settings", facebook_autho_path %>
+	</li></ul>
+	<% end %>
+	<br />
+</div>

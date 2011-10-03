@@ -1,0 +1,14 @@
+<% @page_title = @blog.title %>
+<% draw_crumbs Crumb.new("#{get_name(@profile, true, true, true)} Diary", profile_blogs_path(@profile))%>
+
+<% content_for :actions do %>
+  <ul><li><%= link_to 'Add Comment', new_profile_blog_comment_path(@blog.profile, @blog) %></li></ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<li><%= linkify(shortlinkify(sanitize(@blog.body))) %></li>	
+	</ul>
+	<%= render :partial => 'comments/comment_list', :locals => { :parent => @blog } %>
+<% end %>
+

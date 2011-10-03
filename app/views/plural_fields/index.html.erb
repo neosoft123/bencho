@@ -1,0 +1,18 @@
+<h1>Listing plural_fields</h1>
+
+<table>
+  <tr>
+  </tr>
+
+<% for plural_fields in @plural_fields %>
+  <tr>
+    <td><%= link_to 'Show', plural_fields %></td>
+    <td><%= link_to 'Edit', edit_plural_fields_path(plural_fields) %></td>
+    <td><%= link_to 'Destroy', plural_fields, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New plural_fields', new_plural_fields_path %>

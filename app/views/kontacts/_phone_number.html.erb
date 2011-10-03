@@ -1,0 +1,18 @@
+<div class="phone_number">
+	<% 
+		phone_number = PhoneNumber.new if phone_number.nil?
+		new_or_existing = phone_number.new_record? ? 'new' : 'existing'
+		prefix = "kontact[kontact_information][#{new_or_existing}_phone_number_attributes][]"
+	%>
+
+	<% fields_for prefix, phone_number, :builder => ApplicationHelper::DefinitionListFormBuilder do |pn| %>
+		<%= pn.select :field_type, PhoneNumber::TYPE %>
+		<dl class="contactfield">
+		<%= pn.text_field :value %>
+		</dl>
+	<% end -%>
+
+	<%= 	
+		observe_field(dom_id(phone_number, prefix), :url => "add_phone_number_link('Add Phone Number');")
+	 %>
+</div>

@@ -1,0 +1,14 @@
+<% content_for :toolbar do %>
+  <h1><%= @chat.topic %></h1>
+	<%= link_to "Back", profile_chat_url(@p, @chat), :class => "nav", :id => "backButton" %>
+<% end %>
+<% content_for :head do %>
+	<%#= javascript_include_tag "prototype" %>
+	<%#= javascript_include_tag formatted_chatjs_profile_chat_url(@profile, @chat, :js) %>
+	<%= stylesheet_link_tag 'chat' %>
+<% end %>
+
+<%#= wait_for_messages(:url => check_for_messages_profile_chat_url(@profile, @chat), :polling => true, :frequency => 5)%>
+<%#= call_for_presence_updates "presenceChange" %>
+
+<%= render_chatbox_for(@chat_id, @chat, @roster) %>

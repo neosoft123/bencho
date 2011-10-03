@@ -1,0 +1,284 @@
+<?xml version="1.0" charset="iso-8859-1"?>
+
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN"
+         "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+        <meta http-equiv="Pragma" content="no-cache" />
+        <!-- Pragma content set to no-cache tells the browser not to cache the page
+        This may or may not work in IE. Mark -->
+
+        <meta http-equiv="expires" content="0" />
+  <title>7.am<%= " - #{@page_title}" unless @page_title.blank? %></title>
+
+   <script javascript ="/javascripts/jquery-1.4.2.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/jquery_002.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/ajax.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/ui.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/superfish.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/tab.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/jqModal.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/farbtastic.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/ckeditor.js" type ="text/javascript"></script>
+   <script javascript ="/javascripts/sample.js" type ="text/javascript"></script>
+
+   <link href="/stylesheets/farbtastic.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/farbtastic.css" media="handheld" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/jqmodal.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/jqmodal.css" media="handheld" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/stylesheet.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/stylesheet.css" media="handheld" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/ui.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/ui.css" media="handheld" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/validationEngine.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/validationEngine.css" media="handheld" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/sample.css" media="screen" rel="stylesheet" type="text/css" />
+   <link href="/stylesheets/sample.css" media="handheld" rel="stylesheet" type="text/css" />
+
+
+ <style>
+ ul.makelist {list-style:none; padding:0; margin:0}
+
+ul.prArticles li.prList {border-bottom:2px solid #ccc; padding-bottom:10px; margin-bottom:10px; width:100%; float:left}
+ul.prArticles li.prList .col3 {width:270px; float:left}
+ul.prArticles li.prList .col4 {width:180px; float:left }
+ul.prArticles li.prList p{padding:0 0 0 0; margin:0 0 0 0}
+ul.prArticles li.prList ul {padding-left:70px; list-style:disc; margin:0 0 0 0}
+ul.prArticles li.prList .col5 ul {padding:0 0 0 15px; color:#a66523; list-style:disc}
+ul.prArticles li.prList .col5 .col5Hrd {color:#FFFFFF; background:url(../images/img7.gif) 0 0 no-repeat; height:30px; line-height:27px; padding-left:30px; margin-top:10px}
+.col2 {width:520px; overflow:auto; position:relative; right:0; background-color:#FFFFFF; margin-left:10px; height:698px; text-align:left; color:#666; padding:15px 20px 0 20px}
+
+.fl {
+    float: left;
+}
+.prHeader {color:#000000; font-size:17px; font-weight:bold; font-family:Helvetica, "Lucida Sans Unicode", Arial}
+.text14 {font-size:14px}
+.text15 {font-size:15px}
+.text22 {font-size:22px}
+.upperCase, .upperCase a {text-transform:uppercase}
+.clr {clear:both; padding:0; margin:0; overflow:hidden; height:0}
+
+</style>
+
+
+<style type="text/css">
+        .jqmOverlay { background-color: #FFF; }
+            .jqmWindow {
+                background: #888888 url(modal_bckgrn.gif) left top repeat-x;
+                color: #000;
+                border: 1px solid #888888;
+                padding: 0 0px 50px;
+            }
+
+            button.jqmClose {
+                background: none;
+                border: 0px solid #EAEAEB;
+                color: #000;
+                clear: right;
+                float: right;
+                padding: 0;
+                margin-top:5px;
+                margin-left:5px;
+                cursor: pointer;
+                font-size: 8px;
+
+                letter-spacing: 1px;
+            }
+
+            button.jqmClose:hover, button.jqmClose:active {
+                color: #FFF;
+				border: 0px solid #FFF;
+            }
+
+            #jqmTitle {
+                background: transparent;
+                color: black;
+                text-transform: capitalize;
+                height: 50px;
+                padding: 0px 5px 0 10px;
+
+            }
+
+            #jqmContent {
+                width: 100%;
+                height: 90%;
+                display: block;
+                clear: both;
+                margin: 0;
+                margin-top: 0px;
+                background: #e8e8e8;
+                border: 1px solid #888888;
+            }
+        </style>
+
+
+<!-- addedd -->
+<style>
+body{
+	background:url(/images/bgadmin.jpg) top center no-repeat #000000;
+	font-family:'Segoe UI',Tahoma,Verdana,Arial,sans-serif;
+	text-decoration:none;
+	font-size:12px;
+}
+.logobg{
+	background-image:url(/images/img1.gif);
+	background-repeat:repeat-x;
+	background-position:top left;
+}
+.heading1{
+	color:#FFF;
+	font-weight:bold;
+	font-size:18px;
+}
+
+.links {
+
+color:#FFFFFF}
+.links a{
+	color:#fff;
+	text-decoration:underline;
+}
+
+.links a:hover{
+	text-decoration:none;
+}
+input{border:1px solid #c3c3c3; background-color:#efefef; padding:3px; width:auto}
+textarea{border:1px solid #c3c3c3; background-color:#efefef; padding:6px; width:auto}
+select{border:1px solid #c3c3c3; background-color:#efefef; padding:3px; width:auto}
+
+
+.tableMain tr td{
+	border-bottom:1px dotted #ccc;
+	padding:7px 10px 7px 10px;
+	font-size:12px;
+}
+
+.tableMain tr:hover{
+	/*background-color:#efefef;*/
+	background-color:#EFF3FF;
+}
+
+.tableMain table tr td {border:none; padding:0 0 0 0 }
+.tableMain table tr:hover {background-color:transparent}
+
+.tableMain tr.tableTitle{
+	background-color:#ccc;
+	font-size:14px;
+}
+
+</style>
+</head>
+<body onpageshow='event.persisted &amp;&amp; (function(){var allInstances = CKEDITOR.instances, editor, doc;for ( var i in allInstances ){	editor = allInstances[ i ];	doc = editor.document;	if ( doc )	{		doc.$.designMode = "off";		doc.$.designMode = "on";	}}})();;event.persisted &amp;&amp; (function(){var allInstances = CKEDITOR.instances, editor, doc;for ( var i in allInstances ){	editor = allInstances[ i ];	doc = editor.document;	if ( doc )	{		doc.$.designMode = "off";		doc.$.designMode = "on";	}}})();'>
+
+  <div class="logobg" valign="middle" height="61">
+  <div class="heading1">
+
+<table class="headertxt" width="95%" align="center" border="0" cellpadding="0" cellspacing="0">
+      <tbody><tr>
+        <td class="heading" width="300"><a href="http://bijness.in/admin/home.html"><!--<img width="260" border="0"  height="37" src="images/logo1.png"></a>--></a></td>
+        <td style="background: url(&quot;images/controlPannel_img.gif&quot;) no-repeat scroll center top transparent;" align="center" height="61">&nbsp; </td>
+			<% if @user %>
+				
+		        <td width="300" align="right"><font color="green">You loged in as admin<% if @u %><%= link_to image_tag("logout.png", :title => "Logout", :width => 22, :border => 0, :height => 22), logout_path %><% end %></font></td>       </tr>
+    		
+			<% end %>
+</tbody></table>
+</div>
+</div>
+
+<% if @u %>
+<div id="menu">
+
+  <ul class="nav left sf-js-enabled" style="display: block;">
+
+
+ <li class="selected" id="home"><a href="/admins" class="top">Dashboard</a>
+
+  </li>
+
+	<li style="display:none;" class="" id="advert"><a href="/campaigns" class="top">Campaigns</a><ul style="display:none;">
+				<li><a href="/campaigns/new">Create New Add</a></li>
+				<li><a href="/campaigns">Campaign Details</a></li>
+				<li><%= link_to 'Send Bulk message', bulk_message_path %></li>
+                                
+			</ul>
+  </li>
+<li class="" id="advert"><%= link_to 'Send Bulk message', bulk_message_path, :class=>'top' %></li>
+<li class="" id="advert"><%= link_to 'Users', showuser_path, :class=>'top' %></li>
+
+  </ul>
+
+</div>	
+<% end %>
+
+<div id="content">
+
+<div class="box">
+  <div class="left"></div>
+  <div class="right"></div>
+  <div class="heading">
+    <h1 style="background-image: url(http://bijness.in//admin/images/user.png);"><% if current_user %>Dashboard<% else %> Register<% end %></h1>
+    <div class="buttons"> </div>
+  </div>
+
+  <div class="content">
+       <%= yield %>
+	<% if @user %>
+		<table width="90%" align="center" border="0" cellpadding="0" cellspacing="0">
+             <tbody><tr>
+                <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                  <tbody><tr>
+					  <td class="iconImg"><a href="/admins/user_list"><img src="images/members_icon.png" width="128" border="0" height="128"></a><br>
+					  <span align="center"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/admins/user_list">Users</a> </span></td>
+					  
+                   </tr>
+                  </tbody></table></td> 
+                   <td><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tbody><tr>
+                      <td class="iconImg"><a href=""><img src="images/change_passIcon.png" width="128" border="0" height="128"></a> <br>
+					  <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<a href="">Change Password</a> </span></td>
+                     
+                    </tr>
+                  </tbody></table> </td> 
+
+                  
+
+                   </tr>
+                
+              
+                  </tbody></table> 
+
+				
+                  
+
+                  
+                
+                
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                 
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                
+              
+            
+            
+              &nbsp;
+            
+            
+              &nbsp;
+                
+            
+          <% end %>  
+        
+</div>
+</div>
+</div><div id="links" height="">
+ &nbsp;&nbsp;&nbsp;© 2010-2011, <a href="http://www.neosofttech.com/">Neosoft Tech</a> All rights reserved.</div>
+</body></html>
+

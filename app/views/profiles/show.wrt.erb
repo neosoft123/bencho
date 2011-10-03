@@ -1,0 +1,22 @@
+<% update_element :header do %>
+	<h1>Profile</h1>
+		<%= link_to_remote "Back",
+		    :url => welcome_path, :html => {:class => "nav", :id => "backButton"}
+		%>	
+<% end %>
+
+<% update_element :message_holder do %>
+	<%= render :partial => 'shared/flashes' %>
+<% end %>
+
+<% update_element :content do %>
+	<%= render :partial => 'bio' %>
+
+<ul>
+		<li class="arrow">
+			<%= link_to_remote "Check In Now", :url => set_location_profile_path %>
+		</li>
+	</ul>
+<% end %>
+
+<%= round_corners %>

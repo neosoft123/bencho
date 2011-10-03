@@ -1,0 +1,10 @@
+<% @page_title = 'Search' %>
+<%= draw_crumbs %>
+
+<% content_for :searchbar do %>
+	<% form_tag basic_search_do_profile_path(@p) do %>
+		<%= text_field_tag 'q', nil, :class=>"search-box" -%><%= submit_tag 'Search', :disable_with => 'Searching..' %>
+	<% end %>
+<% end %>
+
+

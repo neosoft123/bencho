@@ -1,0 +1,20 @@
+function sendTo(name, network){
+	document.getElementById('to').value = name;
+	document.getElementById('transport').value = network;
+	document.chat.submit();
+};
+
+function presenceChange(date, from, message, network) {
+	if(from != '<%= @u.login %>') {
+		alert(from +" is now " + message);
+	}
+	var rosterItem = document.getElementById('roster_' + from);
+	if(rosterItem) {
+		rosterItem.className = 'arrow friend ' + message;
+	}     
+};
+
+function hideLoading() {
+	var loading = document.getElementById('roster_loading');
+	loading.style.display = 'none';
+}

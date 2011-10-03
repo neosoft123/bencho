@@ -1,0 +1,43 @@
+<% @page_title = 'Facebook Settings' %>
+<% draw_crumbs Crumb.new('Settings', settings_path) %>
+
+ <% if @fbuser %>
+<% content_for :topbox do %>
+	<%= image_tag @fbuser.pic_square, :align => 'left', :style=>'margin: 0px 5px 0px 0px' %>
+	<b><%= @fbuser.name %></b><br />
+	<%= @fbuser.status.message %>
+<% end %>
+<% end %>
+<% content_for :stories do %>
+	<% form_tag facebook_do_settings_path do %>
+	<ul>
+		<li><%= check_box_tag :send_status, 'true', @u.settings.send_status_to_facebook %> Allow sending of status to Facebook</li>
+		<li><%= check_box_tag :upload_photos, 'true', @u.settings.upload_photos_to_facebook %> Allow upload of photos to Facebook</li>
+		<li><%= submit_tag 'Save', :disable_with => 'Saving..' %></li>
+	</ul>
+	<% end %>
+	
+	<% if @fbuser %>
+  	<ul>
+  	  <% if @u.has_facebook_login? %>
+  	    <li><b>You have permanently authorised 7.am to interact with Facebook on your behalf! You will no longer have
+  	      to be redirected to Facebook to login and give us permission.</b>
+  	      <%#= "#{@u.settings.facebook_uid}/#{@u.settings.facebook_infinite_session}" %></li>
+  	  <% end %>
+  	  <li>
+  	    To permanently authorise 7.am to interact with Facebook on your behalf you need to generate a special authorization key. This will
+  	    mean that you will not have to be sent to Facebook to login from time to time and give us permission. To do so, 
+  	    <%= link_to "click here", "http://m.facebook.com/code_gen.php?v=1.0&api_key=#{@api_key}" %> and follow the instructions on Facebook 
+  	    to generate the code. Facebook will not return you to 7.am, so please note the code, then return to 7.am and enter it in the form below.
+  	  </li>
+  	  <li>
+  	    <% form_tag facebook_key_path do %>
+  	      <%= label_tag "Key" %>
+  	      <%= text_field_tag :key %>
+  	      <%= submit_tag "Save", :disable_with => "Saving.." %>
+  	    <% end %>
+	    </li>
+    </ul>
+  <% end %>
+	
+<% end %>

@@ -1,0 +1,12 @@
+<%
+feed_item ||= @feed_item
+m = Message.find(
+  feed_item.item_id, 
+	:include => [:sender,:receiver]
+)
+%>
+
+<% content_for_feed_item(feed_item, m.sender) do %>
+	Sent <%= "the group " if m.receiver.is_a?(Group) %><%= name_link(m.receiver, true, false) %> a message entitled <%= link_to m.subject, profile_message_path(m.receiver, m) %>
+<% end %>
+

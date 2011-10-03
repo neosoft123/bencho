@@ -1,0 +1,9 @@
+<% draw_crumbs %>
+<%content_for :stories do %>
+<% if(@u.login_count  <= 1 ) %>
+ <div id="messenger" >  Please set your Facebook  and Twitter Credentials to get Streams, <%= link_to 'click here', settings_path%></div> 
+<% end %>
+<% end %>
+
+<%= render :partial => 'profiles/stream' %>
+ 

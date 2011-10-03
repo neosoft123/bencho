@@ -1,0 +1,20 @@
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "New Global Feed Item", new_global_feed_item_path %>
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+  <% unless @feed_items.empty? %>
+    <% @feed_items.each do |f| %>
+      <% content_tag_for(:li, f) do %>
+        <%= f.message %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>
+

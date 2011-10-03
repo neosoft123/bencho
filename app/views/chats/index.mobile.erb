@@ -1,0 +1,14 @@
+<% content_for :toolbar do %>
+  <h1>Chat</h1>
+	<%= link_to "Back", welcome_path, :class => "nav", :id => "backButton" %>
+<% end %>
+
+<%= render :partial => 'new_chat',
+	  :locals => {:profile => @profile} if is_my_profile?(@profile) %>
+
+<h2>Recent Conversations</h2>
+<ul id="recent_chats">
+	<%= render :partial => 'chat', :collection => @chats %>
+</ul>
+<div class="clear"></div>
+<%= will_paginate @chats %>

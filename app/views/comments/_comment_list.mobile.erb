@@ -1,0 +1,12 @@
+<% if parent.comments_count > 0 %>
+	<ul>
+		<li class="heading">Comments</li>
+	  <% parent.comments.each do |comment|
+	    content_tag_for(:li, comment) do %>
+	      <%= content_tag(:div, link_to(avatar_icon_tag(comment.profile), comment.profile), :class => 'feed-avatar') %>
+	      <%= posted_by comment.profile, comment.created_at %>
+	      <%= linkify(shortlinkify(sanitize(comment.comment))) -%>
+	    <% end
+	  end %>
+	</ul>
+<% end %>

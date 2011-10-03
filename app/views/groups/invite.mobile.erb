@@ -1,0 +1,23 @@
+<% @page_title = "Invite friends to '#{@group.name}'" %>
+<%= draw_crumbs Crumb.new('Groups', groups_path), Crumb.new(@group.name, group_path(@group)) %>
+
+<% content_for :topbox do %>
+	<div class="bio-info"><strong>Owner:</strong> <%= link_to @group.owner.f, @group.owner %></div>
+	<div class="bio-info"><strong>Members:</strong> <%= @group.members.map{|m|link_to(m.f,m)}.to_sentence %></div>
+	<div class="bio-info"><strong>Description:</strong> <%= @group.description %></div>
+<% end %>
+
+<% content_for :stories do %>
+	<% form_tag send_invites_group_path(@group) do %>
+		<ul>
+			<li class="heading">Invite Friends</li>
+			<li><%= submit_tag 'Invite', :disable_with => 'Inviting..' %></li>
+			<% @p.friends.each do |friend| %>
+				<% unless @group.is_member? friend %>
+					<li><%= check_box_tag 'friends[]', friend.id %> <%= friend.f %>
+				<% end %>
+			<% end %>
+			<li><%= submit_tag 'Invite', :disable_with => 'Inviting..' %></li>
+		</ul>
+	<% end %>
+<% end %>

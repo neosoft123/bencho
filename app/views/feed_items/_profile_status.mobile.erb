@@ -1,0 +1,48 @@
+<%
+feed_item ||= @feed_item
+status ||= feed_item.item
+var  ||= "#{status.profile.icon}"
+ab ||= var.split("/")
+k ||= ab.count-1
+cd ||= Array.new
+for i in 8..k do
+cd[i] = ab[i]
+end
+f ||= cd.delete_if {|x| x == nil}
+url ||= f.join("/")
+%>
+
+<% if @p %>
+<% content_for_feed_item feed_item, status.profile do %>
+  <% if status.twitter_status_id && 1 == 2 %>
+    <div class="posted-by">
+    <% if status.profile.icon != nil %> <a href="session/new"><img style="margin:10px;width:32px;height:32px" src="<%= url %>" /> </a>
+<% else %>
+<%= link_to image_tag("avatar_default_thumb.png", :style => 'margin:10px;width:32px;height:32px;' ), new_session_path%> <% end %>
+      <%#= link_to "Posted on Twitter", "http://m.twitter.com/#{status.profile.user.settings.twitter_login}/statuses/#{status.twitter_status_id}" %>
+      <%= link_to "Posted on Twitter", twitter_settings_path %>
+    </div>
+  <% end %>
+  <% if status.facebook_status_id && 1 == 2 %>
+    <div class="posted-by"><%= link_to "Posted on Facebook", facebook_settings_path %></div>
+  <% end %> 
+  <span class="status-text"><%= tweetify(linkify(shortlinkify(h(status.text)))) %></span> 
+  <%= feed_comments status %> 
+  <%= feed_location feed_item %>
+  <% end %>
+<% else %><!--<%= debug url  %> -->
+      
+         <li class="public_feed_item" id="public_feed_item_260392">
+<div class="posted-by"><% if status.profile.icon != nil %> <a href="session/new"><img style="margin:10px;width:32px;height:32px" src="<%= url %>" /> </a>
+<% else %>
+<%= link_to image_tag("avatar_default_thumb.png", :style => 'margin:10px;width:32px;height:32px;' ), new_session_path%> <% end %> <a href="/session/new">
+                  <% if status.profile.display_name == nil%> <%= status.profile.user.login %>
+                   <% else %> <%= status.profile.display_name%> <% end %>
+          </a> <%= distance_of_time_in_words(Time.now, feed_item.item.created_at)%> ago</div>
+  <span class="status-text"><%= feed_item.item.text%></span>
+  
+   <div class="feed-item-detail"><a href="/session/new"><%= feed_item.item.comments_count%> Comments</a> - <a href="session/new">Add comment</a></div>
+
+     
+</li> 
+<% end %>

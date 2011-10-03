@@ -1,0 +1,27 @@
+<%
+  kontact ||= @kontact
+  @kontact_information = @kontact.kontact_information
+%>
+
+<div id="editor">
+
+  <!-- Setup jQuery UI/DatePicker -->
+  <script type="text/javascript" charset="utf-8">
+    $("#kontact_kontact_information_birthday").datepicker();
+    $("#kontact_kontact_information_anniversary").datepicker();
+  </script>
+
+  <div class="avatarfield">
+    <% form_tag(upload_icon_path(:id => @parent, :kontact_id => @kontact) , :multipart => true) do -%>
+
+      <%= avatar(kontact) %>
+      <div class="avatarlink">
+        <%= file_column_field 'kontact_information', 'icon' , :size => "1x10"%>
+      </div>
+
+      <div class="actionsubmit">
+        <%= submit_tag "Upload" %>
+      </div>
+    <% end -%>
+  </div>
+</div>

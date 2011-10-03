@@ -1,0 +1,7 @@
+<%
+  members = @members || @group.members.all(:limit=>Group::DISPLAY_LIMIT)
+  member_count = @member_count || @group.members.count
+  members = members.map{|m|link_to(m.f,m)}
+  members.<<(link_to("#{member_count - Group::DISPLAY_LIMIT} more..", members_group_path(@group))) if member_count > Group::DISPLAY_LIMIT
+%>
+<div class="bio-info"><strong>Members:</strong> <%= members.to_sentence %></div>

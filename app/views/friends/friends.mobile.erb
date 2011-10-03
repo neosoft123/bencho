@@ -1,0 +1,13 @@
+<% @page_title = @title %>
+
+<%= draw_crumbs Crumb.new('Friends & Followers', profile_friends_url(@p)) %>
+
+<% content_for :stories do %>
+  <ul>
+    <%= render :partial => 'friend', :collection => @friends %>
+  </ul>
+<% end %>
+ 
+<% content_for :footer do %>
+	<%= will_paginate @friends, :page_links => false, :prev_label => 'Prev', :next_label => 'Next' %>
+<% end %>

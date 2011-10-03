@@ -1,0 +1,10 @@
+<% @page_title = "Log in to chat" %>
+
+<% content_for :searchbar do %>
+	<% form_tag chat_login_proc_profile_path(@p) do %>
+                <%= hidden_field_tag :id, @p.id %>
+		<%= password_field_tag :password -%><%= submit_tag 'Login', :disable_with => 'Logging in..' %>
+	<% end %>
+<% end %>
+
+<p>Please enter your password to resume your account and you will be returned to your original destination</p>

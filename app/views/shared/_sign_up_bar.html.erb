@@ -1,0 +1,8 @@
+<div class="userstatus">
+  <% if @u.nil? or @u.new_record? %>
+    You must <%= link_to 'Login', login_path %> or <%= link_to 'Sign-up', signup_path %> to participate
+  <% else %>
+    <%= avatar_icon_tag(@p, :tiny) unless @p.blank? %>Hi, <strong><%= @p.formatted_name.blank? ? @p.user.login : @p.formatted_name %></strong>
+    &#124; <%= link_to 'logout', logout_path %>
+  <% end %>
+</div>

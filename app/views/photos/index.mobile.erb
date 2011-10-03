@@ -1,0 +1,19 @@
+<% @page_title = 'Photos' %>
+<%= draw_crumbs %>
+
+<% content_for :actions do %>
+	<ul>
+		<li><%= link_to "Upload a photo", new_profile_photo_url(@p) %></li>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<li class="header"><%= name_link @profile, true, true %> <%= has_have(@profile) %> uploaded <%= "#{pluralize(@profile.photos.count, 'photo')}" -%></li>
+		<%= render :partial => @photos %>
+	</ul>
+<% end %>
+
+<% content_for :footer do %>
+	<%= will_paginate @photos unless @photos.empty? if @photos %>
+<% end %>

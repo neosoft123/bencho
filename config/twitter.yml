@@ -1,0 +1,17 @@
+development: &defaults
+#  consumer_key: 0oLi2yJj2m119jdfUNON2w
+#  consumer_secret: 8XHGJZ6FNydGAN8Hgc54dA5yvWxF7EBXIaZXCw3ujg
+  consumer_key: MyYBKICB6Oe9XyQmYMui2g
+  consumer_secret: A7w8JjWu0SDnhMEHbGANri0CxQCfIjt6Dokjk3ouA
+  request_token_url: http://api.twitter.com/1/oauth/request_token
+  access_token_url: http://api.twitter.com/1/oauth/access_token
+  authorize_url: http://api.twitter.com/1/oauth/authorize
+  
+staging:
+  <<: *defaults
+  
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -1,0 +1,32 @@
+<% @page_title = 'Shared contacts' %>
+<%= draw_crumbs Crumb.new('Groups', groups_path), Crumb.new(@group.name, group_path(@group)) %>
+
+<% content_for :topbox do %>
+	<div class="bio-info"><strong>Owner:</strong> <%= link_to @group.owner.f, @group.owner %></div>
+	<%= render :partial => 'member_list' %>
+	<div class="bio-info"><strong>Description:</strong> <%= @group.description %></div>
+<% end %>
+
+<% content_for :actions do %>
+	<ul>
+	  <li>
+	    <%= link_to "Share Contacts", share_contacts_group_path(@group) %>
+	  </li>
+	</ul>
+<% end %>
+
+<% content_for :stories do %>
+	<ul>
+		<li class="heading">Shared Contacts</li>
+		<% @contacts.each do |k|
+			content_tag_for :li, k, :class=>'arrow' do %>
+				<div class="posted-by">Owned by <%= name_link k.ki.owner %><%= "&nbsp;" + link_to("[unshare]", unshare_group_contact_path(@group, k)) if @p == k.ki.owner %></div>
+				<%= link_to k.ki.f, [@group, k], :style=>'display:inline' -%>
+			<% end
+		end %>
+	</ul>
+<% end %>
+
+<% content_for :footer do %>
+  <%= will_paginate @contacts %>
+<% end %>

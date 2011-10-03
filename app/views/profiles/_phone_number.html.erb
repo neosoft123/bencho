@@ -1,0 +1,8 @@
+<div id='number_<%= phone_number.id %>'>
+<br />
+<label><%= phone_number.field_type %>:</label>
+<%= phone_number.value %> <span class="smaller"><%= link_to_remote "remove" , :url => delete_number_profile_path(:number_id => phone_number ) ,
+											    :method => :delete,
+												:loading => "$('#mobile_email_spinner').show();" ,
+								                :success => "$('#mobile_email_spinner').hide();" %></span>
+</div>

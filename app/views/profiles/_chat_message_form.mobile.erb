@@ -1,0 +1,5 @@
+<div id="message_form" style="display:block;">
+	<% form_tag profile_chatter_send_path(@profile) do %>
+		<%= text_field_tag :message -%><%= submit_tag 'Send', :disable_with => 'Sending..', :id => 'send_button' %>
+	<% end %> 
+</div>

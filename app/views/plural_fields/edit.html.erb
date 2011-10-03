@@ -1,0 +1,12 @@
+<h1>Editing plural_fields</h1>
+
+<% form_for(@plural_fields) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @plural_fields %> |
+<%= link_to 'Back', plural_fields_path %>

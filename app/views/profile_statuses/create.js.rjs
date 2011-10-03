@@ -1,0 +1,2 @@
+page['profile_status_text'].value = ''
+page.insert_html :top, 'status-list', :partial => 'profile_status', :object => @status

@@ -1,0 +1,6 @@
+account:
+  username: kontact
+  password: k0nt@ct747
+  serviced: 142
+  reference: Kontact
+  endpoint: http://www.smartcalltech.co.za/SmsWS/Service.asmx

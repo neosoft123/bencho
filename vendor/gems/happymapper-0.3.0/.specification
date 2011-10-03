@@ -1,0 +1,128 @@
+--- !ruby/object:Gem::Specification 
+name: happymapper
+version: !ruby/object:Gem::Version 
+  prerelease: false
+  segments: 
+  - 0
+  - 3
+  - 0
+  version: 0.3.0
+platform: ruby
+authors: 
+- John Nunemaker
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2009-10-04 00:00:00 +02:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: libxml-ruby
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    requirements: 
+    - - "="
+      - !ruby/object:Gem::Version 
+        segments: 
+        - 1
+        - 1
+        - 3
+        version: 1.1.3
+  type: :runtime
+  version_requirements: *id001
+description: object to xml mapping library
+email: nunemaker@gmail.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- lib/happymapper/attribute.rb
+- lib/happymapper/element.rb
+- lib/happymapper/item.rb
+- lib/happymapper/version.rb
+- lib/happymapper.rb
+- README
+- TODO
+files: 
+- examples/amazon.rb
+- examples/current_weather.rb
+- examples/dashed_elements.rb
+- examples/multi_street_address.rb
+- examples/post.rb
+- examples/twitter.rb
+- happymapper.gemspec
+- History
+- HOW_TO_RELEASE
+- lib/happymapper/attribute.rb
+- lib/happymapper/element.rb
+- lib/happymapper/item.rb
+- lib/happymapper/version.rb
+- lib/happymapper.rb
+- License
+- Manifest
+- Rakefile
+- README
+- spec/fixtures/address.xml
+- spec/fixtures/analytics.xml
+- spec/fixtures/commit.xml
+- spec/fixtures/current_weather.xml
+- spec/fixtures/family_tree.xml
+- spec/fixtures/multi_street_address.xml
+- spec/fixtures/multiple_namespaces.xml
+- spec/fixtures/nested_namespaces.xml
+- spec/fixtures/pita.xml
+- spec/fixtures/posts.xml
+- spec/fixtures/product_default_namespace.xml
+- spec/fixtures/product_no_namespace.xml
+- spec/fixtures/product_single_namespace.xml
+- spec/fixtures/radar.xml
+- spec/fixtures/statuses.xml
+- spec/happymapper_attribute_spec.rb
+- spec/happymapper_element_spec.rb
+- spec/happymapper_item_spec.rb
+- spec/happymapper_spec.rb
+- spec/spec.opts
+- spec/spec_helper.rb
+- TODO
+- website/css/common.css
+- website/index.html
+has_rdoc: true
+homepage: http://happymapper.rubyforge.org
+licenses: []
+
+post_install_message: May you have many happy mappings!
+rdoc_options: 
+- --line-numbers
+- --inline-source
+- --title
+- Happymapper
+- --main
+- README
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      segments: 
+      - 1
+      - 2
+      version: "1.2"
+requirements: []
+
+rubyforge_project: happymapper
+rubygems_version: 1.3.6
+signing_key: 
+specification_version: 3
+summary: object to xml mapping library
+test_files: []
+

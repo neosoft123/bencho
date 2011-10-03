@@ -1,0 +1,10 @@
+<% 
+	ki = kontact.kontact_information 
+	@kontact_information = ki
+	return if ki.nil?
+%>
+
+<% content_tag_for(:li, ki, :profile, :class => "arrow") do  %>
+	<%= link_to_remote "#{ki.display_name}", 
+	 	:url => profile_kontact_url(@p, kontact ) %>
+<% end %>

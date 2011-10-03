@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  to: 
+  message: 
+  sent: 
+  profile_id: 1
+
+two:
+  to: 
+  message: 
+  sent: 
+  profile_id: 1

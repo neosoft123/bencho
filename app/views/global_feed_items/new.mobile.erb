@@ -1,0 +1,7 @@
+<% draw_crumbs %>
+
+<% form_for @feed_item do |f| %>
+  <%= f.label :message %>
+  <%= f.text_area :message %>
+  <%= f.submit "Save", :disable_with => "Saving.." %> or <%= link_to "Cancel", global_feed_items_path %>
+<% end %>

@@ -1,0 +1,121 @@
+<%= link_to('Return to your profile', @p, :class=>'profilelink') if @p %>
+<h2 class="contenttitle">Edit Your Profile <%= 'or '+link_to('Skip This Step', profile_path(@p)) if flash[:notice]=="Thanks for signing up!" %></h2>
+<p>Edit your profile information, add new email addresses and phone numbers, and choose how much of your personal information is displayed to the public.
+Double click directly on a field to edit it.
+</p>
+<div id="editor" class="clearfix">
+    <div class="avatarfield">
+    <h4 class="editoravatartitle">Current Avatar</h4>
+      <%= profile_icon(@profile, "medium") %>
+    <% form_tag(upload_icon_profile_path(:id => @profile) , :multipart => true) do -%>
+      <div class="avatarlink">
+        <%= file_column_field 'profile', 'icon' , :size => "1x10"%>
+      </div>
+      <div class="avatarsubmit">
+        <%= submit_tag "Upload" %>
+      </div>
+    <% end -%>
+	<p class="avatardescription">Upload an icon for your account. It should be square, no larger than 600x600 pixels, and in JPG, Gif or PNG format</p>
+    </div>
+    <div class="editorform clearfix">
+			<% form_for @profile do |f| %>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Basic Information
+                </legend>
+                <div class="inlineeditsmall">
+                    <label>
+                        First Name:
+                    </label>
+                    <%= f.text_field :given_name %>
+                </div>
+                <div class="inlineeditsmall">
+                    <label>
+                        Last Name:
+                    </label>
+                    <%= f.text_field :family_name %>
+                </div>
+                <div class="inlineedit">
+                    <label>
+                        Display Name: <span>(the name that you want other people to see)</span>
+                    </label>
+                    <%= f.text_field :display_name %>
+                </div>
+                <div class="privacyoptions">
+									<%= f.submit 'Save', :disable_with => 'Saving..' %>
+                </div>
+            </fieldset>
+        </div>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Additional Information
+                </legend>
+                <div class="inlineeditmini">
+                    <label>
+                        Birthday:
+                    </label>
+											<%= f.date_select :birthday %>
+	                </div>
+                <div class="inlineeditmini">
+                    <label>
+                        Gender:
+                    </label>
+										<%= select_tag(:gender, options_for_select(%w( Male Female))) %>
+                </div>
+                <div class="inlineeditmini2">
+                    <label>
+                        Home:
+                    </label>
+                    <div id="inline_location">
+                    	<%= f.text_field :location %>
+					</div>
+                </div>
+                <div class="inlineeditmini3">
+                    <label>
+                        Biography:
+                    </label>
+                    <%= f.text_area :about_me , :cols => 25, :rows => 10 %>
+                </div>
+                <div class="privacyoptions">
+									<%= f.submit 'Save', :disable_with => 'Saving..' %>
+                </div>
+            </fieldset>
+        </div>
+        <div class="seperator">
+            <fieldset>
+                <legend>
+                    Contact Information
+                </legend>
+			    <div id="mobile_email_spinner" style="display:none;">
+					<%= image_tag 'spinner.gif' %>
+    			</div>
+				<div class="microheading">
+                    Email Addresses
+                </div>
+				<div class="clearfix">
+                <div class="inlineeditmini2">
+                    <label>
+                        Primary:
+                    </label>
+                    <%= f.text_field :email %>
+                </div>
+				</div>
+                <div class="microheading">
+                    Mobile No
+                </div>
+				<div class="clearfix">
+                <div class="inlineeditmini2">
+                    <label>
+                        Mobile Number:
+                    </label>
+                    <%= f.text_field :mobile %>
+		                <div class="privacyoptions">
+											<%= f.submit 'Save', :disable_with => 'Saving..' %>
+		                </div>
+            </fieldset>
+        </div>
+<% end %>
+    </div>
+</div>

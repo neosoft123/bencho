@@ -1,0 +1,92 @@
+require "capistrano"
+#require "#{File.dirname(__FILE__)}/../lib/bowtie_cap"
+
+`ssh-add` 
+set :application,  "dev7am"
+set :webpath,      "dev.7.am"
+set :domain,       "ec2.7.am"
+set :user,         "cftuser"
+set :password,     "aih5Thoboh"
+
+# repository elsewhere
+#set :repository, "svn+ssh://user@other.com/usr/local/svn/repo/app1/trunk"
+#set :repository, "https://other.com/usr/local/svn/repo/app1/trunk"
+#set :scm_password, "xxxxxxxx"
+
+# which environment to work in
+set :rails_env,    "production"
+
+# necessary for functioning on the (gs)
+#default_run_options[:pty] = true
+
+# Git Deployment
+set :repository,  "git@github.com:agilisto/lovd-by-less.git"
+set :scm, "git"
+
+set :use_sudo, false
+#set :user, "notroot"
+
+ssh_options[:forward_agent] = true
+set :ssh_options, {:forward_agent => true}
+set :copy_cache, true
+
+
+#set :git_enable_submodules,1
+set :forward_agent, true
+
+# these shouldn't be changed
+role :web, "#{domain}"
+role :app, "#{domain}"
+role :db,  "#{domain}", :primary => true
+#set :deploy_to,    "/home/#{site}/containers/rails/#{application}"
+set :deploy_to,    "/var/www/rails/#{application}"
+
+# uncomment if desired
+#after "deploy:update_code".to_sym do
+#  put File.read("deploy/database.yml.mt"), "#{release_path}/config/database.yml", :mode => 0444
+#end
+
+# update .htaccess rules after new version is deployed
+#after "deploy:symlink".to_sym
+
+default_run_options[:shell] = false
+
+before "deploy:start" do 
+  #run "#{current_path}/script/ferret_server -e production start"
+    run "cd #{current_path} && touch ./tmp/debug.txt"
+end 
+ 
+after "deploy:stop" do 
+  #run "#{current_path}/script/ferret_server -e production stop"
+end
+ 
+after 'deploy:restart' do
+  #run "cd #{current_path} && ./script/ferret_server -e production stop"
+  #run "cd #{current_path} && ./script/ferret_server -e production start"
+  run "cd #{current_path} && touch ./tmp/debug.txt"
+end
+
+
+namespace :deploy do
+  # desc "Create asset packages for production" 
+  #  task :after_update_code, :roles => [:web] do
+  #    puts "Packing CSS and Javascript"
+  #    run <<-EOF
+  #      cd #{release_path} && rake asset:packager:build_all
+  #    EOF
+  #  end
+   
+  namespace :web do
+    desc "Serve up a custom maintenance page."
+    task :disable, :roles => :web do
+      require 'erb'
+      on_rollback { run "#{shared_path}/system/maintenance.html" }
+      reason = ENV["REASON"]
+      deadline = ENV['UNTIL']
+      template = File.read("config/maintenance.html.erb")
+      page = ERB.new(template).result(binding)
+      put page, "#{shared_path}/system/maintenance.html",
+                :mode => 0644
+    end
+  end
+end

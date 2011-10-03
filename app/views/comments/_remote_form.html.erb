@@ -1,0 +1,25 @@
+<div id="new-comment-<%= resource.id %>" style="display:none" class="clearfix">
+  <% remote_form_for(
+    :comment,
+    resource.comments.new(:profile => @p, :commentable_type => resource.class.name, :commentable_id => resource.id),
+    :url => create_comment_path,
+    :before => "$('#comment-spinner-#{resource.id}').show()",
+    :complete => "$('#comment-spinner-#{resource.id}').hide()"
+  ) do |f| %>
+    <%= f.hidden_field :profile_id %>
+    <%= f.hidden_field :commentable_type %>
+    <%= f.hidden_field :commentable_id %>
+    <div class="statuscommentform clearfix">
+      <dl>
+        <dt><%= f.label :comment, 'Add your comment:' %></dt>
+        <dd><%= f.text_area :comment, :rows => 5 %></dd>
+      </dl>
+      
+      <div class="statuscommentformactions">
+        <nobr><%= f.submit 'Save', :disable_with => 'Saving..' -%><span id="comment-spinner-<%= resource.id %>" style="display:none;"><%= image_tag 'spinner.gif' -%></span></nobr>
+        <br />
+        <%= link_to_function "Cancel", "$('#new-comment-#{resource.id}').toggle()" %>
+      </div>
+    </div>
+  <%end%>
+</div>

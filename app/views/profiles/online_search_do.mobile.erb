@@ -1,0 +1,64 @@
+<% @page_title = 'Search Results' %>
+<%= draw_crumbs %>
+ 
+ 
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "Search again", online_search_profile_path(@p) %></li>
+  </ul>
+<% end %>
+
+<% if @results %>
+	<% content_for :stories do %>
+	  <% content_tag :ul do %>
+			<li class="heading">Your search for "Online" returned <%= pluralize(@results.length, 'profile') %></li>
+	    <% @results.each do |p| %>
+
+	     
+  
+                        <li class="arrow">
+  <div style="float:left;margin-right:5px;">
+    <%= avatar_icon_tag p %>
+  </div>
+  <div><%= link_to(p.f, p) %>
+   </div>
+  <div style="font-size:10px;color:#ccc;"><%= p.location if p.location %></div>
+  <div class="<%= p.online? ? "online-status" : "offline-status" %>"><%= online_status(p) %></div>
+   
+    <% if p.friend_of? @p %>
+    <div class="feed-item-detail" style="padding-left:0px">
+    <% if p.online? %>
+      <%= link_to("chat", profile_chatter_path(p)) + " - " %>
+      <% else %>
+      <%= link_to "send chat invite", chat_invite_profile_path(p) %> - 
+      <% end %>
+      <%= link_to "send message", message_sendto_path(@p, p) %>
+    </div>
+
+  <% else %>
+  <% if p == @p %>
+       
+
+  <% else %>
+    <div class="feed-item-detail" style="padding-left:0px">
+     
+      <%= link_to 'Send Friend Request', friend_path(@p, p) %> -
+      <%= link_to "send message", message_sendto_path(@p, p) %>
+    </div>
+  <% end %>
+  <% end %>
+  
+</li>
+	
+    <% end %>
+
+<li><%= will_paginate @results, :params => { :commit => params[:commit], :location => params[:location], :gender => params[:gender], :friend => params[:friends], :agefrom => params[:agefrom], :ageto => params[:ageto], :available => params[:available]  } %></li>
+	    <li class="heading">Your search for "Online" returned <%= pluralize(@kontacts.length, 'contact') %></li>
+	    <% @kontacts.each do |k| %>
+	      <%= content_tag :li, link_to(k.ki.f, k), :class=>"arrow" %>
+	    <% end %>
+	   
+	    <li><%= will_paginate @kontacts, :params => { :commit => params[:commit], :location => params[:location], :gender => params[:gender], :friend => params[:friends], :agefrom => params[:agefrom], :ageto => params[:ageto], :available => params[:available]  } %></li>
+	  <% end %>
+	<% end %>
+<% end %>

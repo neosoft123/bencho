@@ -1,0 +1,8 @@
+<div id='email_<%= email.id %>'>
+<br />
+<label><%= email.field_type %>:</label>
+<%= email.value %> <span class="smaller"><%= link_to_remote "remove" , :url => delete_email_profile_path(:email_id => email ) ,
+											    :method => :delete,
+											    :loading => "$('#mobile_email_spinner').show();" ,
+								                :success => "$('#mobile_email_spinner').hide();" %></span>
+</div>

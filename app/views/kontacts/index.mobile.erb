@@ -1,0 +1,37 @@
+<%
+@page_title = 'Contacts'
+@page_title = "Contacts under '#{h params[:letter]}'" if params[:letter]
+@page_title = "Search results for '#{h params[:q]}'" if params[:q]
+%>
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "Search", basic_kontact_search_path(@p) %></li>
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+	<div class="greenblock">
+		<% s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+		for i in 0..s.length-1 %>
+			<%= link_to s[i].chr, kontacts_by_letter_path(@p, s[i].chr) %>
+		<% end %>
+		<%= link_to('View all', profile_kontacts_path(@profile)) if @search_results %>
+		<span><%= " - You last synced at #{current_user.last_sync_started.to_s(:long)}" if current_user.last_sync_started %></span></h3>
+	</div>
+	<ul>
+	  <li>Sort by <%= (@profile.sort_contacts_last_name_first?) ? link_to("first name, last name", kontacts_sort_first_last_path(@profile)) : link_to("last name, first name", kontacts_sort_last_first_path(@profile)) %></li>
+  </ul>
+	<ul>
+	  <% if @kontacts.length > 0 %>
+		  <%= render :partial => 'kontact', :collection => @kontacts %>
+		<% else %>
+		  <li>No contacts were found</li>
+		<% end %>
+	</ul>
+<% end %>
+
+<% content_for :footer do %>
+	 <%= will_paginate @kontacts %>
+<% end %>

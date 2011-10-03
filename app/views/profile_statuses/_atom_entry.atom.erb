@@ -1,0 +1,3 @@
+<p><%= status.profile.formatted_name -%> is <%= sanitize(status.text) -%></p>
+<p>Posted at <%= status.created_at.to_s(:long) %></p>
+<p><%= pluralize(status.comments.count, 'comment') %></p>

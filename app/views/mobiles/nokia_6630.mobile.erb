@@ -1,0 +1,32 @@
+<%= draw_crumbs Crumb.new('Sync', sync_help_profile_mobile_path(@p)) %>
+
+<ol>
+  <li>Click Menu key and open the Connectivity folder.</li>
+  <li>Launch the Sync application.</li>
+  <li>From the Options menu select New sync profile</li>
+  <li>If you are asked to copy the values from another profile, click No</li>
+  <li>Enter the following values:
+    <ol>
+      <li>Sync profile name: "<%= @sync_profile_name %>"</li>
+      <li>Data bearer: "<%= @data_bearer %>"</li>
+      <li>Access point: "<%= @access_point %>"</li>
+      <li>Host address: "<%= @server_address %>"</li>
+      <li>Port: "<%= @port %>"</li>
+      <li>User name: "<%= @username %>"</li>
+      <li>Password: "<%= @password %>"</li>
+      <li>Leave other values unchanged</li>
+    </ol>
+  </li>
+  
+  <li>Click the 'right' on the central navigation key</li>
+  <li>Highlight and click Contacts and change the option to Yes</li>
+  <li>For Remote data base enter contacts (lower case)</li>
+  <li>Leave Synchronization type set to Normal</li>
+  <li>Click Back to exit this screen and save your settings</li>
+  <li>Make sure that all other content types are set to No</li>
+  <li>Only contacts set to yes</li>
+  <li>Click Back to exit this screen and save your settings</li>
+  <li>Highlight your new sync profile and select Synchronize from the Options menu</li>
+  <li>Exit and save</li>
+  <li>Select synchronise</li>
+</ol>

@@ -1,0 +1,11 @@
+You have insufficient SmartBucks to send an invitation to a 
+friend. Please <%= link_to "purchase some Smartbucks", profile_wallet_url(@p), :style => "text-decoration:underline" %> to 
+send invitations.
+
+<% if kontact %>
+Alternatively, you can send the SMS yourself by 
+<%= content_tag :a, "clicking here", 
+  :href=>"sms:#{kontact.kontact_information.mobile}?body=#{inv.invitation_message}", 
+  :style => "text-decoration:underline" %>
+<% end %>
+  

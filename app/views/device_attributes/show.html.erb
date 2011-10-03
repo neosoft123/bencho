@@ -1,0 +1,18 @@
+<p>
+  <b>Device:</b>
+  <%=h @device_attribute.device_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @device_attribute.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%=h @device_attribute.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_device_device_attribute_path(@device, @device_attribute) %> |
+<%= link_to 'Back', device_device_attributes_path(@device) %>

@@ -1,0 +1,38 @@
+<!--div id="report_holder"><%= link_to 'Report inappropriate content', '#', :id => 'report_content_button' %></div-->
+
+<div id="report_content">
+  <h3>Report inappropriate content</h3>
+  
+  <% form_tag report_content_create_path, :method => :post, :id => 'report_content_form' do -%>
+    <dl>
+      <dt><label for="message">Add a message</label></dt>
+      <dd><%= text_area_tag :message %></dd>
+      <dd><%= submit_tag 'Report' %> or <%= link_to "Cancel", '#', :id => 'cancel_report_content' %></dd>
+    </dl>
+    
+    <% params.each do |param_name, param_value| -%>
+      <%= hidden_field_tag param_name, param_value %>
+    <% end -%>
+    
+    <%= hidden_field_tag :c, params[:controller] %>
+    <%= hidden_field_tag :a, params[:action] %>
+    <%= hidden_field_tag :url, request.url %>
+  <% end -%>
+</div>
+
+<script type="text/javascript">
+  x$('#report_content').addClass('hidden');
+  
+  document.getElementById('report_holder').onclick = function() {
+    x$('#report_content').removeClass('hidden');
+    x$(this).addClass('hidden');
+    return false;
+  }
+  
+  document.getElementById('cancel_report_content').onclick = function() {
+    x$('#report_content').addClass('hidden');
+    x$('#report_holder').removeClass('hidden');
+    return false;
+  }  
+  
+</script>

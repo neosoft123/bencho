@@ -1,0 +1,23 @@
+<%= draw_crumbs Crumb.new('Sync', sync_help_profile_mobile_path(@p)) %>
+
+<ol>
+  <li>Go to the Main menu and open the Tools folder.</li>
+  <li>Open Remote sync and select New.</li>
+  <li>On the Details tab enter the following values:
+    <ol>
+      <li>Profile name: "<%= @sync_profile_name %>"</li>
+      <li>Server address: "<%= @server_address %>"</li>
+      <li>Username: "<%= @username %>"</li>
+      <li>Password: "<%= @password %>"</li>
+      <li>Transport protocol: leave unchanged</li>
+      <li>Internet account: select the Internet access point for your carrier</li>
+      <li>Do not mark Use transport login</li>
+      <li>Leave all other settings unchanged</li>
+      <li>Click Save to exit this screen</li>
+    </ol>
+  </li>
+  
+  <li>Mark Contacts.</li>
+  <li>In the Sync task pop-up menu change Database name to contacts (lower case) and press Save.</li>
+  <li>Select Sync.</li>
+<ol>

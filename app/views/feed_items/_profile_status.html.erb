@@ -1,0 +1,19 @@
+<%
+#locals
+status ||= feed_item.item
+%>
+
+<li class="feed_item status_feed" id="<%= feed_item.dom_id rescue rand(1000) %>">
+  <div class ="lifecontent">
+	  <div class="lifeheader">
+	    <%= time_ago_in_words(feed_item.created_at) %> ago
+	  </div>
+	  <div class="lifebody">
+	      <p><%= linkify(shortlinkify(h(status.text))) %></p>
+	  </div>
+	  <div class="lifefooter clearfix">
+	    <div class="tilecomments"><%= status.comments_count %><span>comments</span></div>
+		<%= link_to h(status.profile.formatted_name), status.profile %>
+  	</div>
+  </div>
+</li>

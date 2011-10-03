@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; utf-8" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <title><%= @title || SITE_NAME %></title>
+<<<<<<< HEAD:app/views/layouts/plain.html.erb
+        <%= javascript_include_tag :defaults, 'jquery', 'thickbox', 'less_routes', 'truncator' %>
+        <%= stylesheet_link_tag 'reset', 'ie', 'application', 'kontact' %>
+=======
+        <%= javascript_include_tag :defaults, 'jquery', 'thickbox', 'less_routes', 'truncator', :cache=>true %>
+        <%= stylesheet_link_tag 'reset', 'ie', 'application', 'kontact', :cache=> true %>
+>>>>>>> b0a5143f5b191c9feefa245db3073d871b72a621:app/views/layouts/plain.html.erb
+        <!--[if lt IE 7.]>
+            <script defer type="text/javascript" src="/javascripts/pngfix.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+    	 <%= display_standard_flashes %>
+        <div id="base_wrapper">
+            <div class="loginmiddle">
+                <div class="loginbottom">
+                    <div class="logintop">
+                        <%= yield %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

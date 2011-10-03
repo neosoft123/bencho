@@ -1,0 +1,18 @@
+<div class="subcontentboxwrapper">
+    <div class="subcontentboxouter">
+        <div class="subcontentbox">
+        	<h4 class="syncinformation">Sync Information</h4>
+            <% if current_user.last_sync_started %>
+            <p class="bottom">
+                You last synced your information on
+                <br/>
+                <b><%= current_user.last_sync_started.to_s(:long) %></b>
+            </p>
+            <% else %>
+            <p class="bottom">
+                You have not synced your contacts from your mobile phone yet.
+            </p>
+            <% end %>
+        </div>
+    </div>
+</div>

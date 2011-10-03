@@ -1,0 +1,24 @@
+# config/ldap.yml
+# TODO: Store encrypted passwords for database and ldap users
+
+development: &defaults
+  ldap_server: dev.7.am
+  ldap_port: 1389
+  ldap_tree_base: ou=people
+  ldap_username: ldapadmin
+  ldap_password: plaintextpasswordsaremadness
+  
+staging:
+  <<: *defaults
+
+test:
+  ldap_server: dev.7.am
+  ldap_port: 1389
+  ldap_tree_base: ou=people
+  ldap_username: ldapadmin
+  ldap_password: plaintextpasswordsaremadness
+  
+production:
+  ldap_server: dev.7.am
+  ldap_port: 1389
+  ldap_tree_base: ou=people

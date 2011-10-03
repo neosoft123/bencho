@@ -1,0 +1,102 @@
+<%= javascript_include_tag "jquery.js"%>
+<script type="text/javascript">
+$(document).ready(function(){
+  
+$('#feedsearch').change(function() {
+          		
+   var action = $(this).val();
+   if(action == 'ALLFEEDS') {
+       window.location='/welcome/index';
+     }
+    if(action== '7AMONLY') {	
+       window.location = '/welcome/seven_stream';
+     }
+   if(action== 'TWITTERONLY'){
+       window.location='/welcome/twitter';
+     }
+    if(action== 'FACEBOOKONLY'){
+       window.location='/welcome/facebook';
+     }
+ 		
+});
+
+});
+</script>
+<% draw_crumbs %>
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to "Menu", main_menu_path %></li>
+  </ul>
+<% end %>
+<%
+show_form = true if show_form.nil?
+show_filters = true if show_filters.nil?
+@active ||= :twitter
+%>
+<%content_for :stories do %>
+<ul id='activity-stream'>
+<% if show_form == true %>
+<%= render :partial => 'profiles/stream_form' %>
+    <% end %>
+<div id="messenger"><b style="font-size:14px;"><%= caption_text(@active) %></b></div>
+<% unless @active == :preview %>
+<li>Filters 
+<br /><br />         
+    
+<%= link_to(image_tag("twitter.png", :class => caption_class(@active, :twitter)), twitter_path) %>
+<%= image_tag "expand.png" %>
+<%= link_to(image_tag("7button.png", :class => caption_class(@active, :seven_stream)), seven_stream_path) %>
+ <%= image_tag "expand.png" %>
+<%= link_to(image_tag("facebook.png", :class => caption_class(@active, :facebook)), facebook_path) %>
+<%= image_tag "equals.png" %>
+<%= link_to(image_tag("myspace.png", :class => caption_class(@active, :public_stream)), welcome_path) %>
+
+<br /><br />
+ <% form_for :test do |f| %>
+ 
+  <select id ='feedsearch' name='feedsearch' >
+			    <option value='ALLFEEDS'>ALL FEEDS</option>
+			    <option value='7AMONLY'> 7AM ONLY </option>
+			    <option value='TWITTERONLY' selected="selected">TWITTER ONLY</option>
+			    <option value='FACEBOOKONLY'>FACEBOOK ONLY</option>
+			  </select>
+  
+  </li>
+  <% end %>
+   <% end %>
+
+<% unless @feed_items.empty? %>
+     <% @feed_items.each do |feed_item| %>
+          <% begin %>
+             <% next unless feed_item.item %>
+	     <% # next unless me? if feed_item.private? if feed_item.respond_to?("private?") %>
+             <%= render :partial => "feed_items/twitter_get_stream", :locals => {:feed_item => feed_item} %>
+          <% rescue => e %>
+             <li><%= feed_item.class.name %></li>
+             <li><%= debug e %></li>
+         <% end %>
+      <% end %> 
+      
+  <% else %>
+
+ 
+   <li>
+   There are currently no items in this activity stream. Try visiting the <%= link_to("public stream", public_stream_path) %>.
+   </li>
+   <li>Facebook user? Setup your <%= link_to "facebook settings", facebook_settings_path%></li>
+   <li>Twitter user? Setup your <%= link_to "twitter settings", twitter_settings_path%></li>   
+<% end %>
+</ul>
+<% end %>
+
+
+<% content_for :footer do %>
+<div class="digg_pagination">
+<div clas="page_info">
+
+<%= page_entries_info @feed_items rescue nil %>
+</div>
+<%= will_paginate @feed_items, :container => false rescue nil%>
+</div>
+
+<% end %>

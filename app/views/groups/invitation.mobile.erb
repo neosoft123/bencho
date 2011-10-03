@@ -1,0 +1,17 @@
+<% @page_title = "Accept invitation to #{@invite.group.name}" %>
+<% crumbs = [Crumb.new(@invite.group.name, group_url(@invite.group)), Crumb.new('Accept invitation')] -%>
+<% content_for :crumbs, render(:partial => 'shared/crumbs', :locals => {:crumbs => crumbs}) -%>
+
+<% content_for :topbox do %>
+	<div class="bio-info"><strong>Owner:</strong> <%= link_to @invite.group.owner.f, @invite.group.owner %></div>
+	<div class="bio-info"><strong>Members:</strong> <%= @invite.group.members.map{|m|link_to(m.f,m)}.to_sentence %></div>
+	<div class="bio-info"><strong>Description:</strong> <%= @invite.group.description %></div>
+<% end %>
+
+<p>You have been invited to join this group by <%= link_to @invite.inviter.f, @invite.inviter %></p>
+
+<%= button_to 'Accept', group_invite_accept_path(@invite.group, @invite) %>
+
+<br/>
+
+<%= button_to 'Decline', group_invite_decline_path(@invite.group, @invite) %>

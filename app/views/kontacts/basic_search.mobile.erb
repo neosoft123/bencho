@@ -1,0 +1,9 @@
+<% @page_title = "Contact Search" %>
+<% draw_crumbs Crumb.new("Contacts", profile_kontacts_path(@p)) %>
+
+<% content_for :searchbar do %>
+	<% form_tag basic_kontact_search_proc_path(@p) do %>
+		<%= text_field_tag 'q' %>
+	  <%= submit_tag 'Search', :disable_with => 'Searching..' %>
+	<% end %>
+<% end %>

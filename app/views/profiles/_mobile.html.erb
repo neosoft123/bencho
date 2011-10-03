@@ -1,0 +1,49 @@
+<div class="clearfix">
+<%= link_to "Skip these steps. I will fill in my profile later" , profile_kontacts_path(@profile) , :class=>"skipsteps" %>
+<h2 class="wizardtitle">Getting Started</h2>
+</div>
+
+<%= render :partial => "wizard_options" , :locals => { :details => "" , :mobile => "_active" , :location => ""}  %>
+
+<h3 class="subtitle">Sync Settings</h3>
+	 <p>Thank you for signing up with 7.am. We have sent an sms to <b><%= @profile.mobile %></b>
+	 with a confirmation link. Open this link on your mobile phone to set up your
+	 sync settings and for instructions on how to start your first contact sync.</p>
+	 <p>Once you have started the sync process on your mobile phone, click "Next" to fill out your profile details</p>
+	<div class="websyncwrapper">
+	<a href="#" onclick="$('#websyncinstructions').slideToggle(); return false;" class="websyncclick">Click here for Nokia E51 Synchronisation settings</a>
+	<div id="websyncinstructions" style="display:none;">
+	<br />
+	<p>
+        To set up your phone manually you need to go through the following steps:
+    </p>
+    <p>
+        Go to the main menu, select "Tools" and open "Sync". Press "Options" and then 
+        "New sync profile". If you are prompted for "Copy values from profile X?" press "No".
+    </p>
+    
+        <p>
+        	- Enter "7.am" in "Sync profile name"<br />
+			- Choose "Connection settings"<br />
+            - Enter following data:<br />
+			  - Server version: <b>1.1</b><br />
+			  - data bearer: <b>Internet</b><br />
+			  - access point: <b>choose your GPRS, WAP or Wireless settings</b><br />
+			  - host address: <b>http://7.am</b><br />
+			  - port: <b>80</b><br />
+			  - user name: <b><%= "#{@p.user.login}@#{SITE_NAME}" %></b><br />
+			  - password: <b>your 7.am password</b><br />
+			  - Allow sync request: <b>Yes</b><br />
+			  - Accept all sync reqs.: <b>No</b><br />
+			  - network authentic.: <b>No</b><br /><br />
+            - Press "Back" and choose "Application". Please set up contacts like this:<br />
+			  - Include in sync: <b>yes</b><br />
+			  - Remote database: <b>con</b><br />
+			  - Synchronization type: <b>Normal</b><br />
+			<br />
+            To start synchronisation go back to the Sync menu and press <b>"Options"</b> and <b>"Synchronise"</b>
+		</p>
+		</div>
+	    </div>
+	 <div class="rightbuttons"><%= submit_tag "Next" , :onclick => "toggleLocation();"%></div>
+	 

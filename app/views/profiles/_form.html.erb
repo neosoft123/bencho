@@ -1,0 +1,60 @@
+<%= javascript_include_tag "profile.js" %>
+<div class="left" id="column_l">
+  <div class="dashboard">
+    <div id="sub_nav">
+      <%= link_to 'View Public Profile', profile_path(@p).add_param( :public_view => true ) %>
+      <%= link_to('&larr; Jump to Dashboard', @p) if @p %>
+    </div>
+  </div>
+  <div id='activate_mobile'<%= hide_or_display( !@profile.mobile_activated? ) %>>
+    <%= render :partial => 'activate_mobile' %>
+  </div>
+  <div id="profile_spinner" style="display:none;">
+    <%= image_tag 'spinner.gif' %>
+  </div>
+  <div id= "profile_main_container"<%= hide_or_display( @context == "existing" ) %>>
+    <%= render :partial => "inplace_form" %>
+  </div>
+
+  <!--div class="manuallocation">
+    <h4 class="manuallocationtitle">Set your home town manually</h4>
+    <p class="manualdescription">As an alternative to setting where you live above, you can drag and drop the marker to set your location manually</p>
+	<div style="margin-top: 30px;">
+		<%= text_field_tag :location %>
+		<br/>
+		<%= observe_field '#location', :url => geocode_location_url,
+		      :frequency => 1,
+		      :with => "'location=' + value",
+			  :before => show_element(:spinner),
+			  :complete => hide_element(:spinner)
+		      %>
+		<div id="spinner" style="display:none;float:right;">
+			<%= image_tag 'spinner.gif' %>
+		</div>
+	</div>		
+    <div class="editprofilemap">
+      <%= @map.div(:width => 500, :height => 400, :class => "select_location_map") %>
+    </div>
+    <%= @map.to_html %>
+    <% form_for(@profile,
+      :loading => "$('#map_spinner').show();") do |f| %>
+	  <%= f.hidden_field(:lat) %>
+	  <%= f.hidden_field(:lng) %>
+      <div class="manualsubmit"><span id="map_spinner" style="display:none;">
+          <%= image_tag 'spinner.gif' %>
+      </span> <%= submit_tag "Set" %></div>
+    <% end %>
+  </div-->
+</div>
+<div class="right" id="column_r">
+  <div class="reloadbutton">
+    <% form_remote_tag :url => reload_public_profile_path(:id => @profile),
+      :loading => "$('#demo_spinner').show();" ,
+      :success => "$('#demo_spinner').hide();"  do %>
+      <span id="demo_spinner" style="display:none;">
+        <%= image_tag 'spinner.gif' %>
+      </span><input class="inplace_save" type="submit" value="Refresh Profile"/>
+    <% end -%>
+  </div>
+  <div id="demo_profile"><%= render :partial => "demo_public_profile" %></div>
+</div>

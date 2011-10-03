@@ -1,0 +1,2 @@
+module GlobalFeedItemsHelper
+end

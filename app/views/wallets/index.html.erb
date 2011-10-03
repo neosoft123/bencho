@@ -1,0 +1,20 @@
+<h1>Listing wallets</h1>
+
+<table>
+  <tr>
+    <th>Balance</th>
+  </tr>
+
+<% for wallet in @wallets %>
+  <tr>
+    <td><%=h wallet.balance %></td>
+    <td><%= link_to 'Show', wallet %></td>
+    <td><%= link_to 'Edit', edit_wallet_path(wallet) %></td>
+    <td><%= link_to 'Destroy', wallet, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New wallet', new_wallet_path %>

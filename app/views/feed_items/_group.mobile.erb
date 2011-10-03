@@ -1,0 +1,9 @@
+<%
+feed_item ||= @feed_item
+g = Group.find(feed_item.item_id)
+%>
+
+<% content_for_feed_item feed_item, f.inviter, 
+  "#{name_link(g.inviter, true, true)} #{has_have(g.inviter)} invited #{name_link(g.invitee, true, false)} to join the group #{link_to g.group.name, group_invite_path(@p, g.group, g)}"
+ %>
+

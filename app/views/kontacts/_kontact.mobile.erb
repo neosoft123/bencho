@@ -1,0 +1,10 @@
+<% 
+	ki = kontact.kontact_information
+	@kontact_information = ki
+	return if ki.nil?
+%>
+<% content_tag_for(:li, ki, :profile, :class => "arrow") do  %>
+  <div class="posted-by">Owned by <%= name_link(ki.owner) -%></div>
+	<%= link_to "#{ki.formal_name(@profile)}", [kontact.parent, kontact] %>
+	<!--div class="posted-by">Updated <%#= time_ago_in_words(ki.updated_at) %> ago</div-->
+<% end %>

@@ -1,0 +1,39 @@
+<% @page_title = @location.title %>
+<%= draw_crumbs Crumb.new('Locations', profile_locations_path(@profile))  %>
+
+<% content_for :topbox do %>
+	<div>
+		<ul>
+		  <li>
+			Checked in <%= time_ago_in_words @location.created_at %> ago
+		  </li>
+		</ul>
+	</div>
+<% end %>
+
+<% content_for :actions do %>
+  <ul>
+    <li><%= link_to 'Add Comment', new_profile_location_comment_path(@location.profile, @location) %></li>
+    <li>
+  		<%= link_to 'Check in Here', set_location_path(@p, @location.title) %>
+    </li>
+    <li>
+  		<%= link_to 'Activities in the Area', stream_profile_location_path(@profile, @location) %>
+    </li>
+    <!--li>
+  		<%= link_to 'Friends in the area', '#'%>
+    </li-->
+  </ul>
+<% end %>
+
+<% content_for :stories do %>
+  <ul>
+  	<li class="heading">
+  		Map
+  	</li>
+  	<li>
+  		<%= render :partial => 'static_map', :locals => {:location => @location} %>
+  	</li>
+  </ul>
+	<%= render :partial => 'comments/comment_list', :locals => { :parent => @location } %>
+<% end %>

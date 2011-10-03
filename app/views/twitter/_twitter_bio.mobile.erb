@@ -1,0 +1,14 @@
+
+<% content_for :topbox do %>
+  <div style="float:right"><%= image_tag @tweeter["profile_image_url"], :style=>'width:32px;height:32px' %></div>
+  <h3><%= @tweeter["name"] %></h3>
+  <div>
+    <% if @follows %>
+      You are following this user
+    <% else %>
+      <%= link_to "Follow", twitter_follow_path(@tweeter["screen_name"]) %>
+    <% end %>
+  </div>
+  <div><%= link_to "#{@tweeter['friends_count']} Following", twitter_following_path(@tweeter["screen_name"]) %></div>
+  <div><%= link_to pluralize(@tweeter["followers_count"], "Follower"), twitter_followers_path(@tweeter["screen_name"]) %></div>
+<% end %>

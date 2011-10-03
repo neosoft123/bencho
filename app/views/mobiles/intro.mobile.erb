@@ -1,0 +1,34 @@
+<% @page_title = 'Welcome to 7AM' %>
+<% draw_crumbs %>
+
+<% content_for :actions do %>
+<p style="padding:5px;font-size:12px">
+  Welcome to 7.am, the service that connects you with your most valuable social 
+  network - the friends and family in your mobile phonebook.
+</p>
+
+<p style="padding:5px;font-size:12px">
+  You have completed your registration and can begin using 7.am immediately. One of
+  the core features of this service is the ability to synchronise your mobile 
+  phonebook, all the contacts currently on your phone, to 7.am. This serves a dual purpose:
+  it allows you to invite them to 7.am as well as serving as a backup of all your
+  contacts that can later be synched back to this or another mobile phone.
+</p>
+
+<p style="padding:5px;font-size:12px">
+  If you would like to sync we can set your phone up using over-the-air settings which 
+  we will send to you, which should be supported by most phones. There are also manual
+  instructions for phones which don't support this service.
+</p>
+
+<ul><li><%= link_to "Start Synching!", provisioning_profile_mobile_path(@p) %></li></ul>
+
+<p style="padding:5px;font-size:12px">
+  Otherwise you can start using 7.am right now, and make the choice to sync later.
+</p>
+
+<ul><li><%= link_to 'Start using 7.am!', welcome_path %></li></ul>
+
+<% end %>
+
+

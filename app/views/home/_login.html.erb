@@ -1,0 +1,22 @@
+<!-- <h3 class="homelogin homeformtoggle"><a href="#">Already a member?</a></h3> -->
+<h3 class="homelogin homeformtoggle">Already a member?</h3>
+
+<% if @show_login %>
+  <p class="loginerror">Could not log you in, please try again.</p>
+<% end %>
+
+<div id="homeformlogin" class="homeformfields">
+  <% form_for @user, :url => session_path, :method => :post do |f| -%>
+    <p><%= f.label :login, 'Login:' %> <%= f.text_field :login %></p>
+    <p><%= f.label :password, 'Password:' %> <%= f.password_field :password %></p>
+	<input type="hidden" id="return_to" name="return_to" value=<%= "#{params[:return_to]}" %> />
+    
+    <p class="checkbox">
+      <input type="checkbox" name="remember_me" value="" id="remember_me">
+      <label>Remember me</label>
+    </p>
+    
+    <span class="clear"></span>
+    <p><%= submit_tag 'Login Now', :class => "homeloginbutton" %></p>
+  <% end %>
+</div>

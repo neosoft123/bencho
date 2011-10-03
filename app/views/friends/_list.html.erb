@@ -1,0 +1,33 @@
+<% profile ||= @profile
+type ||= 'friends'
+size ||= 9
+list = profile.send(type).find(:all, :limit => size, :order => 'RAND()') rescue []
+total = profile.send(type).count
+with_friending ||= false
+title = type == 'Followed' ? 'Following' : 'Followers' %>
+<%- unless list.empty? -%>
+<div id="<%= type %>" class="kontactlist clearfix">
+    <h2 class="friendtitle"><%= title.titleize %> <span>(<%= total %>)</span></h2>
+    <ul id="contactlist" class="clearfix">
+
+        <% list.each do |p| %>
+        <li class="vcard">
+            <div class="maininfo">
+                <div class="fn">
+                     <%= link_to h(p.f), p %>
+                </div>
+                <div class="tel">
+                   <%= get_friend_link @p, p if with_friending %>
+                </div>
+            </div>
+            <div class="secondaryinfo friendcard">
+                <%= icon(p , :small) %>
+                <div class="vcardchoices">
+                    &nbsp;
+                </div>
+            </div>
+        </li>
+        <% end %>
+    </ul>
+</div>
+<%- end -%>
