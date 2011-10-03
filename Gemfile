@@ -6,7 +6,7 @@ gem "mysql"
 # gem "nokogiri", "1.4.2"
 # gem "geokit"
 
-gem 'bullet', :version => '1.7.2'
+gem 'bullet'
 gem 'collectiveidea-money', :lib => 'money'
 gem 'json'
 gem 'rflickr', :lib => 'flickr'
