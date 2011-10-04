@@ -7,7 +7,7 @@ gem 'hoe', '~> 1.7.0'
 # gem "geokit"
 
 gem 'bullet'
-gem 'money'
+gem 'money', '~> 2.1.0'
 gem 'json'
 gem 'rflickr'
 # gem 'colored'
