@@ -1,7 +1,7 @@
 source :gemcutter
 gem "rails", "~> 2.3.5"
 gem "mysql"
-
+gem 'hoe', '~> 1.7.0'
 # bundler requires these gems in all environments
 # gem "nokogiri", "1.4.2"
 # gem "geokit"
